@@ -1,0 +1,190 @@
+<html>
+<head>
+	<title>Facebook Backgrounds</title>
+	<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'> 
+	<link type="text/css" href="Aristo/Aristo.css" rel="Stylesheet" />	
+	<style>
+		#page {max-width: 1201px;margin-left: auto;margin-right: auto;margin-top: 5px;background-color: white;padding: 2px;}
+		#ver_status {float: left; text-align:right;width:100%;}
+		#reset_ver {cursor: pointer;}
+		#content {float: left; margin-right: 10px;min-width: 53%;}
+		#sidebar {float: right; width: 250px;}
+		#background_patterns img{ float: left;margin: 5px 5px 0px 0px;height:175px; }
+		#background_patterns img:hover{ cursor:pointer; }
+		#header_buttons {float: right;margin-top:10px;}
+		.header,  h4{font-family: 'Gloria Hallelujah', cursive;}
+		h1 {font-size: 1em;}
+		h4 {margin: 0px;}
+		button.restore{float:right;margin-top: -36px;margin-right: 4px;}
+		button.remove{margin-top: -36px;margin-left: 4px;}
+		#previous div { display: none; float:left; margin: 12px; width:187px;}
+		#previous img {max-width:202px;max-height: 187px;}
+		#waiting { display: none; }
+		#sample-backgrounds img {width:100px;height:100px; margin: 2px;}
+		#previous button {display:none;}
+		#img_preview {max-width: 651px; width: 100%;}
+		.header {font-size: 40px; float: left;}
+		#store {width: 100%;float:left;}
+		#store h4{float:left;}
+		#store-filters {text-align: right; padding-right: 60px;}
+		#store #catalog div{float:left;}
+		#store #catalog img { max-width: 293px; height: 195px; width: auto;}
+		#catalog button {float: right; margin-top: -37px; margin-right: 43px; cursor: pointer;}
+	@media screen and (max-width: 924px) {
+		#sidebar iframe {
+			float: left;
+		}
+		#sidebar {
+			width: 100%;
+		}
+		#settings {
+			width: 220px;
+			float: left;
+			margin: 30px;
+		}
+		.header {
+			font-size: 30px;
+		}
+	}
+	@media screen and (max-width: 751px) {
+		.header {
+			font-size: 20px;
+		}
+	}
+	@media screen and (max-width: 606px) {
+		#header_buttons {
+			float: left;
+		}
+		#settings {
+			margin: 8px;
+		}
+	}
+	@media screen and (max-width: 312px) {
+		.header {
+			font-size: 17px;
+		}
+		.ui-button-text-only .ui-button-text {
+			padding: .3em .2em !important;
+		}
+	}
+		
+		
+#catalog div.outer {
+	margin: 0px 7px 8px 0px;
+	text-align: center;
+}
+#catalog div.inner {
+	overflow: hidden;
+	position: relative;
+	width: 293px;
+}
+
+#catalog span.info {
+	position: absolute;
+	display: block;
+	width: 120px;
+	left: 61px;
+	bottom: -50px;
+	color: white;
+	padding:0px 5px 0px 5px;
+	background-color: rgba(125, 0, 0, 0.85);
+	line-height: 35px;
+	border-radius: 10px 10px 0 0;
+	-webkit-transition: bottom .5s;
+	margin-left: -20px;
+	font-size: 15px;
+}
+
+#catalog div:hover span.info {
+	bottom: 0px;
+}	
+
+.ui-button .ui-button-text {
+	font-size: 13px;
+}
+.ui-button-text-only .ui-button-text {
+	padding: .3em .5em;
+}
+	</style>
+</head>
+<script type="text/javascript" src="googlejsapi.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
+<script type="text/javascript" src="jquery/noty/jquery.noty.js"></script>
+<script type="text/javascript" src="jquery/noty/themes/default.js"></script>
+<script type="text/javascript" src="jquery/noty/layouts/center.js"></script>
+<script type="text/javascript" src="defaults.js"></script>
+<script type="text/javascript" src="dashed_lines.js"></script>
+<script type="text/javascript" src="store.js"></script>
+<script type="text/javascript" src="options.js"></script>
+<div id="page">
+	<div id="ver_status">
+		<span id="ver_status_info"></span>
+		<span id="reset_ver"></span>
+	</div>
+	<span class="header" style="margin-left: 0px;">Facebook Background Changer</span>
+	<div id="header_buttons">
+		<button id="add_picture_link">Picture from URL</button>
+		<button id="upload_link">Upload Picture</button>
+	</div>
+	<div id="main">
+		<div id="content">
+			<div id="img_preview" >
+				<h4 class="img_preview_req" >Current Background</h4>
+				<img style="max-height: 475px;max-width: 100%;"><br>
+				<button class="img_preview_req" style="margin-top:-34px;" id="remove_main">Remove Current Background</button>
+			</div>
+		<h4 id="history-label" style="display:none;">History</h4>
+			<div id="previous">
+				<div id="old1">
+					<img><br>
+					<button class="restore">Restore</button>
+					<button class="remove">Remove</button>
+				</div>
+				<div id="old2">
+					<img><br>
+					<button class="restore">Restore</button>
+					<button class="remove">Remove</button>
+				</div>
+				<div id="old3">
+					<img><br>
+					<button class="restore">Restore</button>
+					<button class="remove">Remove</button>
+				</div>
+			</div>
+		</div>
+		<div id="sidebar">
+		<iframe  src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FFB-Background-Changer%2F385120791509349&amp;width=250&amp;height=315&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=true&amp;header=true&amp;appId=270609206348109" scrolling="no" frameborder="0" style="background:white;border:none; overflow:hidden; width:250px; height:315px;margin-top:33px" allowTransparency="false"></iframe>
+			<div id="settings">
+				<h4>Page Opacity:<span id="transparency_value"></span></h4>
+				<div style="display: block;" id="transparency_settings" style="width: 300px;"></div>
+				The lower the number, the more you can see through Facebook pages.
+				<button id="sample-backgrounds_link">Old Backgrounds</button>
+			</div>
+		</div>
+	</div>
+	<div id="store">
+		<h4>Premium Backgrounds</h4>
+		<div id="store-filters">
+			Sort by 
+			<input type="radio" id="newest" name="radio" checked="checked"/><label for="newest">Newest</label>
+			<input type="radio" id="oldest" name="radio" /><label for="oldest">Oldest</label>
+		</div>
+		<br>
+		<div id="catalog"></div>
+	</div>
+	<div id="upload_dialog" title="Upload a Picture">
+		<canvas id="canvas" width="530" height="330"></canvas><img style="max-width: 100%;
+	max-height: 100%;" id="upload-preview" />
+	</div>
+	<div id="sample-backgrounds" title="Sample Backgrounds">These backgrounds are from the original version of the Facebook Background Changer.  To add your own background, click on the "Upload Picture" or "Picture from URL" buttons.<br></div>
+	<img style="display:none;" id="temp_image">
+	<div id="add_picture" title="Change Picture">
+		Image Address: <input type="text" placeholder="Image URL" id="enteredURL" />
+		<button id="getImage">Retrieve Image</button><br>
+		<div id="waiting">Loading Picture...The larger the picture, the longer this will take.</div>
+		<div id="validURL" style="display:none;"
+		>Please enter a valid address for an image (ending in .png, .jpg, or an image extension), like https://www.google.com/images/srpr/logo3w.png</div>
+		<img style="width:300px" id="preview" src="" />
+	</div>
+</div>

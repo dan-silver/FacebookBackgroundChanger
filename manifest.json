@@ -1,0 +1,26 @@
+{
+ "name": "Facebook Background Changer",
+ "version": "3.0.16",
+ "manifest_version": 2,
+ "description": "Change the background of Facebook!",
+ "icons": {
+  "16": "icons/icon16.png",
+  "48": "icons/icon48.png",
+  "128": "icons/icon128.png"
+ },
+ "options_page" : "options.html",
+ "permissions" : [ "tabs", "http://*.google.com/*", "storage", "unlimitedStorage", "http://*.dansilver.info/*" ],
+ "background" : {
+  "scripts": ["background.js", "defaults.js"]
+ },
+ "page_action" : {
+  "default_icon": "icons/icon48.png",
+  "default_title": "Facebook Background Changer"
+ },
+ "content_scripts": [{
+  "matches": [ "*://www.facebook.com/*" ],
+  "css": ["style_facebook.css"],
+  "js": [ "jquery/jquery.js", "style_facebook.js" ]
+ }],
+ "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'"
+}

@@ -1,0 +1,17 @@
+#jewelContainer {
+  background-color: #3b5998;
+}
+.fbPlaceFlyout div{
+  background: white;
+}
+
+.fbFeedTicker {
+  background: transparent;
+  border-width: 0px;
+}
+.uiBoxWhite, .uiSideHeader, .groupProfileHeaderWash {
+  background-color: transparent;
+}
+.ego_column {
+  padding: 5px;
+}
