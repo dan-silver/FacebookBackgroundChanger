@@ -24,50 +24,11 @@
 		#previous button {display:none;}
 		#img_preview {max-width: 651px; width: 100%;}
 		.header {font-size: 40px; float: left;}
-		#store {width: 100%;float:left;}
-		#store h4{float:left;}
-		#store-filters {text-align: right; padding-right: 60px;}
+		#store {width: 100%;float:left;min-height:453px}
+		#store-filters {text-align: right;}
 		#store #catalog div{float:left;}
 		#store #catalog img { max-width: 293px; height: 195px; width: auto;}
 		#catalog button {float: right; margin-top: -37px; margin-right: 43px; cursor: pointer;}
-	@media screen and (max-width: 924px) {
-		#sidebar iframe {
-			float: left;
-		}
-		#sidebar {
-			width: 100%;
-		}
-		#settings {
-			width: 220px;
-			float: left;
-			margin: 30px;
-		}
-		.header {
-			font-size: 30px;
-		}
-	}
-	@media screen and (max-width: 751px) {
-		.header {
-			font-size: 20px;
-		}
-	}
-	@media screen and (max-width: 606px) {
-		#header_buttons {
-			float: left;
-		}
-		#settings {
-			margin: 8px;
-		}
-	}
-	@media screen and (max-width: 312px) {
-		.header {
-			font-size: 17px;
-		}
-		.ui-button-text-only .ui-button-text {
-			padding: .3em .2em !important;
-		}
-	}
-		
 		
 #catalog div.outer {
 	margin: 0px 7px 8px 0px;
@@ -105,6 +66,44 @@
 .ui-button-text-only .ui-button-text {
 	padding: .3em .5em;
 }
+
+	@media screen and (max-width: 924px) {
+		#sidebar iframe {
+			float: left;
+		}
+		#sidebar {
+			width: 100%;
+		}
+		#settings {
+			width: 220px;
+			float: left;
+			margin: 30px;
+		}
+		.header {
+			font-size: 30px;
+		}
+	}
+	@media screen and (max-width: 751px) {
+		.header {
+			font-size: 20px;
+		}
+	}
+	@media screen and (max-width: 606px) {
+		#header_buttons {
+			float: left;
+		}
+		#settings {
+			margin: 8px;
+		}
+		.ui-button-text-only .ui-button-text {
+			padding: .1em .3em;
+		}
+	}
+	@media screen and (max-width: 312px) {
+		.header {
+			font-size: 17px;
+		}
+	}
 	</style>
 </head>
 <script type="text/javascript" src="googlejsapi.js"></script>
@@ -165,11 +164,16 @@
 	</div>
 	<div id="store">
 		<h4>Premium Backgrounds</h4>
-		<div id="store-filters">
-			Sort by 
-			<input type="radio" id="newest" name="radio" checked="checked"/><label for="newest">Newest</label>
-			<input type="radio" id="oldest" name="radio" /><label for="oldest">Oldest</label>
-		</div>
+			<div id="store-filters">
+				<span style="width:600px;">
+				<input type="radio" id="newest" name="radio" checked="checked"/><label for="newest">Newest</label>
+				<input type="radio" id="oldest" name="radio" /><label for="oldest">Oldest</label>
+				<input type="radio" class="category-filter" id="nature" name="radio" /><label for="nature">Nature</label>
+				<input type="radio" class="category-filter" id="space" name="radio" /><label for="space">Space</label>
+				<input type="radio" class="category-filter" id="effects" name="radio" /><label for="effects">Effects</label>
+				<input type="radio" class="category-filter" id="other" name="radio" /><label for="other">Other</label>
+				</span>
+			</div>
 		<br>
 		<div id="catalog"></div>
 	</div>

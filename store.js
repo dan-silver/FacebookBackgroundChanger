@@ -81,21 +81,118 @@ function lookup_purchased_backgrounds() {
 	});
 }
 
+var backgrounds = [];
+backgrounds[1] = {
+	"dimensions": "1400x938",
+	"preview": 0,
+	"tags": "nature"
+};
+backgrounds[2] = {
+	"dimensions": "1400x918",
+	"preview": 0,
+	"tags": "other"
+};
+backgrounds[3] = {
+	"dimensions": "1400x918",
+	"preview": 0,
+	"tags": "effects"
+};
+backgrounds[4] = {
+	"dimensions": "1400x1050",
+	"preview": 0,
+	"tags": "effects"
+};
+backgrounds[5] = {
+	"dimensions": "1400x1050",
+	"preview": 0,
+	"tags": "effects"
+};
+backgrounds[6] = {
+	"dimensions": "1400x947",
+	"preview": 0,
+	"tags": "space"
+};
+backgrounds[7] = {
+	"dimensions": "1400x1048",
+	"preview": 0,
+	"tags": "nature"
+};
+backgrounds[8] = {
+	"dimensions": "1400x875",
+	"preview": 0,
+	"tags": "nature"
+};
+backgrounds[9] = {
+	"dimensions": "1400x1050",
+	"preview": 0,
+	"tags": "nature"
+};
+backgrounds[10] = {
+	"dimensions": "1280x1024",
+	"preview": 0,
+	"tags": "other"
+};
+backgrounds[11] = {
+	"dimensions": "1400x875",
+	"preview": 0,
+	"tags": "nature"
+};
+backgrounds[12] = {
+	"dimensions": "1263x1050",
+	"preview": 0,
+	"tags": "space"
+};
+backgrounds[13] = {
+	"dimensions": "1400x931",
+	"preview": 0,
+	"tags": "nature"
+};
+backgrounds[14] = {
+	"dimensions": "1360x1050",
+	"preview": 0,
+	"tags": "space"
+};
+backgrounds[15] = {
+	"dimensions": "1305x1050",
+	"preview": 0,
+	"tags": ""
+};
+backgrounds[16] = {
+	"dimensions": "1292x1050",
+	"preview": 0,
+	"tags": "effects"
+};
+backgrounds[17] = {
+	"dimensions": "1400x1015",
+	"preview": 0,
+	"tags": "other"
+};
+backgrounds[18] = {
+	"dimensions": "1400x778",
+	"preview": 0,
+	"tags": "effects"
+};
+backgrounds[19] = {
+	"dimensions": "1428x926",
+	"preview": 0,
+	"tags": "nature"
+};
+
 function prepareStore(sort) {
 	currentSort = sort;
 	$("#catalog").html("");
 	var tempString='',storeContent = '';
-	var dimmensions = ["1400x938", "1400x918", "1400x1050", "1400x1050", "1400x1050", "1400x947","1400x1048","1400x875","1400x1050","1280x1024","1400x875","1263x1050","1400x931","1360x1050","1305x1050","1292x1050","1400x1015","1400x778"];
+	
 	for(i = 1; i < (numberOfBackgrounds+1); i++){
 	
-		tempString = '<div class="outer"><div class="inner"><img id="img_'+i+'" src="premium_backgrounds/'+i+'_small.jpg"><br>';
+		tempString = '<div class="outer ' + backgrounds[i].tags + '"><div class="inner"><img id="img_'+i+'" src="premium_backgrounds/'+i+'_small.jpg"><br>';
 		
 		if (localStorage['purchased_background-'+i] == 1) {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install">Install</button>';
 		} else {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase">$0.99</button>';
 		}		
-		tempString+= '<span class="info">Size: '+dimmensions[i-1]+'px</span></div></div>';
+		tempString+= '<span class="info">Size: '+backgrounds[i].dimensions+'px</span></div></div>';
 		if(typeof(sort)==='undefined') {
 			$("#catalog").append(tempString);
 		} else {
@@ -137,5 +234,10 @@ function prepare_store_filters() {
 	});	
 	$("#oldest").click(function() {
 		prepareStore();
+	});
+	$(".category-filter").click(function() {
+		$("#catalog .outer").hide();
+		$("#catalog div." + $(this).attr("id")).fadeIn("fast");
+		console.log("#catalog ." + $(this).attr("id"));
 	});
 }
