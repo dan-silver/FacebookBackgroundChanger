@@ -4,7 +4,7 @@ google.load('payments', '1.0', {
     'packages': ['production_config']
 });
 $(document).ready(function(){
-	prepareStore(1);
+	prepareStore();
 	prepare_store_filters();
 });
 function bind_purchase_buttons() {
@@ -155,7 +155,7 @@ backgrounds[14] = {
 backgrounds[15] = {
 	"dimensions": "1305x1050",
 	"preview": 0,
-	"tags": ""
+	"tags": "other"
 };
 backgrounds[16] = {
 	"dimensions": "1292x1050",
@@ -174,30 +174,26 @@ backgrounds[18] = {
 };
 backgrounds[19] = {
 	"dimensions": "1428x926",
-	"preview": 0,
+	"preview": 1,
 	"tags": "nature"
 };
 
-function prepareStore(sort) {
-	currentSort = sort;
+function prepareStore() {
 	$("#catalog").html("");
 	var tempString='',storeContent = '';
 	
 	for(i = 1; i < (numberOfBackgrounds+1); i++){
-	
 		tempString = '<div class="outer ' + backgrounds[i].tags + '"><div class="inner"><img id="img_'+i+'" src="premium_backgrounds/'+i+'_small.jpg"><br>';
-		
 		if (localStorage['purchased_background-'+i] == 1) {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install">Install</button>';
 		} else {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase">$0.99</button>';
-		}		
-		tempString+= '<span class="info">Size: '+backgrounds[i].dimensions+'px</span></div></div>';
-		if(typeof(sort)==='undefined') {
-			$("#catalog").append(tempString);
-		} else {
-			$("#catalog").prepend(tempString);
+		}	
+		if (backgrounds[i].preview == 1) {
+			tempString += '<button bid="'+i+'" class="open-preview">Preview</button>';
 		}
+		tempString+= '<span class="info">Size: '+backgrounds[i].dimensions+'px</span></div></div>';
+		$("#catalog").prepend(tempString);
 	}
 	$("button").button();
 	bind_install_buttons();
@@ -230,14 +226,11 @@ function bind_install_buttons() {
 function prepare_store_filters() {
 	$( "#store-filters" ).buttonset();
 	$("#newest").click(function() {
-		prepareStore(1);
+		$("#catalog .outer").fadeIn();
 	});	
-	$("#oldest").click(function() {
-		prepareStore();
-	});
 	$(".category-filter").click(function() {
 		$("#catalog .outer").hide();
-		$("#catalog div." + $(this).attr("id")).fadeIn("fast");
+		$("#catalog div." + $(this).attr("id")).fadeIn();
 		console.log("#catalog ." + $(this).attr("id"));
 	});
 }

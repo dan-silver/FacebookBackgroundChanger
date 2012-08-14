@@ -133,7 +133,7 @@ $( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",button
 			resetCanvas();
 			$( this ).dialog( "close" );
 		}
-	}});
+}});
 	$( "#sample-backgrounds" ).dialog({autoOpen: false, width: "748",height: "580",buttons: {
 		Close: function() {
 			$( this ).dialog( "close" );
@@ -142,13 +142,24 @@ $( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",button
 	$(".restore").click(function() {
 		restore_history($(this).parent().attr("id"));
 		display_pictures();
-		return false;
 	});
 	$(".remove").click(function() {
 		remove_history($(this).parent().attr("id"));
 		display_pictures();
-		return false;
 	});
+	
+	/** Start Premium Background Previews**/
+	$("#store-preview").dialog({ autoOpen: false, width: "1000",height: "700",buttons: {
+		Close: function() {
+			$( this ).dialog( "close" );
+		}
+	}});
+	$(".open-preview").click(function() {
+		$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
+		$("#store-preview").dialog("open");
+	});
+	/** End Premium Background Previews**/
+		
 	$( "#add_picture" ).dialog({ autoOpen: false, width: "535",height: "400",buttons: {
 		Cancel: function() {
 			reset_add_picture();
@@ -160,9 +171,9 @@ $( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",button
 			}
 		}});
 	$("button, #header_buttons a").button();
-	$("#upload_link").click(function() { $("#upload_dialog").dialog("open");return false; });
-	$("#sample-backgrounds_link").click(function() { $("#sample-backgrounds").dialog("open"); return false; });
-	$("#add_picture_link").click(function() {$("#add_picture").dialog("open"); return false; });
+	$("#upload_link").click(function() { $("#upload_dialog").dialog("open");});
+	$("#sample-backgrounds_link").click(function() { $("#sample-backgrounds").dialog("open");});
+	$("#add_picture_link").click(function() {$("#add_picture").dialog("open");});
 	$("#getImage").click(function() {
 		if (validateURL($("#enteredURL").val()) == true) {
 		$("#validURL").hide();
