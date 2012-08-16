@@ -15,3 +15,6 @@
 .ego_column {
   padding: 5px;
 }
+body {
+  background-size: 100%;
+}

@@ -1,12 +1,17 @@
 var vars=new Array();
+var sharedBackground = false;
 
 function fetch_update() {
-chrome.extension.sendRequest({method: "get_vars"}, function(response) {
+chrome.extension.sendMessage({method: "get_vars"}, function(response) {
   vars = response.variables.split(',');
+	if (sharedBackground) return;
 	$('body').css({
 		"background": 'url(data:image/png;charset=utf-8;base64,'+vars[0]+')',
+//		"background-size" : '100%',
+		"background-repeat" : 'no-repeat',
 		"background-attachment": "fixed"
 	});
+	updateBackgroundSize();
 	$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");
 	$(".fbTimelineCapsule .timelineUnitContainer").css("background-color", "rgba(255,255,255,"+vars[1]+")");
 	});
@@ -18,6 +23,53 @@ chrome.extension.sendRequest({method: "get_vars"}, function(response) {
 }
 fetch_update();
 
+
+  
+// *** Shared Backgrounds ***
+
+//save users background
+var Facebook_ID = $(".firstItem a").attr("href").split(".com/")[1].split("?")[0];
+chrome.extension.sendMessage({FacebookID: Facebook_ID});
+
+//lookup other users backgrounds
+var previousLookup;
+function lookup_backgrounds() {
+	var otherUser = document.URL.split(".com/")[1];
+	if (otherUser == previousLookup)  return; //Already using the correct background for this user
+	previousLookup = otherUser; 
+	if (otherUser != Facebook_ID) { //not on your own profile
+		$.ajax({
+			url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png',
+			type:'HEAD',
+			error: function() {
+				sharedBackground = false;
+			},
+			success: function() {
+				sharedBackground = true;
+				$('body').css({
+					"background": 'url(http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png)',
+					"background-repeat" : 'no-repeat',
+					"background-attachment": "fixed"
+				});
+				updateBackgroundSize();
+			}
+		});
+	} else {
+	  sharedBackground = false;
+	}
+}
+lookup_backgrounds();
+
 setInterval(function() {
 	fetch_update();
-  }, 2000);
+	lookup_backgrounds();
+}, 1000);
+  
+window.onresize = function(event) {
+	updateBackgroundSize();
+}
+
+function updateBackgroundSize() {
+	console.log("resizing window");
+	$('body').css("background-size", document.width);
+}

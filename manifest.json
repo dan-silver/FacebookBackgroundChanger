@@ -11,7 +11,7 @@
  "options_page" : "options.html",
  "permissions" : [ "tabs", "http://*.google.com/*", "storage", "unlimitedStorage", "http://*.dansilver.info/*" ],
  "background" : {
-  "scripts": ["background.js", "defaults.js"]
+  "scripts": ["jquery/jquery.js","background.js", "defaults.js"]
  },
  "page_action" : {
   "default_icon": "icons/icon48.png",

@@ -11,15 +11,6 @@ chrome.pageAction.onClicked.addListener(function(tab) {
 	open_options_page();
 });
 
-var vars_string;
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if (request.method == "get_vars") {
-		vars_string = localStorage['base64'] +','+localStorage['transparency'];
-		sendResponse({variables: vars_string});
-    } else
-      sendResponse({});
-});
-
 function open_options_page() {
 	chrome.tabs.getAllInWindow(undefined, function(tabs) {
 		for (var i = 0, tab; tab = tabs[i]; i++) {
@@ -41,6 +32,14 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 });
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
+	if (request.method == "get_vars") {
+		vars_string = localStorage['base64'] +','+localStorage['transparency'];
+		sendResponse({variables: vars_string});
+    }
+	if (request.FacebookID) {
+		localStorage['FacebookID'] = request.FacebookID;
+	}
+
 	if(request.GoogleID) {
 		localStorage['gid']=request.GoogleID;
 		localStorage['name']=request.GoogleName;
