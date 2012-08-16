@@ -149,11 +149,7 @@ $( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",button
 			$( this ).dialog( "close" );
 		}
 }});
-	$( "#sample-backgrounds" ).dialog({autoOpen: false, width: "748",height: "580",buttons: {
-		Close: function() {
-			$( this ).dialog( "close" );
-		}
-	}});
+
 	$(".restore").click(function() {
 		restore_history($(this).parent().attr("id"));
 		display_pictures();
@@ -187,7 +183,6 @@ $( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",button
 		}});
 	$("button, #header_buttons a").button();
 	$("#upload_link").click(function() { $("#upload_dialog").dialog("open");});
-	$("#sample-backgrounds_link").click(function() { $("#sample-backgrounds").dialog("open");});
 	$("#add_picture_link").click(function() {$("#add_picture").dialog("open");});
 	$("#getImage").click(function() {
 		if (validateURL($("#enteredURL").val()) == true) {
@@ -276,24 +271,6 @@ if (files.length > 0) {
 evt.preventDefault();
 }, false);
 
-
-$("#sample-backgrounds img").click(function() {
-	$.ajax({
-		type : 'POST',
-		url : 'http://www.dansilver.info/fbBackgroundChanger/sample_pictures.php',
-		dataType : 'json',
-		data: {
-			id : $(this).attr("number")
-		},
-		success : function(data){
-			$("#sample-backgrounds").dialog("close");
-			localStorage['temp'] = data.base64;
-			update_history();
-		}
-	});
-	return false;
-});
-
 $("#previous div").hover(function() {
 	$(this).find("button").show();
 }, function () {
@@ -307,9 +284,6 @@ return false;
 //initialize 
 display_pictures();
 $("html").disableSelection();
-for (i=1;i<=36;i++) {
-	$("#sample-backgrounds").append('<img style="background-image:url(\'images/' + i + '.png\')" number="'+i+'">');
-}
 //end initialize
 
 });

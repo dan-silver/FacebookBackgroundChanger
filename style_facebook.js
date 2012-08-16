@@ -23,7 +23,6 @@ chrome.extension.sendMessage({method: "get_vars"}, function(response) {
 }
 fetch_update();
 
-
   
 // *** Shared Backgrounds ***
 
@@ -35,28 +34,28 @@ chrome.extension.sendMessage({FacebookID: Facebook_ID});
 var previousLookup;
 function lookup_backgrounds() {
 	var otherUser = document.URL.split(".com/")[1];
+	if (!otherUser) return;
 	if (otherUser == previousLookup)  return; //Already using the correct background for this user
+	if (otherUser == Facebook_ID) return; //not on your own profile
+	console.log('Looking up a shared backrground');
+	$.ajax({
+		url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png',
+		type:'HEAD',
+		error: function() {
+			sharedBackground = false;
+		},
+		success: function() {
+			console.log('Using a shared background');
+			sharedBackground = true;
+			$('body').css({
+				"background": 'url(http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png)',
+				"background-repeat" : 'no-repeat',
+				"background-attachment": "fixed"
+			});
+			updateBackgroundSize();
+		}
+	});
 	previousLookup = otherUser; 
-	if (otherUser != Facebook_ID) { //not on your own profile
-		$.ajax({
-			url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png',
-			type:'HEAD',
-			error: function() {
-				sharedBackground = false;
-			},
-			success: function() {
-				sharedBackground = true;
-				$('body').css({
-					"background": 'url(http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png)',
-					"background-repeat" : 'no-repeat',
-					"background-attachment": "fixed"
-				});
-				updateBackgroundSize();
-			}
-		});
-	} else {
-	  sharedBackground = false;
-	}
 }
 lookup_backgrounds();
 
@@ -70,6 +69,5 @@ window.onresize = function(event) {
 }
 
 function updateBackgroundSize() {
-	console.log("resizing window");
 	$('body').css("background-size", document.width);
 }
