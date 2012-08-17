@@ -54,10 +54,7 @@ function bind_purchase_buttons() {
 }	
 	
 function lookup_purchased_backgrounds() {
-	if (!localStorage['gid']) {
-	//	console.log('Not logged in');
-		return;
-	}
+	if (!localStorage['gid']) return; //	not logged in to Google
 	$.ajax({
 		type : 'POST',
 		url : 'http://dansilver.info/wallet/lookup_purchased_backgrounds.php',
@@ -66,17 +63,15 @@ function lookup_purchased_backgrounds() {
 				"gid" : localStorage['gid'],
 			},
 		success : function(data){
-			if (data) {
-			//	console.log(data);
-				var bids = data.split(",");
-				$("#store button").each(function() {
-					if (bids.indexOf($(this).attr("bid")) > -1) {
-						$(this).removeClass("purchase").addClass("install").find("span").text("Install");
-						localStorage['purchased_background-'+$(this).attr("bid")] = 1;
-					}
-				});
-				bind_install_buttons();
-			}
+			if (!data) return;
+			var bids = data.split(",");
+			$("#store button").each(function() {
+				if (bids.indexOf($(this).attr("bid")) > -1) {
+					$(this).removeClass("purchase").addClass("install").find("span").text("Install");
+					localStorage['purchased_background-'+$(this).attr("bid")] = 1;
+				}
+			});
+			bind_install_buttons();
 		}
 	});
 }

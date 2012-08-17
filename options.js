@@ -90,13 +90,13 @@ function update_history() {
 }
 
 function display_logged_in_status() {
-if (localStorage['name']) {
-	$("#ver_status_info").html('<i>' + localStorage['name'] + '</i>');
-	$("#reset_ver").text("(Logout)");
-} else {
-	$("#reset_ver").text("Log In with your Google Account");
-	$("#ver_status_info").html("");
-}
+	if (localStorage['name']) {
+		$("#ver_status_info").html('<i>' + localStorage['name'] + '</i>');
+		$("#reset_ver").text("(Logout)");
+	} else {
+		$("#reset_ver").text("Log In with your Google Account");
+		$("#ver_status_info").html("");
+	}
 }
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
@@ -235,26 +235,26 @@ canvas.addEventListener("dragover", function (evt) {
 
 canvas.addEventListener("drop", function (evt) {
 var files = evt.dataTransfer.files;
-if (files.length > 0) {
-	var file = files[0];
-	if (typeof FileReader !== "undefined" && file.type.indexOf("image") != -1) {
-		var reader = new FileReader();
-		reader.onload = function (evt) {
-			img.src = evt.target.result;
-			try {
-				var temp = img.src.split(',');
-				localStorage['temp']  = temp[1];
-				$("#upload-preview").attr("src", "data:image/png;base64, " + localStorage['temp']);
-				$("canvas").css("display", "none").next().css("display", "block");
-				context.drawImage(img, 0, 0);
-			} catch(e) {
-				resetCanvas();
-				message('too_big');
-			}
-		};
-		reader.readAsDataURL(file);
-	}
+if (files.length < 0) return;
+var file = files[0];
+if (typeof FileReader !== "undefined" && file.type.indexOf("image") != -1) {
+	var reader = new FileReader();
+	reader.onload = function (evt) {
+		img.src = evt.target.result;
+		try {
+			var temp = img.src.split(',');
+			localStorage['temp']  = temp[1];
+			$("#upload-preview").attr("src", "data:image/png;base64, " + localStorage['temp']);
+			$("canvas").css("display", "none").next().css("display", "block");
+			context.drawImage(img, 0, 0);
+		} catch(e) {
+			resetCanvas();
+			message('too_big');
+		}
+	};
+	reader.readAsDataURL(file);
 }
+
 evt.preventDefault();
 }, false);
 
