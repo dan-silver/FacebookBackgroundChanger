@@ -71,20 +71,7 @@ function restore_history(item) {
 	shift_history_down();
 }
 
-function server_save_background() {
-	$.ajax({
-		type : 'POST',
-		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
-		dataType : 'json',
-			data: {
-				"FacebookID" : localStorage['FacebookID'],
-				"background" : localStorage['base64']
-			}
-	});
-}
-
 function update_history() {
-	console.log("updating history");
 	try {
 		shift_history_up();
 		if (localStorage['base64']) {
@@ -126,7 +113,7 @@ $('#reset_ver').click(function() {
 	for(i = 1; i < (numberOfBackgrounds+1); i++){
 		localStorage['purchased_background-'+i] = '';
 	}
-	prepareStore(currentSort);
+	prepareStore();
 	localStorage['gid'] = '';
 	localStorage['name'] = '';
 	if ($(this).text() == "(Logout)") {
@@ -285,7 +272,6 @@ return false;
 display_pictures();
 $("html").disableSelection();
 //end initialize
-
 });
 
 function message(status) {

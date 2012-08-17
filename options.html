@@ -115,6 +115,7 @@
 <script type="text/javascript" src="dashed_lines.js"></script>
 <script type="text/javascript" src="store.js"></script>
 <script type="text/javascript" src="options.js"></script>
+<script type="text/javascript" src="sharedBackgrounds.js"></script>
 <div id="page">
 	<div id="ver_status">
 		<span id="ver_status_info"></span>
@@ -157,6 +158,12 @@
 				<h4>Page Opacity:<span id="transparency_value"></span></h4>
 				<div style="display: block;" id="transparency_settings" style="width: 300px;"></div>
 				The lower the number, the more you can see through Facebook pages.
+				<div id="sharing-settings">
+				<h4>Background Mode</h4>
+					<input type="radio" id="private" name="sharing"/><label for="private">Private</label>
+					<input type="radio" id="public" name="sharing"/><label for="public">Public</label><br>
+					In public background mode, anyone else with the extension installed will see your background when visiting your profile.
+				</div>
 			</div>
 		</div>
 	</div>
