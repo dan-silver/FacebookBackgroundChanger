@@ -64,12 +64,8 @@ window.onresize = function(event) {
 
 function updateBackgroundSettings() {
 	if (vars[2] == "automatic") {
-		$('body').css({
-			"background-size": document.width
-		});	
+		$('body').css("background-size", document.width);	
 	} else {
-		$('body').css({
-			"background-repeat": "none"
-		});
+		$('body').css("background-repeat", "none");
 	}
 }

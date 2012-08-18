@@ -43,6 +43,7 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 	background: white;
 	color: #4F4F4F;
 	max-width: 480px;
+	cursor:pointer;
 }
 #current-background {
 	min-height: 300px;
