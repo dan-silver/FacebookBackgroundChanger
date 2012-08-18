@@ -25,12 +25,14 @@ function display_history() {
 }
 function display_current_picture() {
 	if (localStorage['base64']) {
+		$("#noBackground").hide();
 		$(".img_preview_req").show();
 		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64']).css({
 			"opacity": "1",
 			"height" : "auto"
 		});
 	} else {
+		$("#noBackground").fadeIn();
 		$(".img_preview_req").hide();
 		$("#current-background").attr("src", "").css({
 			"opacity": "0",
@@ -200,7 +202,6 @@ $('#reset_ver').click(function() {
 
 	document.getElementById("img_preview").addEventListener("dragover", function (evt) {
 		$("#current-background").css({
-			"border": "4px dotted black",
 			"-webkit-filter": "grayscale(1)"
 		});
 		evt.preventDefault();
@@ -212,7 +213,6 @@ $('#reset_ver').click(function() {
 
 function resetPicture() {
 	$("#current-background").css({
-		"border": "4px dotted white",
 		"-webkit-filter": "grayscale(0)"
 	});
 }

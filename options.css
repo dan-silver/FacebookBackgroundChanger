@@ -32,10 +32,12 @@
 		float: left;
 		overflow: hidden;
 		padding: 7px;
-		border-radius: 6px;
-		background:lightgray;
 		margin-top:10px;
 		z-index: 100;
+		border: 1px solid #B6B6B6;
+		border-radius: 6px;
+		background: white;
+		color: #4F4F4F;
 	}
 	#current-background {
 		min-height: 300px;
