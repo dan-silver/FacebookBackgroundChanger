@@ -1,5 +1,6 @@
 function server_save_background() {
-	if (!localStorage['sharingMode']) return;
+	if (localStorage['sharingMode'] == 'private') return;
+	console.log('saving to server');
 	$.ajax({
 		type : 'POST',
 		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
@@ -12,16 +13,5 @@ function server_save_background() {
 }
 
 $(function() {
-	$( '#sharing-settings' ).buttonset();
-	$('#private').click(function() { localStorage['sharingMode'] = false;});
-	$('#public').click(function() { localStorage['sharingMode'] = true; });
-	updateSharingModeButtons();
+	createRadioSetting('sharingMode', 'private', 'sharing-settings')
 });
-
-function updateSharingModeButtons() {
-	if (localStorage['sharingMode']) {
-		$('#public').next().addClass("ui-state-active");
-	} else {
-		$('#private').next().addClass("ui-state-active");
-	}
-}
