@@ -79,92 +79,74 @@ function lookup_purchased_backgrounds() {
 var backgrounds = [];
 backgrounds[1] = {
 	"dimensions": "1400x938",
-	"preview": 0,
 	"tags": "nature"
 };
 backgrounds[2] = {
 	"dimensions": "1400x918",
-	"preview": 0,
 	"tags": "other"
 };
 backgrounds[3] = {
 	"dimensions": "1400x918",
-	"preview": 0,
 	"tags": "effects"
 };
 backgrounds[4] = {
 	"dimensions": "1400x1050",
-	"preview": 0,
 	"tags": "effects"
 };
 backgrounds[5] = {
 	"dimensions": "1400x1050",
-	"preview": 0,
 	"tags": "effects"
 };
 backgrounds[6] = {
 	"dimensions": "1400x947",
-	"preview": 0,
 	"tags": "space"
 };
 backgrounds[7] = {
 	"dimensions": "1400x1048",
-	"preview": 0,
 	"tags": "nature"
 };
 backgrounds[8] = {
 	"dimensions": "1400x875",
-	"preview": 0,
 	"tags": "nature"
 };
 backgrounds[9] = {
 	"dimensions": "1400x1050",
-	"preview": 0,
 	"tags": "nature"
 };
 backgrounds[10] = {
 	"dimensions": "1280x1024",
-	"preview": 0,
 	"tags": "other"
 };
 backgrounds[11] = {
 	"dimensions": "1400x875",
-	"preview": 0,
 	"tags": "nature"
 };
 backgrounds[12] = {
 	"dimensions": "1263x1050",
-	"preview": 0,
 	"tags": "space"
 };
 backgrounds[13] = {
 	"dimensions": "1400x931",
-	"preview": 0,
 	"tags": "nature"
 };
 backgrounds[14] = {
 	"dimensions": "1360x1050",
-	"preview": 0,
 	"tags": "space"
 };
 backgrounds[15] = {
 	"dimensions": "1305x1050",
-	"preview": 0,
 	"tags": "other"
 };
 backgrounds[16] = {
 	"dimensions": "1292x1050",
-	"preview": 0,
 	"tags": "effects"
 };
 backgrounds[17] = {
 	"dimensions": "1400x1015",
-	"preview": 0,
 	"tags": "other"
 };
 backgrounds[18] = {
 	"dimensions": "1400x778",
-	"preview": 0,
 	"tags": "effects"
 };
 backgrounds[19] = {
@@ -215,8 +197,6 @@ function bind_install_buttons() {
 				if (data) {
 					localStorage['temp'] = data.premium_background_base64;
 					update_history();
-				} else {
-				//	console.log("You haven't purchased this background...yet");
 				}
 			}
 		});
