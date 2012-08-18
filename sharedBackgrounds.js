@@ -11,7 +11,6 @@ function server_save_background() {
 	});
 }
 
-
 $(function() {
 	$( '#sharing-settings' ).buttonset();
 	$('#private').click(function() { localStorage['sharingMode'] = false;});

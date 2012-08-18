@@ -124,14 +124,13 @@
 	<span class="header" style="margin-left: 0px;">Facebook Background Changer</span>
 	<div id="header_buttons">
 		<button id="add_picture_link">Picture from URL</button>
-		<button id="upload_link">Upload Picture</button>
 	</div>
 	<div id="main">
 		<div id="content">
 			<div id="img_preview" >
 				<h4 class="img_preview_req" >Current Background</h4>
-				<img style="max-height: 475px;max-width: 100%;"><br>
-				<button class="img_preview_req" style="margin-top:-34px;" id="remove_main">Remove Current Background</button>
+				<img id="current-background" style="max-height: 475px;max-width: 100%;border: 4px dotted white;"><br>
+				<button class="img_preview_req" style="margin-top:-36px;margin-left: 8px;" id="remove_main">Remove Current Background</button>
 			</div>
 		<h4 id="history-label" style="display:none;">History</h4>
 			<div id="previous">
@@ -181,11 +180,6 @@
 		<br>
 		<div id="catalog"></div>
 	</div>
-	<div id="upload_dialog" title="Upload a Picture">
-		<canvas id="canvas" width="530" height="330"></canvas><img style="max-width: 100%;
-	max-height: 100%;" id="upload-preview" />
-	</div>
-	<img style="display:none;" id="temp_image">
 	<div id="add_picture" title="Change Picture">
 		Image Address: <input type="text" placeholder="Image URL" id="enteredURL" />
 		<button id="getImage">Retrieve Image</button><br>

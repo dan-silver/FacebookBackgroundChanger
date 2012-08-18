@@ -124,19 +124,6 @@ $('#reset_ver').click(function() {
 	}
 });
 
-$( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",buttons: {
-		Save: function() {
-			update_history();
-			resetCanvas();
-			$( this ).dialog( "close" );
-		}, "New Picture":function() {
-			resetCanvas();
-		}, Close:function() {
-			resetCanvas();
-			$( this ).dialog( "close" );
-		}
-}});
-
 	$(".restore").click(function() {
 		restore_history($(this).parent().attr("id"));
 		display_pictures();
@@ -169,7 +156,6 @@ $( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",button
 			}
 		}});
 	$("button, #header_buttons a").button();
-	$("#upload_link").click(function() { $("#upload_dialog").dialog("open");});
 	$("#add_picture_link").click(function() {$("#add_picture").dialog("open");});
 	$("#getImage").click(function() {
 		if (validateURL($("#enteredURL").val()) == true) {
@@ -205,57 +191,50 @@ $( "#upload_dialog" ).dialog({autoOpen: false, width: "635",height: "500",button
 			 $("#transparency_value").html((Math.round(ui.value*100))+"%");
 		}
 	});
+
+	document.getElementById("img_preview").addEventListener("dragover", function (evt) {
+		$("#current-background").css({
+			"border": "4px dotted black",
+			"-webkit-filter": "grayscale(1)"
+		});
+		evt.preventDefault();
+	}, false);
+	document.getElementById("img_preview").addEventListener("dragleave", function (evt) {
+		resetPicture();
+		evt.preventDefault();
+	}, false);
+
+function resetPicture() {
+	$("#current-background").css({
+		"border": "4px dotted white",
+		"-webkit-filter": "grayscale(0)"
+	});
+}
 	
-var canvas = document.getElementById("canvas");
-context = canvas.getContext("2d");
-context.font = "15pt Calibri";
-img = document.createElement("img");
- function resetCanvas () {
-	$("canvas").css("display", "block").next().css("display", "none");
-	context.clearRect(0, 0, canvas.width, canvas.height); //Reseting Canvas
-	context.fillText("Drag an image here from your computer", 145, 200);
-	context.lineWidth = 0.5;
-	var cordinates = {
-		'length': 20,
-		'gap': 5,
-		'y_top': 100,
-		'y_bottom': 280,
-		'x_right': 590,
-		'x_left': 90
-	};
-	context.dashedLine(cordinates.x_left, cordinates.y_top, cordinates.x_right, cordinates.y_top,[cordinates.length, cordinates.gap]); //top horizontal
-	context.dashedLine(cordinates.x_left, cordinates.y_bottom, cordinates.x_right, cordinates.y_bottom,[cordinates.length, cordinates.gap]); //bottom horizontal
-	context.stroke(); //draw lines
-}
-resetCanvas();
-
-canvas.addEventListener("dragover", function (evt) {
+	document.getElementById("img_preview").addEventListener("drop", function (evt) {
+	resetPicture();
+	var files = evt.dataTransfer.files;
+	if (files.length < 0) {
+		message("incorrectImgFormat");
+		return;
+	}
+	var file = files[0];
+	if (typeof FileReader !== "undefined" && file.type.indexOf("image") != -1) {
+		var reader = new FileReader();
+		reader.onload = function (evt) {
+			try {
+				var temp = evt.target.result.split(',');
+				localStorage['temp']  = temp[1];
+				update_history();
+			} catch(e) {
+				message('too_big');
+			}
+		};
+		reader.readAsDataURL(file);
+	} else {
+		message("incorrectImgFormat");
+	}
 	evt.preventDefault();
-}, false);
-
-canvas.addEventListener("drop", function (evt) {
-var files = evt.dataTransfer.files;
-if (files.length < 0) return;
-var file = files[0];
-if (typeof FileReader !== "undefined" && file.type.indexOf("image") != -1) {
-	var reader = new FileReader();
-	reader.onload = function (evt) {
-		img.src = evt.target.result;
-		try {
-			var temp = img.src.split(',');
-			localStorage['temp']  = temp[1];
-			$("#upload-preview").attr("src", "data:image/png;base64, " + localStorage['temp']);
-			$("canvas").css("display", "none").next().css("display", "block");
-			context.drawImage(img, 0, 0);
-		} catch(e) {
-			resetCanvas();
-			message('too_big');
-		}
-	};
-	reader.readAsDataURL(file);
-}
-
-evt.preventDefault();
 }, false);
 
 $("#previous div").hover(function() {
@@ -271,26 +250,35 @@ return false;
 //initialize 
 display_pictures();
 $("html").disableSelection();
+$('img').bind('dragstart', function(event) { event.preventDefault(); }); //prevent images from being dragged
 //end initialize
 });
 
 function message(status) {
 	switch (status) {
 		case 'saved':
-		noty({
-			text: 'Check Facebook! Your background has been saved.',
-			layout: "center",
-			type: 'success',
-			timeout: 3000
-		});	
+			noty({
+				text: 'Check Facebook! Your background has been saved.',
+				layout: "center",
+				type: 'success',
+				timeout: 3000
+			});	
 		break;
 		case 'too_big':
-		noty({
-			text: 'This image is too big, try using a smaller image and keeping the dimensions under 1600x1400px.<br>If this problem continues, try removing previous backgrounds in the history.',
-			layout: "center",
-			type: 'warning',
-			timeout: 5000,
-		});
+			noty({
+				text: 'This image is too big, try using a smaller image and keeping the dimensions under 1600x1400px.<br>If this problem continues, try removing previous backgrounds in the history.',
+				layout: "center",
+				type: 'warning',
+				timeout: 5000,
+			});
+		break;
+		case 'incorrectImgFormat':
+				noty({
+					text: 'Images need to be dragged from your computer and should end in .png, .jpg, .bmp or .gif.',
+					layout: "center",
+					type: 'warning',
+					timeout: 5000,
+				});
 		break;
 	}
 }
