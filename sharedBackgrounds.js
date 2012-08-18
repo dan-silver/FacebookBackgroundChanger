@@ -13,5 +13,5 @@ function server_save_background() {
 }
 
 $(function() {
-	createRadioSetting('sharingMode', 'private', 'sharing-settings')
+	createRadioSetting('sharingMode', 'private', 'sharing-settings');
 });
