@@ -29,14 +29,16 @@ function display_current_picture() {
 		$(".img_preview_req").show();
 		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64']).css({
 			"opacity": "1",
-			"height" : "auto"
+			"height" : "auto",
+			"min-height": "0px"
 		});
 	} else {
 		$("#noBackground").fadeIn();
 		$(".img_preview_req").hide();
 		$("#current-background").attr("src", "").css({
 			"opacity": "0",
-			"height" : "0px"
+			"height" : "0px",
+			"min-height": "300px"
 		});
 	}
 }
@@ -229,8 +231,7 @@ function resetPicture() {
 		var reader = new FileReader();
 		reader.onload = function (evt) {
 			try {
-				var temp = evt.target.result.split(',');
-				localStorage['temp']  = temp[1];
+				localStorage['temp']  = evt.target.result.split(',')[1];
 				update_history();
 			} catch(e) {
 				message('too_big');
