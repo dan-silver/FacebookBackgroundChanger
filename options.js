@@ -26,10 +26,10 @@ function display_history() {
 function display_current_picture() {
 	if (localStorage['base64']) {
 		$(".img_preview_req").show();
-		$("#img_preview img").attr("src", "data:image/png;base64, " + localStorage['base64']).show();
+		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64']).show();
 	} else {
 		$(".img_preview_req").hide();
-		$("#img_preview img").attr("src", "").hide();
+		$("#current-background").attr("src", "").hide();
 	}
 }
 function display_pictures() {

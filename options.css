@@ -25,7 +25,7 @@
 	#store #catalog img { max-width: 293px; height: 195px; width: auto;}
 	#catalog button {float: right; margin-top: -37px;cursor: pointer;position:absolute;right: 38px;}
 	.open-preview {top: 164px}
-	.help {width: 25px;margin-bottom: -7px;}
+	.help {width: 25px;margin-bottom: -7px;cursor:pointer;}
 	.help-description {display: none;float: left;overflow: hidden;padding: 7px;border-radius: 6px;background:lightgray;margin-top:10px;}
 	#catalog div.outer {
 		margin: 0px 7px 8px 0px;
