@@ -1,0 +1,103 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+	#page {max-width: 1201px;margin-left: auto;margin-right: auto;margin-top: 5px;background-color: white;padding: 2px;}
+	#ver_status {float: left; text-align:right;width:100%;}
+	#reset_ver {cursor: pointer;}
+	#content {float: left; margin-right: 10px;min-width: 53%;}
+	#sidebar {float: right; width: 250px;}
+	#background_patterns img{ float: left;margin: 5px 5px 0px 0px;height:175px; }
+	#background_patterns img:hover{ cursor:pointer; }
+	#header_buttons {float: right;margin-top:10px;}
+	.header,  h4{font-family: 'Droid Sans', sans-serif;}
+	p, span {font-family: 'Droid Sans', sans-serif;}
+	h1 {font-size: 1em;}
+	h4 {margin: 0px;}
+	button.restore{float:right;margin-top: -36px;margin-right: 4px;}
+	button.remove{margin-top: -36px;margin-left: 4px;}
+	#previous div { display: none; float:left; margin: 12px; width:187px;}
+	#previous img {max-width:202px;max-height: 187px;}
+	#waiting { display: none; }
+	#sample-backgrounds img {width:100px;height:100px; margin: 2px;}
+	#previous button {display:none;}
+	#img_preview {max-width: 651px; width: 100%;}
+	.header {font-size: 40px; float: left;}
+	#store {width: 100%;float:left;min-height:453px}
+	#store #catalog div{float:left;}
+	#store #catalog img { max-width: 293px; height: 195px; width: auto;}
+	#catalog button {float: right; margin-top: -37px;cursor: pointer;position:absolute;right: 38px;}
+	.open-preview {top: 164px}
+	.help {width: 25px;margin-bottom: -7px;}
+	.help-description {display: none;float: left;overflow: hidden;padding: 7px;border-radius: 6px;background:lightgray;margin-top:10px;}
+	#catalog div.outer {
+		margin: 0px 7px 8px 0px;
+		text-align: center;
+	}
+	#catalog div.inner {
+		overflow: hidden;
+		position: relative;
+		width: 293px;
+	}
+
+	#catalog span.info {
+		position: absolute;
+		display: block;
+		width: 120px;
+		left: 61px;
+		bottom: -50px;
+		color: white;
+		padding:0px 5px 0px 5px;
+		background-color: rgba(125, 0, 0, 0.85);
+		line-height: 35px;
+		border-radius: 10px 10px 0 0;
+		-webkit-transition: bottom .5s;
+		margin-left: -20px;
+		font-size: 14px;
+	}
+
+	#catalog div:hover span.info {
+		bottom: 0px;
+	}	
+
+	.ui-button .ui-button-text {
+		font-size: 13px !important;
+	}
+	.ui-button-text-only .ui-button-text {
+		padding: .3em .5em !important;
+	}
+
+	@media screen and (max-width: 924px) {
+		#sidebar iframe {
+			float: left;
+		}
+		#sidebar {
+			width: 100%;
+		}
+		#settings {
+			width: 220px;
+			float: left;
+			margin: 30px;
+		}
+		.header {
+			font-size: 30px;
+		}
+	}
+	@media screen and (max-width: 455px) {
+		.header {
+			font-size: 20px;
+		}
+	}
+	@media screen and (max-width: 606px) {
+		#header_buttons {
+			float: left;
+		}
+		#settings {
+			margin: 8px;
+		}
+		.ui-button-text-only .ui-button-text {
+			padding: .1em .3em;
+		}
+	}
+	@media screen and (max-width: 312px) {
+		.header {
+			font-size: 17px;
+		}
+	}
