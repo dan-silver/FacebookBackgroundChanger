@@ -7,7 +7,7 @@
 	#background_patterns img{ float: left;margin: 5px 5px 0px 0px;height:175px; }
 	#background_patterns img:hover{ cursor:pointer; }
 	#header_buttons {float: right;margin-top:10px;}
-	.header,  h4{font-family: 'Droid Sans', sans-serif;}
+	.header,  h4, img{font-family: 'Droid Sans', sans-serif;}
 	p, span {font-family: 'Droid Sans', sans-serif;}
 	h1 {font-size: 1em;}
 	h4 {margin: 0px;}
@@ -26,7 +26,38 @@
 	#catalog button {float: right; margin-top: -37px;cursor: pointer;position:absolute;right: 38px;}
 	.open-preview {top: 164px}
 	.help {width: 25px;margin-bottom: -7px;cursor:pointer;}
-	.help-description {display: none;float: left;overflow: hidden;padding: 7px;border-radius: 6px;background:lightgray;margin-top:10px;}
+	.help-description {
+		display: none;
+		position: absolute; 
+		float: left;
+		overflow: hidden;
+		padding: 7px;
+		border-radius: 6px;
+		background:lightgray;
+		margin-top:10px;
+		z-index: 100;
+	}
+	#current-background {
+		min-height: 300px;
+		max-height: 475px;
+		font-size: 40px;
+		max-width: 100%;
+		border: 4px solid white;
+		-webkit-transition: -webkit-filter 0.4s
+	}
+	.help-close { 
+		cursor: pointer;
+	}
+	#noBackground { 
+		float: left;
+		margin-top: -290px;
+		width: 305px;
+		font-size: 18px;
+		margin-left: 9px;
+		padding: 100px 161px;
+		border: 1px dashed black;
+		text-align: center;
+	}
 	#catalog div.outer {
 		margin: 0px 7px 8px 0px;
 		text-align: center;

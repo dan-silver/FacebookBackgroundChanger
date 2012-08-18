@@ -26,10 +26,16 @@ function display_history() {
 function display_current_picture() {
 	if (localStorage['base64']) {
 		$(".img_preview_req").show();
-		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64']).show();
+		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64']).css({
+			"opacity": "1",
+			"height" : "auto"
+		});
 	} else {
 		$(".img_preview_req").hide();
-		$("#current-background").attr("src", "").hide();
+		$("#current-background").attr("src", "").css({
+			"opacity": "0",
+			"height" : "0px"
+		});
 	}
 }
 function display_pictures() {
@@ -252,13 +258,6 @@ display_pictures();
 $("html").disableSelection();
 $('img').bind('dragstart', function(event) { event.preventDefault(); }); //prevent images from being dragged
 //end initialize
-});
-
-/*** Help Icons***/
-$(function() {
-	$("img.help").click(function() {
-		$("#"+$(this).attr("for")).slideToggle(300);
-	});
 });
 
 function message(status) {
