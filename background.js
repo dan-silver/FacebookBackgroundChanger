@@ -33,7 +33,7 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
-		vars_string = localStorage['base64'] +','+localStorage['transparency'];
+		vars_string = localStorage['base64'] +','+localStorage['transparency'] + ',' + localStorage['widthMode'];
 		sendResponse({variables: vars_string});
     }
 	if (request.FacebookID) {

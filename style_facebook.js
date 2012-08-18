@@ -7,10 +7,9 @@ function getLocalBackground() {
 	  vars = response.variables.split(',');
 		$('body').css({
 			"background": 'url(data:image/png;charset=utf-8;base64,'+vars[0]+')',
-			"background-repeat" : 'no-repeat',
 			"background-attachment": "fixed"
 		});
-		updateBackgroundSize();
+		updateBackgroundSettings();
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");
 		$(".fbTimelineCapsule .timelineUnitContainer").css("background-color", "rgba(255,255,255,"+vars[1]+")");
 	});
@@ -46,10 +45,9 @@ function lookup_backgrounds() {
 			sharedBackground = true;
 			$('body').css({
 				"background": 'url(http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png)',
-				"background-repeat" : 'no-repeat',
 				"background-attachment": "fixed"
 			});
-			updateBackgroundSize();
+			updateBackgroundSettings();
 		}
 	});
 	previousLookup = otherUser; 
@@ -61,9 +59,17 @@ setInterval(function() {
 }, 1000);
   
 window.onresize = function(event) {
-	updateBackgroundSize();
+	updateBackgroundSettings();
 }
 
-function updateBackgroundSize() {
-	$('body').css("background-size", document.width);
+function updateBackgroundSettings() {
+	if (vars[2] == "automatic") {
+		$('body').css({
+			"background-size": document.width
+		});	
+	} else {
+		$('body').css({
+			"background-repeat": "none"
+		});
+	}
 }

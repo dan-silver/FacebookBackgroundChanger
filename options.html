@@ -15,6 +15,7 @@
 <script type="text/javascript" src="store.js"></script>
 <script type="text/javascript" src="options.js"></script>
 <script type="text/javascript" src="sharedBackgrounds.js"></script>
+<script type="text/javascript" src="backgroundWidth.js"></script>
 <script type="text/javascript" src="help.js"></script>
 <div id="page">
 	<div id="ver_status">
@@ -28,7 +29,7 @@
 	<div id="main">
 		<div id="content">
 			<div id="img_preview" >
-				<h4 class="img_preview_req" >Current Background<img for="help-uploading" class="help" src="icons/help.png"></h4>
+				<h4>Current Background<img for="help-uploading" class="help" src="icons/help.png"></h4>
 				<span id="help-uploading" class="help-description">To change your background, drag a picture from your computer and drop it on top of your current Facebook background below.</span>
 				<img id="current-background"><br>
 				<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
@@ -60,10 +61,16 @@
 				<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;"></div>
 				<span id="help-transparency" class="help-description">The lower the number, the more you can see through Facebook pages.</span>
 				<div id="sharing-settings">
-				<h4>Background Mode<img for="help-sharing" class="help" src="icons/help.png"></h4>
+				<h4>Background Sharing<img for="help-sharing" class="help" src="icons/help.png"></h4>
 					<input type="radio" id="private" name="sharing"/><label for="private">Private</label>
 					<input type="radio" id="public" name="sharing"/><label for="public">Public</label><br>
-					<span id="help-sharing" class="help-description">In public background mode, anyone else with this extension installed will see your background when visiting your profile.</span>
+					<span id="help-sharing" class="help-description">In public background mode, anyone else with this extension installed will see your background when visiting your profile and vice versa.</span>
+				</div>
+				<div id="background-width-settings">
+				<h4>Background Width<img for="help-width" class="help" src="icons/help.png"></h4>
+					<input type="radio" id="static" name="width"/><label for="static">Static</label>
+					<input type="radio" id="automatic" name="width"/><label for="automatic">Automatic</label><br>
+					<span id="help-width" class="help-description"><b>Static Mode</b> - Backgrounds will not change size and they will repeat horizontally and vertically.<br><b>Automatic Mode</b> - Backgrounds will be the same width as your screen, and adjust and you resize the window.</span>
 				</div>
 			</div>
 		</div>
