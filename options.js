@@ -254,6 +254,13 @@ $('img').bind('dragstart', function(event) { event.preventDefault(); }); //preve
 //end initialize
 });
 
+/*** Help Icons***/
+$(function() {
+	$("img.help").click(function() {
+		$("#"+$(this).attr("for")).slideToggle(300);
+	});
+});
+
 function message(status) {
 	switch (status) {
 		case 'saved':

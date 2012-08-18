@@ -1,9 +1,9 @@
 <html>
 <head>
 	<title>Facebook Backgrounds</title>
-	<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'> 
 	<link type="text/css" href="Aristo/Aristo.css" rel="Stylesheet" />	
 	<style>
+		@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 		#page {max-width: 1201px;margin-left: auto;margin-right: auto;margin-top: 5px;background-color: white;padding: 2px;}
 		#ver_status {float: left; text-align:right;width:100%;}
 		#reset_ver {cursor: pointer;}
@@ -12,7 +12,8 @@
 		#background_patterns img{ float: left;margin: 5px 5px 0px 0px;height:175px; }
 		#background_patterns img:hover{ cursor:pointer; }
 		#header_buttons {float: right;margin-top:10px;}
-		.header,  h4{font-family: 'Gloria Hallelujah', cursive;}
+		.header,  h4{font-family: 'Droid Sans', sans-serif;}
+		p, span {font-family: 'Droid Sans', sans-serif;}
 		h1 {font-size: 1em;}
 		h4 {margin: 0px;}
 		button.restore{float:right;margin-top: -36px;margin-right: 4px;}
@@ -29,6 +30,8 @@
 		#store #catalog img { max-width: 293px; height: 195px; width: auto;}
 		#catalog button {float: right; margin-top: -37px;cursor: pointer;position:absolute;right: 38px;}
 		.open-preview {top: 164px}
+		.help {width: 25px;margin-bottom: -7px;}
+		.help-description {display: none;float: left;overflow: hidden;padding: 7px;border-radius: 6px;background:lightgray;margin-top:10px;}
 #catalog div.outer {
 	margin: 0px 7px 8px 0px;
 	text-align: center;
@@ -52,7 +55,7 @@
 	border-radius: 10px 10px 0 0;
 	-webkit-transition: bottom .5s;
 	margin-left: -20px;
-	font-size: 15px;
+	font-size: 14px;
 }
 
 #catalog div:hover span.info {
@@ -82,7 +85,7 @@
 			font-size: 30px;
 		}
 	}
-	@media screen and (max-width: 751px) {
+	@media screen and (max-width: 455px) {
 		.header {
 			font-size: 20px;
 		}
@@ -154,14 +157,14 @@
 		<div id="sidebar">
 		<iframe  src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FFB-Background-Changer%2F385120791509349&amp;width=250&amp;height=315&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=true&amp;header=true&amp;appId=270609206348109" scrolling="no" frameborder="0" style="background:white;border:none; overflow:hidden; width:250px; height:315px;margin-top:33px" allowTransparency="false"></iframe>
 			<div id="settings">
-				<h4>Page Opacity:<span id="transparency_value"></span></h4>
-				<div style="display: block;" id="transparency_settings" style="width: 300px;"></div>
-				The lower the number, the more you can see through Facebook pages.
+				<h4>Page Opacity:<span id="transparency_value"></span><img for="help-transparency" class="help" src="icons/help.png"></h4>
+				<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;"></div>
+				<span id="help-transparency" class="help-description">The lower the number, the more you can see through Facebook pages.</span>
 				<div id="sharing-settings">
-				<h4>Background Mode</h4>
+				<h4>Background Mode<img for="help-sharing" class="help" src="icons/help.png"></h4>
 					<input type="radio" id="private" name="sharing"/><label for="private">Private</label>
 					<input type="radio" id="public" name="sharing"/><label for="public">Public</label><br>
-					In public background mode, anyone else with the extension installed will see your background when visiting your profile.
+					<span id="help-sharing" class="help-description">In public background mode, anyone else with the extension installed will see your background when visiting your profile.</span>
 				</div>
 			</div>
 		</div>
