@@ -155,7 +155,7 @@ backgrounds[19] = {
 	"tags": "nature"
 };
 backgrounds[20] = {
-	"dimensions": "1600x1200",
+	"dimensions": "1500x1125",
 	"preview": 1,
 	"tags": "nature"
 };
