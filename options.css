@@ -50,8 +50,11 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 	max-height: 475px;
 	font-size: 40px;
 	max-width: 100%;
-	border: 4px solid white;
-	-webkit-transition: -webkit-filter 0.4s
+	-webkit-transition: -webkit-filter 0.4s;
+	border: 3px dashed;
+	padding: 6px;
+	margin: 5px 0px;
+
 }
 .help-close { 
 	cursor: pointer;
