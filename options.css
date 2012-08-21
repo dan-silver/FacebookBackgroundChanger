@@ -4,8 +4,6 @@
 #reset_ver {cursor: pointer;}
 #content {float: left; margin-right: 10px;min-width: 53%;}
 #sidebar {float: right; width: 250px;}
-#background_patterns img{ float: left;margin: 5px 5px 0px 0px;height:175px; }
-#background_patterns img:hover{ cursor:pointer; }
 #header_buttons {float: right;margin-top:10px;}
 .header,  h4, img{font-family: 'Droid Sans', sans-serif;}
 p, span {font-family: 'Droid Sans', sans-serif;}
@@ -16,7 +14,6 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 #previous div { display: none; float:left; margin: 12px; width:187px;}
 #previous img {max-width:202px;max-height: 187px;}
 #waiting { display: none; }
-#sample-backgrounds img {width:100px;height:100px; margin: 2px;}
 #previous button {display:none;}
 #img_preview {max-width: 651px; width: 100%;}
 .header {font-size: 40px; float: left;}
