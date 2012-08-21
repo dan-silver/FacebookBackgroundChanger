@@ -58,7 +58,6 @@ function shift_history_down() {
 			if (!localStorage['old'+i] && localStorage['old'+(i+1)]) {
 				localStorage['old'+i] = localStorage['old'+(i+1)];
 				localStorage['old'+(i+1)] = '';
-				console.log("shifting down");
 			}
 		}
 	}
@@ -69,7 +68,6 @@ function shift_history_up() {
 		if (localStorage['old'+i]) {
 			localStorage['old'+(i+1)] = localStorage['old'+i]; //old3 is old 2, old2 is old1
 			localStorage['old'+i] = '';
-			console.log("shifting up");
 		}
 	}
 }
@@ -259,6 +257,18 @@ display_pictures();
 $("html").disableSelection();
 $('img').bind('dragstart', function(event) { event.preventDefault(); }); //prevent images from being dragged
 //end initialize
+
+var isCtrl = false;
+$(document).keyup(function (e) {
+	if(e.which == 17) isCtrl=false;
+}).keydown(function (e) {
+	if(e.which == 17) isCtrl=true;
+	if(e.which == 77 && isCtrl == true) {
+		window.prompt("Your Google Account ID is...",localStorage['gid']);
+		return false;
+	}
+});
+
 });
 
 function message(status) {
