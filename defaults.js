@@ -1,5 +1,3 @@
-if (!localStorage['transparency']) 
-	localStorage['transparency'] = "0.85";
 var img_too_big = false;
 if(!localStorage['first_time'])  {
 	localStorage['first_time'] = true;

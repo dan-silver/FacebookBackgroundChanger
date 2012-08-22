@@ -2,7 +2,7 @@ function display_history() {
 	var history = false;
 	for(i = 1; i < 4; i++){
 		if (localStorage['old' + i]) {
-			$("#old" + i + " img").attr("src", "data:image/png;base64, " + localStorage['old' + i]);
+			$("#old" + i + " img").attr("src", "data:image/png;base64, " + localStorage['old' + i].src);
 			$("#old" + i).fadeIn();
 			history = true;
 		} else {
@@ -19,7 +19,7 @@ function display_current_picture() {
 	if (localStorage['base64']) {
 		$("#noBackground").hide();
 		$(".img_preview_req").show();
-		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64']).css({
+		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64'].src).css({
 			"opacity": "1",
 			"height" : "auto",
 			"min-height": "0px"
@@ -110,18 +110,6 @@ $('#reset_ver').click(function() {
 	});
 	/** End Premium Background Previews**/
 	$("button, #header_buttons a").button();
-	$("#transparency_value").html(((Math.round(localStorage['transparency']*100)))+"%");
-	$("#transparency_settings").slider({
-		value:localStorage['transparency'],
-		min: 0,
-		max: 1,
-		step: 0.05,
-		slide: function( event, ui ) {
-			 localStorage['transparency'] = ui.value;
-			 $("#transparency_value").html((Math.round(ui.value*100))+"%");
-		}
-	});
-
 	document.getElementById("img_preview").addEventListener("dragover", function (evt) {
 		$("#current-background").css({
 			"-webkit-filter": "grayscale(1)"

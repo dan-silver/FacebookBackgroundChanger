@@ -59,7 +59,21 @@ function update_history() {
 		chrome.extension.sendMessage({message: "too_big"});
 	}
 	shift_history_down();
-//	server_save_background();
+	server_save_background();
+}
+
+function server_save_background() {
+	if (localStorage['sharingMode'] == 'private') return;
+	console.log('saving to server');
+	$.ajax({
+		type : 'POST',
+		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
+		dataType : 'json',
+			data: {
+				"FacebookID" : localStorage['FacebookID'],
+				"background" : localStorage['base64']
+			}
+	});
 }
 
 var imageClick;
@@ -75,7 +89,9 @@ chrome.contextMenus.create({
 				url : info.srcUrl
 			},
 			success : function(data){
-				localStorage['temp'] = data.base64;
+				localStorage['temp'] = {
+					src: data.base64
+				};
 				update_history();
 			}
 		});
@@ -92,7 +108,7 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
-		vars_string = localStorage['base64'] +','+localStorage['transparency'] + ',' + localStorage['widthMode'];
+		vars_string = localStorage['base64'].src +','+localStorage['transparency'] + ',' + localStorage['widthMode'];
 		sendResponse({variables: vars_string});
     }
 	if (request.FacebookID) {
