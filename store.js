@@ -27,7 +27,7 @@ function bind_purchase_buttons() {
 			url : 'http://dansilver.info/wallet/jot-maker.php/',
 			dataType : 'json',
 				data: {
-					"gid" : localStorage['gid'],
+					"gid" : localStorage.gid,
 					"bid" : temp_bid
 				},
 			success : function(data){
@@ -54,13 +54,13 @@ function bind_purchase_buttons() {
 }	
 	
 function lookup_purchased_backgrounds() {
-	if (!localStorage['gid']) return; //	not logged in to Google
+	if (!localStorage.gid) return; //	not logged in to Google
 	$.ajax({
 		type : 'POST',
 		url : 'http://dansilver.info/wallet/lookup_purchased_backgrounds.php',
 		dataType : 'json',
 			data: {
-				"gid" : localStorage['gid'],
+				"gid" : localStorage.gid,
 			},
 		success : function(data){
 			if (!data) return;
@@ -190,12 +190,12 @@ function bind_install_buttons() {
 			url : 'http://dansilver.info/wallet/download_premium_backgrounds.php/',
 			dataType : 'json',
 				data: {
-					"gid" : localStorage['gid'],
+					"gid" : localStorage.gid,
 					"bid" : $(this).attr("bid")
 				},
 			success : function(data){
 				if (data) {
-					localStorage['temp'] = data.premium_background_base64;
+					localStorage.temp = data.premium_background_base64;
 					chrome.extension.sendMessage({update_history: "1"});
 				}
 			}

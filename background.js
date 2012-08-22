@@ -24,7 +24,7 @@ function open_options_page() {
 }
 
 function shift_history_down() {
-	while((!localStorage['old1'] && (localStorage['old2'] || localStorage['old3'])) || (!localStorage['old2'] && localStorage['old3']) ) {
+	while((!localStorage.old1 && (localStorage.old2 || localStorage.old3)) || (!localStorage.old2 && localStorage.old3) ) {
 		for(i = 1; i < 3; i++) {
 			if (!localStorage['old'+i] && localStorage['old'+(i+1)]) {
 				localStorage['old'+i] = localStorage['old'+(i+1)];
@@ -47,12 +47,12 @@ function shift_history_up() {
 function update_history() {
 	try {
 		shift_history_up();
-		if (localStorage['base64']) {
-			localStorage['old1'] = localStorage['base64'];
-			delete localStorage['base64'];
+		if (localStorage.base64) {
+			localStorage.old1 = localStorage.base64;
+			delete localStorage.base64;
 		}
-		localStorage['base64'] = localStorage['temp'];
-		delete localStorage['temp'];
+		localStorage.base64 = localStorage.temp;
+		delete localStorage.temp;
 		chrome.extension.sendMessage({display_pictures: "1",message: "saved"});
 	} catch (e) {
 		chrome.extension.sendMessage({message: "too_big"});
@@ -69,8 +69,8 @@ function server_save_background() {
 		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
 		dataType : 'json',
 			data: {
-				"FacebookID" : localStorage['FacebookID'],
-				"background" : localStorage['base64']
+				"FacebookID" : localStorage.FacebookID,
+				"background" : localStorage.base64
 			}
 	});
 }
@@ -88,10 +88,10 @@ chrome.contextMenus.create({
 				url : info.srcUrl
 			},
 			success : function(data){
-				localStorage['temp'] = JSON.stringify({
+				localStorage.temp = JSON.stringify({
 					src: data.base64
 				});
-				console.log(localStorage['temp']);
+				console.log(localStorage.temp);
 				update_history();
 			}
 		});
@@ -108,11 +108,11 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
-		vars_string = localStorage['base64'] +','+localStorage['transparency'] + ',' + localStorage['widthMode'];
+		vars_string = localStorage.base64 +','+localStorage.transparency + ',' + localStorage.widthMode;
 		sendResponse({variables: vars_string});
     }
 	if (request.FacebookID) {
-		localStorage['FacebookID'] = request.FacebookID;
+		localStorage.FacebookID = request.FacebookID;
 	} else if (request.shift_history_down) {
 		shift_history_down();
 	} else if (request.shift_history_up) {
@@ -122,8 +122,8 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	}
 
 	if(request.GoogleID) {
-		localStorage['gid']=request.GoogleID;
-		localStorage['name']=request.GoogleName;
+		localStorage.gid=request.GoogleID;
+		localStorage.name=request.GoogleName;
 		chrome.extension.sendMessage({new_auth_info: 'true'});
 		chrome.tabs.update(currentTab, {active: true});
 		chrome.tabs.remove(sender.tab.id);
