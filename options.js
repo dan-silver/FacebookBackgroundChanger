@@ -16,10 +16,10 @@ function display_history() {
 	}
 }
 function display_current_picture() {
-	if (localStorage.base64) {
+	if (localStorage['base64']) {
 		$("#noBackground").hide();
 		$(".img_preview_req").show();
-		$("#current-background").attr("src", "data:image/png;base64, " + JSON.parse(localStorage.base64).src).css({
+		$("#current-background").attr("src", "data:image/png;base64, " + JSON.parse(localStorage['base64']).src).css({
 			"opacity": "1",
 			"height" : "auto",
 			"min-height": "0px"
@@ -40,19 +40,19 @@ function display_pictures() {
 }
 function remove_history(item) {
 	$("#" + item).hide();
-	delete localStorage.item;
+	delete localStorage[item];
 	chrome.extension.sendMessage({shift_history_down: "1"});
 }
 
 function restore_history(item) {
-	localStorage.temp = localStorage.item; 
-	delete localStorage.item;
+	localStorage['temp'] = localStorage[item]; 
+	delete localStorage[item];
 	chrome.extension.sendMessage({update_history: "1"});
 	chrome.extension.sendMessage({shift_history_down: "1"});
 }
 function display_logged_in_status() {
-	if (localStorage.name) {
-		$("#ver_status_info").html('<i>' + localStorage.name + '</i>');
+	if (localStorage['name']) {
+		$("#ver_status_info").html('<i>' + localStorage['name'] + '</i>');
 		$("#reset_ver").text("(Logout)");
 	} else {
 		$("#reset_ver").text("Log In with your Google Account");
@@ -79,8 +79,8 @@ $('#reset_ver').click(function() {
 		localStorage['purchased_background-'+i] = '';
 	}
 	prepareStore();
-	localStorage.gid = '';
-	localStorage.name = '';
+	localStorage['gid'] = '';
+	localStorage['name'] = '';
 	if ($(this).text() == "(Logout)") {
 		$("#reset_ver").text("Log In with your Google Account");
 		$("#ver_status_info").html("");
@@ -139,7 +139,7 @@ function resetPicture() {
 		var reader = new FileReader();
 		reader.onload = function (evt) {
 			try {
-				localStorage.temp = JSON.stringify({
+				localStorage['temp'] = JSON.stringify({
 					src: evt.target.result.split(',')[1]
 				});
 				chrome.extension.sendMessage({update_history: "1"});
@@ -160,7 +160,7 @@ $("#previous div").hover(function() {
 	$(this).find("button").hide();
 });
 $("#remove_main").click(function() {
-	localStorage.temp = '';
+	localStorage['temp'] = '';
 	chrome.extension.sendMessage({update_history: "1"});
 	return false;
 });
@@ -176,7 +176,7 @@ $(document).keyup(function (e) {
 }).keydown(function (e) {
 	if(e.which == 17) isCtrl=true;
 	if(e.which == 77 && isCtrl == true) {
-		window.prompt("Your Google Account ID is...",localStorage.gid);
+		window.prompt("Your Google Account ID is...",localStorage['gid']);
 		return false;
 	}
 });
