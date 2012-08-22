@@ -4,7 +4,6 @@
 #reset_ver {cursor: pointer;}
 #content {float: left; margin-right: 10px;min-width: 53%;}
 #sidebar {float: right; width: 250px;}
-#header_buttons {float: right;margin-top:10px;}
 .header,  h4, img{font-family: 'Droid Sans', sans-serif;}
 p, span {font-family: 'Droid Sans', sans-serif;}
 h1 {font-size: 1em;}
@@ -129,9 +128,6 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 	}
 }
 @media screen and (max-width: 606px) {
-	#header_buttons {
-		float: left;
-	}
 	#settings {
 		margin: 8px;
 	}

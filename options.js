@@ -1,11 +1,3 @@
-function validateURL(textval) {
-  var urlregex = new RegExp(     "^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
-  return urlregex.test(textval);
-}
-function reset_add_picture() {
-	$("#enteredURL").val("");
-	$("#preview").attr("src", "");
-}
 function display_history() {
 	var history = false;
 	for(i = 1; i < 4; i++){
@@ -49,54 +41,15 @@ function display_pictures() {
 function remove_history(item) {
 	$("#" + item).hide();
 	localStorage[item] = "";
-	shift_history_down();
-}
-
-function shift_history_down() {
-	while(!localStorage['old1'] && (localStorage['old2'] || localStorage['old3'])) {
-		for(i = 1; i < 3; i++) {
-			if (!localStorage['old'+i] && localStorage['old'+(i+1)]) {
-				localStorage['old'+i] = localStorage['old'+(i+1)];
-				localStorage['old'+(i+1)] = '';
-			}
-		}
-	}
-}
-
-function shift_history_up() {
-	for(i = 2; i > 0; i--) {
-		if (localStorage['old'+i]) {
-			localStorage['old'+(i+1)] = localStorage['old'+i]; //old3 is old 2, old2 is old1
-			localStorage['old'+i] = '';
-		}
-	}
+	chrome.extension.sendMessage({shift_history_down: "1"});
 }
 
 function restore_history(item) {
 	localStorage['temp'] = localStorage[item]; 
 	localStorage[item] = '';
-	update_history();
-	shift_history_down();
+	chrome.extension.sendMessage({update_history: "1"});
+	chrome.extension.sendMessage({shift_history_down: "1"});
 }
-
-function update_history() {
-	try {
-		shift_history_up();
-		if (localStorage['base64']) {
-			localStorage['old1'] = localStorage['base64'];
-			localStorage['base64'] = "";
-		}
-		localStorage['base64'] = localStorage['temp'];
-		localStorage['temp'] = '';
-		display_pictures();
-		message('saved');
-	} catch (e) {
-		message('too_big');
-	}
-	shift_history_down();
-	server_save_background();
-}
-
 function display_logged_in_status() {
 	if (localStorage['name']) {
 		$("#ver_status_info").html('<i>' + localStorage['name'] + '</i>');
@@ -112,6 +65,10 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 		display_logged_in_status();
 		lookup_purchased_backgrounds();
 		bind_purchase_buttons();
+	} else if (request.display_pictures) {
+		display_pictures();	
+	} else if (request.message) {
+		message(request.message);
 	}
 });
 
@@ -152,42 +109,7 @@ $('#reset_ver').click(function() {
 		$("#store-preview").dialog("open");
 	});
 	/** End Premium Background Previews**/
-		
-	$( "#add_picture" ).dialog({ autoOpen: false, width: "535",height: "400",buttons: {
-		Cancel: function() {
-			reset_add_picture();
-			$( this ).dialog( "close" );
-		}, Save: function() {
-			update_history();
-			reset_add_picture();
-			$( this ).dialog( "close" );
-			}
-		}});
 	$("button, #header_buttons a").button();
-	$("#add_picture_link").click(function() {$("#add_picture").dialog("open");});
-	$("#getImage").click(function() {
-		if (validateURL($("#enteredURL").val()) == true) {
-		$("#validURL").hide();
-		$('#waiting').show(500);
-		$.ajax({
-			type : 'POST',
-			url : 'http://www.dansilver.info/fbBackgroundChanger/convert_to_base64.php',
-			dataType : 'json',
-			data: {
-				url : $("#enteredURL").val()
-			},
-			success : function(data){
-				localStorage['temp'] = data.base64;
-				$('#waiting').hide(500);
-				$("#preview").attr("src", "data:image/png;base64, " + localStorage['temp']);
-				}
-			});
-		} else {
-			$("#validURL").show();
-		}
-	});
-
-
 	$("#transparency_value").html(((Math.round(localStorage['transparency']*100)))+"%");
 	$("#transparency_settings").slider({
 		value:localStorage['transparency'],
@@ -230,7 +152,7 @@ function resetPicture() {
 		reader.onload = function (evt) {
 			try {
 				localStorage['temp']  = evt.target.result.split(',')[1];
-				update_history();
+				chrome.extension.sendMessage({update_history: "1"});
 			} catch(e) {
 				message('too_big');
 			}
@@ -249,8 +171,8 @@ $("#previous div").hover(function() {
 });
 $("#remove_main").click(function() {
 	localStorage['temp'] = '';
-	update_history();
-return false;
+	chrome.extension.sendMessage({update_history: "1"});
+	return false;
 });
 //initialize 
 display_pictures();

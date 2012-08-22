@@ -23,6 +23,65 @@ function open_options_page() {
 	});
 }
 
+function shift_history_down() {
+	while((!localStorage['old1'] && (localStorage['old2'] || localStorage['old3'])) || (!localStorage['old2'] && localStorage['old3']) ) {
+		for(i = 1; i < 3; i++) {
+			if (!localStorage['old'+i] && localStorage['old'+(i+1)]) {
+				localStorage['old'+i] = localStorage['old'+(i+1)];
+				localStorage['old'+(i+1)] = '';
+			}
+		}
+	}
+}
+
+function shift_history_up() {
+	for(i = 2; i > 0; i--) {
+		if (localStorage['old'+i]) {
+			localStorage['old'+(i+1)] = localStorage['old'+i]; //old3 is old 2, old2 is old1
+			localStorage['old'+i] = '';
+		}
+	}
+}
+
+
+function update_history() {
+	try {
+		shift_history_up();
+		if (localStorage['base64']) {
+			localStorage['old1'] = localStorage['base64'];
+			localStorage['base64'] = "";
+		}
+		localStorage['base64'] = localStorage['temp'];
+		localStorage['temp'] = '';
+		chrome.extension.sendMessage({display_pictures: "1"});
+		chrome.extension.sendMessage({message: "saved"});
+	} catch (e) {
+		chrome.extension.sendMessage({message: "too_big"});
+	}
+	shift_history_down();
+//	server_save_background();
+}
+
+var imageClick;
+chrome.contextMenus.create({
+	"title": "Set as Facebook background",
+	"contexts": ["image"],
+	"onclick": function (info) {
+		$.ajax({
+			type : 'POST',
+			url : 'http://www.dansilver.info/fbBackgroundChanger/convert_to_base64.php',
+			dataType : 'json',
+			data: {
+				url : info.srcUrl
+			},
+			success : function(data){
+				localStorage['temp'] = data.base64;
+				update_history();
+			}
+		});
+	}
+});
+
 chrome.tabs.onUpdated.addListener(function(tabId) {
 	chrome.tabs.get(tabId, function(tab) {
 		if (tab.url.search("dansilver.info/oauth2callback/") > 0) {
@@ -38,6 +97,12 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
     }
 	if (request.FacebookID) {
 		localStorage['FacebookID'] = request.FacebookID;
+	} else if (request.shift_history_down) {
+		shift_history_down();
+	} else if (request.shift_history_up) {
+		shift_history_up();
+	} else if (request.update_history) {
+		update_history();
 	}
 
 	if(request.GoogleID) {

@@ -196,7 +196,7 @@ function bind_install_buttons() {
 			success : function(data){
 				if (data) {
 					localStorage['temp'] = data.premium_background_base64;
-					update_history();
+					chrome.extension.sendMessage({update_history: "1"});
 				}
 			}
 		});

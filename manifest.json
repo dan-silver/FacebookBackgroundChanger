@@ -9,7 +9,7 @@
   "128": "icons/icon128.png"
  },
  "options_page" : "options.html",
- "permissions" : [ "tabs", "http://*.google.com/*", "storage", "unlimitedStorage", "http://*.dansilver.info/*" ],
+ "permissions" : [ "tabs", "http://*.google.com/*", "storage", "unlimitedStorage", "http://*.dansilver.info/*", "contextMenus" ],
  "background" : {
   "scripts": ["jquery/jquery.js","background.js", "defaults.js"]
  },
