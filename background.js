@@ -28,7 +28,7 @@ function shift_history_down() {
 		for(i = 1; i < 3; i++) {
 			if (!localStorage['old'+i] && localStorage['old'+(i+1)]) {
 				localStorage['old'+i] = localStorage['old'+(i+1)];
-				localStorage['old'+(i+1)] = '';
+				delete localStorage['old'+(i+1)];
 			}
 		}
 	}
@@ -38,7 +38,7 @@ function shift_history_up() {
 	for(i = 2; i > 0; i--) {
 		if (localStorage['old'+i]) {
 			localStorage['old'+(i+1)] = localStorage['old'+i]; //old3 is old 2, old2 is old1
-			localStorage['old'+i] = '';
+			delete localStorage['old'+i];
 		}
 	}
 }
@@ -49,10 +49,13 @@ function update_history() {
 		shift_history_up();
 		if (localStorage['base64']) {
 			localStorage['old1'] = localStorage['base64'];
-			localStorage['base64'] = "";
+			delete localStorage['base64'];
 		}
+		console.log(localStorage['temp']);
 		localStorage['base64'] = localStorage['temp'];
-		localStorage['temp'] = '';
+		console.log(localStorage['base64']);
+		console.log(localStorage['temp']);
+		delete localStorage['temp'];
 		chrome.extension.sendMessage({display_pictures: "1"});
 		chrome.extension.sendMessage({message: "saved"});
 	} catch (e) {
@@ -89,9 +92,10 @@ chrome.contextMenus.create({
 				url : info.srcUrl
 			},
 			success : function(data){
-				localStorage['temp'] = {
+				localStorage['temp'] = JSON.stringify({
 					src: data.base64
-				};
+				});
+				console.log(localStorage['temp']);
 				update_history();
 			}
 		});
@@ -108,7 +112,7 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
-		vars_string = localStorage['base64'].src +','+localStorage['transparency'] + ',' + localStorage['widthMode'];
+		vars_string = localStorage['base64'] +','+localStorage['transparency'] + ',' + localStorage['widthMode'];
 		sendResponse({variables: vars_string});
     }
 	if (request.FacebookID) {

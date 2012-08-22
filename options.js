@@ -2,7 +2,7 @@ function display_history() {
 	var history = false;
 	for(i = 1; i < 4; i++){
 		if (localStorage['old' + i]) {
-			$("#old" + i + " img").attr("src", "data:image/png;base64, " + localStorage['old' + i].src);
+			$("#old" + i + " img").attr("src", "data:image/png;base64, " + JSON.parse(localStorage['old' + i]).src);
 			$("#old" + i).fadeIn();
 			history = true;
 		} else {
@@ -19,7 +19,7 @@ function display_current_picture() {
 	if (localStorage['base64']) {
 		$("#noBackground").hide();
 		$(".img_preview_req").show();
-		$("#current-background").attr("src", "data:image/png;base64, " + localStorage['base64'].src).css({
+		$("#current-background").attr("src", "data:image/png;base64, " + JSON.parse(localStorage['base64']).src).css({
 			"opacity": "1",
 			"height" : "auto",
 			"min-height": "0px"
@@ -40,13 +40,13 @@ function display_pictures() {
 }
 function remove_history(item) {
 	$("#" + item).hide();
-	localStorage[item] = "";
+	delete localStorage[item];
 	chrome.extension.sendMessage({shift_history_down: "1"});
 }
 
 function restore_history(item) {
 	localStorage['temp'] = localStorage[item]; 
-	localStorage[item] = '';
+	delete localStorage[item];
 	chrome.extension.sendMessage({update_history: "1"});
 	chrome.extension.sendMessage({shift_history_down: "1"});
 }
@@ -139,7 +139,9 @@ function resetPicture() {
 		var reader = new FileReader();
 		reader.onload = function (evt) {
 			try {
-				localStorage['temp']  = evt.target.result.split(',')[1];
+				localStorage['temp'] = JSON.stringify({
+					src: evt.target.result.split(',')[1]
+				});
 				chrome.extension.sendMessage({update_history: "1"});
 			} catch(e) {
 				message('too_big');

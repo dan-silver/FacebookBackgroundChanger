@@ -6,7 +6,7 @@ function getLocalBackground() {
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
 	  vars = response.variables.split(',');
 		$('#chromeFacebookbackground').css({
-			"background": 'url(data:image/png;charset=utf-8;base64,'+vars[0]+')',
+			"background": 'url(data:image/png;charset=utf-8;base64,'+JSON.parse(vars[0]).src+')',
 		});
 		updateBackgroundSettings();
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");
