@@ -5,6 +5,10 @@ $(function() {
 	//Transparency settings
 	$("#transparency_value").html(((Math.round(localStorage['transparency']*100)))+"%");
 	createRangeSetting('transparency', 0.85, 'transparency_settings',0,1,0.05,transparencyCallback);
+	
+	//image effects
+	//blur
+	createRangeSetting('blur', 0, 'blur_effect',0,1,0.05);
 });
 
 function transparencyCallback() {
@@ -31,7 +35,7 @@ function createRangeSetting(setting, defaultValue, rangeDivID, minValue, maxValu
 			step: increment,
 			slide: function(event, ui) {
 				localStorage[setting] = ui.value;
-				callback();
+				if (callback) callback();
 			}
 	});
 }

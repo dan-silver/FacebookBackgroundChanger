@@ -51,13 +51,9 @@ function update_history() {
 			localStorage['old1'] = localStorage['base64'];
 			delete localStorage['base64'];
 		}
-		console.log(localStorage['temp']);
 		localStorage['base64'] = localStorage['temp'];
-		console.log(localStorage['base64']);
-		console.log(localStorage['temp']);
 		delete localStorage['temp'];
-		chrome.extension.sendMessage({display_pictures: "1"});
-		chrome.extension.sendMessage({message: "saved"});
+		chrome.extension.sendMessage({display_pictures: "1",message: "saved"});
 	} catch (e) {
 		chrome.extension.sendMessage({message: "too_big"});
 	}

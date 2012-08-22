@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 #page {max-width: 1201px;margin-left: auto;margin-right: auto;margin-top: 5px;background-color: white;padding: 2px;}
-#ver_status {float: left; text-align:right;width:100%;}
+#ver_status {float: right;}
 #reset_ver {cursor: pointer;}
 #content {float: left; margin-right: 10px;min-width: 53%;}
 #sidebar {float: right; width: 250px;}
@@ -10,6 +10,7 @@ h1 {font-size: 1em;}
 h4 {margin: 0px;}
 button.restore{float:right;margin-top: -36px;margin-right: 4px;}
 button.remove{margin-top: -36px;margin-left: 4px;}
+#previous {float: left;}
 #previous div { display: none; float:left; margin: 12px; width:187px;}
 #previous img {max-width:202px;max-height: 187px;}
 #waiting { display: none; }
