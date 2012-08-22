@@ -15,6 +15,9 @@
 .ego_column {
   padding: 5px;
 }
-body {
-  background-size: 100%;
+
+#chromeFacebookbackground {
+	height: 100%;
+	width: 100%;
+	position: fixed;
 }
