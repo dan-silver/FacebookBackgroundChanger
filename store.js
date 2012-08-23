@@ -200,8 +200,7 @@ function bind_install_buttons() {
 				},
 			success : function(data){
 				if (data) {
-					localStorage['temp'] = data.premium_background_base64;
-					chrome.extension.sendMessage({update_history: "1"});
+					chrome.extension.sendMessage({update_history: data.premium_background_base64,backgroundSrc:1});
 				}
 			}
 		});

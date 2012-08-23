@@ -44,15 +44,22 @@ function shift_history_up() {
 }
 
 
-function update_history() {
+function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 	try {
 		shift_history_up();
 		if (localStorage['base64']) {
 			localStorage['old1'] = localStorage['base64'];
 			delete localStorage['base64'];
 		}
-		localStorage['base64'] = localStorage['temp'];
-		delete localStorage['temp'];
+		if (clearMain != 1) { //just move current background to old1
+			if (isBackgroundSrc) {
+				localStorage['base64'] = JSON.stringify({
+					src: isBackgroundSrc
+				});
+			} else if (backgroundObject){
+				localStorage['base64'] = backgroundObject;
+			}
+		}
 		chrome.extension.sendMessage({display_pictures: "1",message: "saved"});
 	} catch (e) {
 		chrome.extension.sendMessage({message: "too_big"});
@@ -88,11 +95,11 @@ chrome.contextMenus.create({
 				url : info.srcUrl
 			},
 			success : function(data){
-				localStorage['temp'] = JSON.stringify({
-					src: data.base64
-				});
-				console.log(localStorage['temp']);
-				update_history();
+			//	localStorage['base64'] = JSON.stringify({
+			//		src: data.base64
+			//	});
+		//		console.log(localStorage['temp']);
+				update_history(null, data.base64);
 			}
 		});
 	}
@@ -118,7 +125,13 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	} else if (request.shift_history_up) {
 		shift_history_up();
 	} else if (request.update_history) {
-		update_history();
+		if (request.backgroundSrc) {
+			update_history(null, request.update_history);
+		} else {
+			update_history(request.update_history, null);
+		}
+	} else if (request.clearMain) {
+		update_history(null,null,1);
 	}
 
 	if(request.GoogleID) {

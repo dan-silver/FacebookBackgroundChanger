@@ -45,9 +45,8 @@ function remove_history(item) {
 }
 
 function restore_history(item) {
-	localStorage['temp'] = localStorage[item]; 
-	delete localStorage[item];
-	chrome.extension.sendMessage({update_history: "1"});
+	chrome.extension.sendMessage({update_history: localStorage[item]});
+	localStorage[item]='';
 	chrome.extension.sendMessage({shift_history_down: "1"});
 }
 function display_logged_in_status() {
@@ -139,10 +138,7 @@ function resetPicture() {
 		var reader = new FileReader();
 		reader.onload = function (evt) {
 			try {
-				localStorage['temp'] = JSON.stringify({
-					src: evt.target.result.split(',')[1]
-				});
-				chrome.extension.sendMessage({update_history: "1"});
+				chrome.extension.sendMessage({update_history: evt.target.result.split(',')[1],backgroundSrc:1});
 			} catch(e) {
 				message('too_big');
 			}
@@ -160,8 +156,7 @@ $("#previous div").hover(function() {
 	$(this).find("button").hide();
 });
 $("#remove_main").click(function() {
-	localStorage['temp'] = '';
-	chrome.extension.sendMessage({update_history: "1"});
+	chrome.extension.sendMessage({clearMain: 1});
 	return false;
 });
 //initialize 
