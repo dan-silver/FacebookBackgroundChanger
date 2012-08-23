@@ -137,11 +137,7 @@ function resetPicture() {
 	if (typeof FileReader !== "undefined" && file.type.indexOf("image") != -1) {
 		var reader = new FileReader();
 		reader.onload = function (evt) {
-			try {
-				chrome.extension.sendMessage({update_history: evt.target.result.split(',')[1],backgroundSrc:1});
-			} catch(e) {
-				message('too_big');
-			}
+		chrome.extension.sendMessage({update_history: evt.target.result.split(',')[1],backgroundSrc:1});
 		};
 		reader.readAsDataURL(file);
 	} else {

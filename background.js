@@ -43,7 +43,6 @@ function shift_history_up() {
 	}
 }
 
-
 function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 	try {
 		shift_history_up();
