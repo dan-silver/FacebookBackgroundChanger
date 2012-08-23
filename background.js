@@ -70,7 +70,6 @@ function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 
 function server_save_background() {
 	if (localStorage['sharingMode'] == 'private') return;
-	console.log('saving to server');
 	$.ajax({
 		type : 'POST',
 		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
@@ -95,10 +94,6 @@ chrome.contextMenus.create({
 				url : info.srcUrl
 			},
 			success : function(data){
-			//	localStorage['base64'] = JSON.stringify({
-			//		src: data.base64
-			//	});
-		//		console.log(localStorage['temp']);
 				update_history(null, data.base64);
 			}
 		});
