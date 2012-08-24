@@ -69,6 +69,7 @@ function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 
 function server_save_background() {
 	if (localStorage['sharingMode'] == 'private') return;
+	console.log('Sending background to server');
 	$.ajax({
 		type : 'POST',
 		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',

@@ -4,6 +4,8 @@ var sharedBackground = false;
 function getLocalBackground() {
 	previousLookup = '';
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
+		if (!JSON.parse(vars[0]).src) return;
+		console.log(response);
 	  vars = response.variables.split(',');
 		$('#chromeFacebookbackground').css({
 			"background": 'url(data:image/png;charset=utf-8;base64,'+JSON.parse(vars[0]).src+')',
@@ -37,16 +39,18 @@ function lookup_backgrounds() {
 	}
 	if(otherUser == previousLookup) return;
 	$.ajax({
-		url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png',
+		url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.txt',
 		type:'HEAD',
 		error: function() {
 			sharedBackground = false;
 			getLocalBackground();
 		},
-		success: function() {
+		success: function(data) {
+			var information = JSON.parse(data);
 			sharedBackground = true;
+			
 			$('#chromeFacebookbackground').css({
-				"background": 'url(http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.png)'
+				"background": 'url(data:image/png;base64, '+information.src+')'
 			});
 			updateBackgroundSettings();
 		}
