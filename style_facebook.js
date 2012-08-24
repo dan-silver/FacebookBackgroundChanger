@@ -6,7 +6,6 @@ function getLocalBackground() {
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
 	  vars = response.variables.split(',');
 		if (!JSON.parse(vars[0]).src.length) return;
-		console.log(response);
 		$('#chromeFacebookbackground').css({
 			"background": 'url(data:image/png;charset=utf-8;base64,'+JSON.parse(vars[0]).src+')',
 		});
@@ -21,11 +20,8 @@ function getLocalBackground() {
 	$(".fbTimelineTimePeriod").css("background", "none");
 }
   
-// *** Shared Background Support ***
-
-//save users Facebook username
 var Facebook_ID = $(".firstItem a").attr("href").split(".com/")[1].split("?")[0];
-chrome.extension.sendMessage({FacebookID: Facebook_ID});
+chrome.extension.sendMessage({FacebookID: Facebook_ID}); //save users Facebook username
 
 var previousLookup;
 function lookup_backgrounds() {
@@ -38,9 +34,9 @@ function lookup_backgrounds() {
 		return;
 	}
 	if(otherUser == previousLookup) return;
-	$.ajax({
+
+		$.ajax({
 		url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.txt',
-		type:'HEAD',
 		error: function() {
 			sharedBackground = false;
 			getLocalBackground();
@@ -48,13 +44,11 @@ function lookup_backgrounds() {
 		success: function(data) {
 			var information = JSON.parse(data);
 			sharedBackground = true;
-			
-			$('#chromeFacebookbackground').css({
-				"background": 'url(data:image/png;base64, '+information.src+')'
-			});
+			$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+JSON.parse(data).src+')');
 			updateBackgroundSettings();
 		}
 	});
+		
 	previousLookup = otherUser; 
 }
 
@@ -68,6 +62,11 @@ window.onresize = function(event) {
 }
 
 function updateBackgroundSettings() {
+	if (typeof vars == "undefined" || !(vars instanceof Array)) {
+		chrome.extension.sendMessage({method: "get_vars"}, function(response) {
+			vars = response.variables.split(',');
+		});
+	}
 	if (vars[2] == "automatic") {
 		$('#chromeFacebookbackground').css({
 			"background-size": document.width
