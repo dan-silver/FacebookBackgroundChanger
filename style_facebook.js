@@ -4,9 +4,9 @@ var sharedBackground = false;
 function getLocalBackground() {
 	previousLookup = '';
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
-		if (!JSON.parse(vars[0]).src) return;
-		console.log(response);
 	  vars = response.variables.split(',');
+		if (!JSON.parse(vars[0]).src.length) return;
+		console.log(response);
 		$('#chromeFacebookbackground').css({
 			"background": 'url(data:image/png;charset=utf-8;base64,'+JSON.parse(vars[0]).src+')',
 		});
