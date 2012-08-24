@@ -9,4 +9,18 @@ $(function() {
 			$(this).parent().slideToggle(300);
 		});		
 	});
+	
+	if (!localStorage.dragHelp) {
+		localStorage.dragHelp = 1;
+		noty({
+				text: 'Did you know you can drop pictures inside the dashed region from your computer to add a new Facebook background?',
+				layout: "center",
+				type: 'success',
+				timeout: 3000,
+			  buttons: [
+			  {text: 'More Information', onClick: function() {chrome.tabs.create({url: 'http://www.dansilver.info'}); }},
+			  {text: 'Ok', onClick: function($noty) {$noty.close();}}			  
+			  ]
+	});	
+	}
 });
