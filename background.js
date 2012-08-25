@@ -119,6 +119,8 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 		shift_history_down();
 	} else if (request.shift_history_up) {
 		shift_history_up();
+	} else if (request.server_save_background) {
+		server_save_background();
 	} else if (request.update_history) {
 		if (request.backgroundSrc) {
 			update_history(null, request.update_history);
