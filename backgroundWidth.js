@@ -1,10 +1,7 @@
 $(function() {
 	//Background Width settings
 	createRadioSetting('widthMode','automatic','background-width-settings');
-	
-	//Transparency settings
-	createRangeSetting('transparency', 0.85, 'transparency_settings',0,1,0.05,transparencyCallback);
-	
+
 	//image effects
 	createImageEffect('grayscale', 0, 0,1,0.05, "Grayscale");
 	createImageEffect('sepia', 0, 0,1,0.05, "Sepia");
@@ -17,11 +14,22 @@ $(function() {
 			$( this ).dialog( "close" );
 		}
 	}});
-});
-
-function transparencyCallback() {
+	
+	if (!localStorage['transparency']) {
+		localStorage['transparency'] = 0.85;
+	}
 	$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
-}
+	$( '#transparency_settings' ).slider({
+			value:localStorage['transparency'],
+			min: 0,
+			max: 1,
+			step: .05,
+			slide: function(event, ui) {
+				localStorage['transparency'] = ui.value;
+				$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
+			}
+	});
+});
 
 function createRadioSetting(setting, defaultValue, radioDiv) {
 	if (!localStorage[setting]) {
@@ -30,22 +38,6 @@ function createRadioSetting(setting, defaultValue, radioDiv) {
 	$( '#' + radioDiv ).buttonset();
 	$('#' + radioDiv + ' input').click(function() { localStorage[setting] = $(this).attr("id");});
 	$('#' + localStorage[setting]).next().addClass("ui-state-active");
-}
-
-function createRangeSetting(setting, defaultValue, rangeDivID, minValue, maxValue, increment, callback) {
-	if (callback) callback(); //initialize defaults
-	if (!localStorage[setting]) {
-		localStorage[setting] = defaultValue;
-	}
-	$( '#' + rangeDivID ).slider({
-			value:[setting],
-			min: minValue,
-			max: maxValue,
-			step: increment,
-			slide: function(event, ui) {
-				if (callback) callback(ui.value);
-			}
-	});
 }
 
 function createImageEffect(setting, defaultValue, minValue, maxValue, increment,humanReadable) {
