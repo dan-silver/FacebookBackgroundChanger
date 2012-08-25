@@ -6,11 +6,11 @@ function getLocalBackground() {
 	previousLookup = '';
 	var currentBackground = JSON.parse(vars[2]);
 	console.log(currentBackground);
-//	$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+currentBackground.src+')');
 $('#chromeFacebookbackground').css({
 	"background": 'url(data:image/png;base64,'+currentBackground.src+')',
 	"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
 });
+autoWidth();
 }
   
 var Facebook_ID = $(".firstItem a").attr("href").split(".com/")[1].split("?")[0];
@@ -18,6 +18,7 @@ chrome.extension.sendMessage({FacebookID: Facebook_ID}); //save users Facebook u
 
 var previousLookup;
 function lookup_backgrounds() {
+console.log("checking for other users background");
 	if (!$("#chromeFacebookbackground").length) {
 		$("body").prepend('<div id="chromeFacebookbackground"></div>');
 	}
@@ -38,7 +39,7 @@ function lookup_backgrounds() {
 				previousLookup = otherUser;
 				sharedBackground = true;
 				var currentBackground = JSON.parse(data);
-				$('#chromeFacebookbackground').css("background-image","url(data:image/png;base64, "+currentBackground.src+')');
+				$('#chromeFacebookbackground').css("background","url(data:image/png;base64,"+currentBackground.src+')');
 				$('#chromeFacebookbackground').css("-webkit-filter","hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")");
 			}
 		});
@@ -50,13 +51,16 @@ setInterval(function() {
 }, 2000);
   
 window.onresize = function() {
+	autoWidth();
+}
+autoWidth();
+function autoWidth() {
 	if (vars[0] == "automatic") {
 		$('#chromeFacebookbackground').css({
 			"background-size": document.width
 		});	
 	}
 }
-
 function updateBackgroundSettings() {
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
 		vars = response.variables.split('~~~');
