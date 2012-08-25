@@ -26,11 +26,11 @@
 	<div id="main">
 		<div id="content">
 			<div id="img_preview" >
-				<h4>Current Background<img for="help-uploading" class="help" src="icons/help.png"></h4>
+				<h4>Current Background<img for="help-uploading" class="help" src="icons/help.png"><button id="launchImageEffets">Image Effects</button></h4>
 				<span id="help-uploading" class="help-description">To change your background, drag a picture from your computer and drop it on top of your current Facebook background below.</span>
-				<img id="current-background"><br>
+				<div id="current-background"><img></div><br>
 				<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
-				<button class="img_preview_req" style="margin-top:-48px;margin-left: 15px;" id="remove_main">Remove Current Background</button>
+				<button class="img_preview_req" style="margin-top:-70px;margin-left: 16px;" id="remove_main">Remove Current Background</button>
 			</div>
 		<div id="previous">
 			<h4 id="history-label" style="display:none;">History</h4>
@@ -90,3 +90,8 @@
 		<img style="width:96%;height:auto;" src="">
 	</div>
 </div>
+<div title="Image Effects" id="imageEffects">
+	<div id="blur_effect"></div>
+	<div id="grayscale_effect"></div>
+	<div id="sepia_effect"></div>
+<div>

@@ -4,11 +4,15 @@ var sharedBackground = false;
 function getLocalBackground() {
 	previousLookup = '';
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
-	  vars = response.variables.split(',');
-		if (!JSON.parse(vars[0]).src.length) return;
+		vars = response.variables.split('~~~');
+		if (!JSON.parse(vars[2]).src.length) return;
+		var currentBackground = JSON.parse(vars[2]);
+	//	console.log(currentBackground.src);
+		$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+currentBackground.src+')');
 		$('#chromeFacebookbackground').css({
-			"background": 'url(data:image/png;charset=utf-8;base64,'+JSON.parse(vars[0]).src+')',
-		});
+			"background-image": 'url(data:image/png;base64, '+currentBackground.src+')',
+			"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+		}).html('1');
 		updateBackgroundSettings();
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");
 		$(".fbTimelineCapsule .timelineUnitContainer").css("background-color", "rgba(255,255,255,"+vars[1]+")");
@@ -33,29 +37,29 @@ function lookup_backgrounds() {
 		getLocalBackground();
 		return;
 	}
-	if(otherUser == previousLookup) return;
-
+	if(otherUser != previousLookup) {
 		$.ajax({
-		url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.txt',
-		error: function() {
-			sharedBackground = false;
-			getLocalBackground();
-		},
-		success: function(data) {
-			var information = JSON.parse(data);
-			sharedBackground = true;
-			$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+JSON.parse(data).src+')');
-			updateBackgroundSettings();
-		}
-	});
-		
-	previousLookup = otherUser; 
+			url:'http://www.dansilver.info/fbBackgroundChanger/sharedBackgrounds/backgrounds/'+otherUser+'.txt',
+			error: function() {
+				sharedBackground = false;
+				getLocalBackground();
+				previousLookup = otherUser;
+			},
+			success: function(data) {
+				previousLookup = otherUser;
+				var information = JSON.parse(data);
+				sharedBackground = true;
+				$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+JSON.parse(data).src+')');
+				updateBackgroundSettings();
+			}
+		});
+	}
 }
 
 lookup_backgrounds();
 setInterval(function() {
 	lookup_backgrounds();
-}, 1000);
+}, 2000);
   
 window.onresize = function(event) {
 	updateBackgroundSettings();
@@ -67,7 +71,7 @@ function updateBackgroundSettings() {
 			vars = response.variables.split(',');
 		});
 	}
-	if (vars[2] == "automatic") {
+	if (vars[0] == "automatic") {
 		$('#chromeFacebookbackground').css({
 			"background-size": document.width
 		});	

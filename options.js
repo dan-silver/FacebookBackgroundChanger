@@ -2,7 +2,12 @@ function display_history() {
 	var history = false;
 	for(i = 1; i < 4; i++){
 		if (localStorage['old' + i]) {
-			$("#old" + i + " img").attr("src", "data:image/png;base64, " + JSON.parse(localStorage['old' + i]).src);
+				var currentBackground = JSON.parse(localStorage['old'+i]);
+
+			$("#old" + i + " img").attr("src", "data:image/png;base64, " + JSON.parse(localStorage['old' + i]).src).css({
+				"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+			});
+			
 			$("#old" + i).fadeIn();
 			history = true;
 		} else {
@@ -15,19 +20,34 @@ function display_history() {
 		$("#history-label").slideUp();
 	}
 }
+
+function initializeImageEffectDefaults() {
+	var effects = ["blur", "grayscale", "sepia"];
+	for (i=0; i<effects.length; i++) {
+		currentBackground = JSON.parse(localStorage['base64']);
+		if (!currentBackground[effects[i]]) 
+		currentBackground[effects[i]] = 0;
+	}
+	localStorage['base64'] = JSON.stringify(currentBackground);
+}
+
 function display_current_picture() {
 	if (localStorage['base64']) {
+		initializeImageEffectDefaults();
 		$("#noBackground").hide();
 		$(".img_preview_req").show();
-		$("#current-background").attr("src", "data:image/png;base64, " + JSON.parse(localStorage['base64']).src).css({
+		var currentBackground = JSON.parse(localStorage['base64']);
+		console.log(currentBackground);
+		$("#current-background img").attr("src", "data:image/png;base64, " + currentBackground.src).css({
 			"opacity": "1",
 			"height" : "auto",
-			"min-height": "0px"
-		});
+			"min-height": "0px",
+			"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+		}); 
 	} else {
 		$("#noBackground").fadeIn();
 		$(".img_preview_req").hide();
-		$("#current-background").attr("src", "").css({
+		$("#current-background img").attr("src", "").css({
 			"opacity": "0",
 			"height" : "0px",
 			"min-height": "300px"
@@ -110,22 +130,12 @@ $('#reset_ver').click(function() {
 	/** End Premium Background Previews**/
 	$("button, #header_buttons a").button();
 	document.getElementById("img_preview").addEventListener("dragover", function (evt) {
-		$("#current-background").css({
-			"-webkit-filter": "grayscale(1)"
-		});
 		evt.preventDefault();
 	}, false);
 	document.getElementById("img_preview").addEventListener("dragleave", function (evt) {
-		resetPicture();
 		evt.preventDefault();
 	}, false);
 
-function resetPicture() {
-	$("#current-background").css({
-		"-webkit-filter": "grayscale(0)"
-	});
-}
-	
 	document.getElementById("img_preview").addEventListener("drop", function (evt) {
 	resetPicture();
 	var files = evt.dataTransfer.files;

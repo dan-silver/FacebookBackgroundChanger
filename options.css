@@ -2,7 +2,7 @@
 #page {max-width: 1201px;margin-left: auto;margin-right: auto;margin-top: 5px;background-color: white;padding: 2px;}
 #ver_status {float: right;}
 #reset_ver {cursor: pointer;}
-#content {float: left; margin-right: 10px;min-width: 53%;}
+#content {float: left; margin-right: 10px;min-width: 70%;}
 #sidebar {float: right; width: 250px;}
 .header,  h4, img{font-family: 'Droid Sans', sans-serif;}
 p, span {font-family: 'Droid Sans', sans-serif;}
@@ -15,7 +15,6 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 #previous img {max-width:202px;max-height: 187px;}
 #waiting { display: none; }
 #previous button {display:none;}
-#img_preview {max-width: 651px; width: 100%;}
 .header {font-size: 40px; float: left;}
 #store {width: 100%;float:left;min-height:453px}
 #store #catalog div{float:left;}
@@ -42,16 +41,20 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 	max-width: 480px;
 	cursor:pointer;
 }
+#img_preview {
+	max-width: 651px; 
+	width: 100%;
+}
 #current-background {
-	min-height: 300px;
-	max-height: 475px;
-	font-size: 40px;
-	max-width: 100%;
-	-webkit-transition: -webkit-filter 0.4s;
+	width: 100%;
 	border: 3px dashed;
 	padding: 6px;
 	margin: 5px 0px;
-
+}
+#current-background img {
+	width: 100%;
+	max-height: 475px;
+	-webkit-transition: -webkit-filter 0.4s;
 }
 .help-close { 
 	cursor: pointer;
@@ -63,7 +66,6 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 	font-size: 18px;
 	margin-left: 9px;
 	padding: 100px 21px;
-	border: 1px dashed black;
 	text-align: center;
 	width: 90%
 }
