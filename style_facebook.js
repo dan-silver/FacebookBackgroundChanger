@@ -2,25 +2,15 @@ var vars=new Array();
 var sharedBackground = false;
 
 function getLocalBackground() {
+	console.log("getting local background");
 	previousLookup = '';
-	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
-		vars = response.variables.split('~~~');
-		if (!JSON.parse(vars[2]).src.length) return;
-		var currentBackground = JSON.parse(vars[2]);
-		$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+currentBackground.src+')');
-		$('#chromeFacebookbackground').css({
-			"background-image": 'url(data:image/png;base64, '+currentBackground.src+')',
-			"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
-		});
-		updateBackgroundSettings();
-		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");
-		$(".fbTimelineCapsule .timelineUnitContainer").css("background-color", "rgba(255,255,255,"+vars[1]+")");
-	});
-
-	if (!$("#background_changer_link").length)  {
-		$("#pageNav").prepend('<li id="background_changer_link"  class="navItem"><a href="'+chrome.extension.getURL("options.html")+'" target="_blank">Change Background</a></li>');
-	}
-	$(".fbTimelineTimePeriod").css("background", "none");
+	var currentBackground = JSON.parse(vars[2]);
+	console.log(currentBackground);
+//	$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+currentBackground.src+')');
+$('#chromeFacebookbackground').css({
+	"background": 'url(data:image/png;base64,'+currentBackground.src+')',
+	"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+});
 }
   
 var Facebook_ID = $(".firstItem a").attr("href").split(".com/")[1].split("?")[0];
@@ -50,30 +40,32 @@ function lookup_backgrounds() {
 				var currentBackground = JSON.parse(data);
 				$('#chromeFacebookbackground').css("background-image","url(data:image/png;base64, "+currentBackground.src+')');
 				$('#chromeFacebookbackground').css("-webkit-filter","hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")");
-				updateBackgroundSettings();
 			}
 		});
 	}
 }
-
-lookup_backgrounds();
+updateBackgroundSettings();
 setInterval(function() {
-	lookup_backgrounds();
+	updateBackgroundSettings();
 }, 2000);
   
-window.onresize = function(event) {
-	updateBackgroundSettings();
-}
-
-function updateBackgroundSettings() {
-	if (typeof vars == "undefined" || !(vars instanceof Array)) {
-		chrome.extension.sendMessage({method: "get_vars"}, function(response) {
-			vars = response.variables.split('~~~');
-		});
-	}
+window.onresize = function() {
 	if (vars[0] == "automatic") {
 		$('#chromeFacebookbackground').css({
 			"background-size": document.width
 		});	
 	}
+}
+
+function updateBackgroundSettings() {
+	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
+		vars = response.variables.split('~~~');
+		lookup_backgrounds();
+	});
+	if (!$("#background_changer_link").length)  {
+		$("#pageNav").prepend('<li id="background_changer_link"  class="navItem"><a href="'+chrome.extension.getURL("options.html")+'" target="_blank">Change Background</a></li>');
+	}
+	$(".fbTimelineTimePeriod").css("background", "none");	
+	$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");
+		$(".fbTimelineCapsule .timelineUnitContainer").css("background-color", "rgba(255,255,255,"+vars[1]+")");
 }
