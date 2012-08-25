@@ -46,9 +46,12 @@ function lookup_backgrounds() {
 			},
 			success: function(data) {
 				previousLookup = otherUser;
-				var information = JSON.parse(data);
 				sharedBackground = true;
-				$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+JSON.parse(data).src+')');
+				var currentBackground = JSON.parse(data);
+				$('#chromeFacebookbackground').css({
+					"background-image": 'url(data:image/png;base64, '+currentBackground.src+')',
+					"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+				});
 				updateBackgroundSettings();
 			}
 		});
