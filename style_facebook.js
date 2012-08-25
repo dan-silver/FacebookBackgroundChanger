@@ -41,6 +41,7 @@ console.log("checking for other users background");
 				var currentBackground = JSON.parse(data);
 				$('#chromeFacebookbackground').css("background","url(data:image/png;base64,"+currentBackground.src+')');
 				$('#chromeFacebookbackground').css("-webkit-filter","hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")");
+				autoWidth();
 			}
 		});
 	}
