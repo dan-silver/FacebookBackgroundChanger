@@ -1,3 +1,13 @@
+if (!localStorage['transparency']) {
+	localStorage['transparency'] = 0.85;
+}
+if (!localStorage['widthMode']) {
+	localStorage['widthMode'] = 'automatic';
+}
+if (!localStorage['sharingMode']) {
+	localStorage['sharingMode'] = 'private';
+}
+
 var currentTab;
 function checkForValidUrl(tabId, changeInfo, tab) {
 	if (tab.url.indexOf('facebook.com') > -1) {

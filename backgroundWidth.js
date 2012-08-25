@@ -1,6 +1,6 @@
 $(function() {
 	//Background Width settings
-	createRadioSetting('widthMode','automatic','background-width-settings');
+	createRadioSetting('widthMode','background-width-settings');
 
 	//image effects
 	createImageEffect('grayscale', 0, 0,1,0.05, "Grayscale");
@@ -15,9 +15,6 @@ $(function() {
 		}
 	}});
 	
-	if (!localStorage['transparency']) {
-		localStorage['transparency'] = 0.85;
-	}
 	$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
 	$( '#transparency_settings' ).slider({
 			value:localStorage['transparency'],
@@ -31,10 +28,7 @@ $(function() {
 	});
 });
 
-function createRadioSetting(setting, defaultValue, radioDiv) {
-	if (!localStorage[setting]) {
-		localStorage[setting] = defaultValue;
-	}
+function createRadioSetting(setting, radioDiv) {
 	$( '#' + radioDiv ).buttonset();
 	$('#' + radioDiv + ' input').click(function() { localStorage[setting] = $(this).attr("id");});
 	$('#' + localStorage[setting]).next().addClass("ui-state-active");
