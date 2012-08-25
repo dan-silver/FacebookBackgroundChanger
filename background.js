@@ -1,3 +1,25 @@
+if (!localStorage['updagraded']) {
+	localStorage['base64'] = JSON.stringify({
+		src: localStorage['base64']
+	});
+	if (localStorage['old1']) {
+		localStorage['old1'] = JSON.stringify({
+			src: localStorage['old1']
+		});
+	}
+	if (localStorage['old2']) {
+		localStorage['old2'] = JSON.stringify({
+			src: localStorage['old2']
+		});
+	}
+	if (localStorage['old3']) {
+		localStorage['old3'] = JSON.stringify({
+			src: localStorage['old3']
+		});
+	}
+	localStorage['temp'] = '';
+	localStorage['updagraded'] = true;
+}
 if (!localStorage['transparency']) {
 	localStorage['transparency'] = 0.85;
 }
