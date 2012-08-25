@@ -33,6 +33,7 @@ function initializeImageEffects() {
 
 function display_current_picture() {
 	if (localStorage['base64']) {
+		initializeImageEffects();
 		$("#noBackground").hide();
 		$(".img_preview_req").show();
 			var currentBackground = JSON.parse(localStorage['base64']);

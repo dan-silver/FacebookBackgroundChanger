@@ -48,8 +48,9 @@ function lookup_backgrounds() {
 				previousLookup = otherUser;
 				sharedBackground = true;
 				var currentBackground = JSON.parse(data);
+				console.log(currentBackground);
 				$('#chromeFacebookbackground').css({
-					"background-image": 'url(data:image/png;base64, '+currentBackground.src+')',
+					"background-image": "url(data:image/png;base64, "+currentBackground.src+')',
 					"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
 				});
 				updateBackgroundSettings();

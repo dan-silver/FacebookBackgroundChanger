@@ -11,13 +11,12 @@ $(function() {
 	createImageEffect('hue', 0, 0,360,20, "Hue");
 	
 	//dialog 
-		$('#launchImageEffets').button().click(function(){$("#imageEffects").dialog("open");});
+		$('#launchImageEffets').button().click(function(){$("#imageEffects").dialog("open");initializeImageEffects();});
 		$("#imageEffects").dialog({ autoOpen: false, width: "300",height: "290",buttons: {
 		Close: function() {
 			$( this ).dialog( "close" );
 		}
 	}});
-	initializeImageEffects();
 });
 
 function transparencyCallback() {
@@ -60,9 +59,6 @@ function createImageEffect(setting, defaultValue, minValue, maxValue, increment,
 				currentBackground[setting] = ui.value;
 				localStorage['base64'] = JSON.stringify(currentBackground);
 				display_current_picture();
-			},
-			start: function() {
-				initializeImageEffects();
 			}
 	}).after('<br>');
 }
