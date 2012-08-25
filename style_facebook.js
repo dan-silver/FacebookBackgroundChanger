@@ -7,12 +7,11 @@ function getLocalBackground() {
 		vars = response.variables.split('~~~');
 		if (!JSON.parse(vars[2]).src.length) return;
 		var currentBackground = JSON.parse(vars[2]);
-	//	console.log(currentBackground.src);
 		$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+currentBackground.src+')');
 		$('#chromeFacebookbackground').css({
 			"background-image": 'url(data:image/png;base64, '+currentBackground.src+')',
 			"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
-		}).html('1');
+		});
 		updateBackgroundSettings();
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");
 		$(".fbTimelineCapsule .timelineUnitContainer").css("background-color", "rgba(255,255,255,"+vars[1]+")");
@@ -68,7 +67,7 @@ window.onresize = function(event) {
 function updateBackgroundSettings() {
 	if (typeof vars == "undefined" || !(vars instanceof Array)) {
 		chrome.extension.sendMessage({method: "get_vars"}, function(response) {
-			vars = response.variables.split(',');
+			vars = response.variables.split('~~~');
 		});
 	}
 	if (vars[0] == "automatic") {

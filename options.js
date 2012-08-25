@@ -2,12 +2,10 @@ function display_history() {
 	var history = false;
 	for(i = 1; i < 4; i++){
 		if (localStorage['old' + i]) {
-				var currentBackground = JSON.parse(localStorage['old'+i]);
-
-			$("#old" + i + " img").attr("src", "data:image/png;base64, " + JSON.parse(localStorage['old' + i]).src).css({
+			var currentBackground = JSON.parse(localStorage['old'+i]);
+			$("#old" + i + " img").attr("src", "data:image/png;base64, " + currentBackground.src).css({
 				"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
-			});
-			
+			});			
 			$("#old" + i).fadeIn();
 			history = true;
 		} else {
@@ -61,7 +59,7 @@ function display_pictures() {
 }
 function remove_history(item) {
 	$("#" + item).hide();
-	delete localStorage[item];
+	localStorage[item]='';
 	chrome.extension.sendMessage({shift_history_down: "1"});
 }
 
