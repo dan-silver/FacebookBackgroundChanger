@@ -4,7 +4,7 @@ function display_history() {
 		if (localStorage['old' + i]) {
 			var currentBackground = JSON.parse(localStorage['old'+i]);
 			$("#old" + i + " img").attr("src", "data:image/png;base64, " + currentBackground.src).css({
-				"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+				"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
 			});			
 			$("#old" + i).fadeIn();
 			history = true;
@@ -20,7 +20,7 @@ function display_history() {
 }
 
 function initializeImageEffects() {
-	var effects = ["blur", "grayscale", "sepia"];
+	var effects = ["hue", "grayscale", "sepia"];
 	var currentBackground = JSON.parse(localStorage['base64']);
 	for (i=0; i<effects.length; i++) {
 		if (!currentBackground[effects[i]]) {
@@ -33,15 +33,14 @@ function initializeImageEffects() {
 
 function display_current_picture() {
 	if (localStorage['base64']) {
-		initializeImageEffects();
 		$("#noBackground").hide();
 		$(".img_preview_req").show();
-		var currentBackground = JSON.parse(localStorage['base64']);
+			var currentBackground = JSON.parse(localStorage['base64']);
 		$("#current-background img").attr("src", "data:image/png;base64, " + currentBackground.src).css({
 			"opacity": "1",
 			"height" : "auto",
 			"min-height": "0px",
-			"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+			"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
 		}); 
 	} else {
 		$("#noBackground").fadeIn();

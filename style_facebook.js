@@ -10,7 +10,7 @@ function getLocalBackground() {
 		$('#chromeFacebookbackground').css("background",'url(data:image/png;base64,'+currentBackground.src+')');
 		$('#chromeFacebookbackground').css({
 			"background-image": 'url(data:image/png;base64, '+currentBackground.src+')',
-			"-webkit-filter": "blur("+currentBackground.blur+"px) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+			"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
 		});
 		updateBackgroundSettings();
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css("background-color", "rgba(255,255,255,"+vars[1]+")");

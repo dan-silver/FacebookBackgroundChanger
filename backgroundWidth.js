@@ -6,9 +6,9 @@ $(function() {
 	createRangeSetting('transparency', 0.85, 'transparency_settings',0,1,0.05,transparencyCallback);
 	
 	//image effects
-	createImageEffect('blur', 0, 0,4,.2, "Blur");
 	createImageEffect('grayscale', 0, 0,1,0.05, "Grayscale");
 	createImageEffect('sepia', 0, 0,1,0.05, "Sepia");
+	createImageEffect('hue', 0, 0,360,20, "Hue");
 	
 	//dialog 
 		$('#launchImageEffets').button().click(function(){$("#imageEffects").dialog("open");});
@@ -60,6 +60,9 @@ function createImageEffect(setting, defaultValue, minValue, maxValue, increment,
 				currentBackground[setting] = ui.value;
 				localStorage['base64'] = JSON.stringify(currentBackground);
 				display_current_picture();
+			},
+			start: function() {
+				initializeImageEffects();
 			}
 	}).after('<br>');
 }
