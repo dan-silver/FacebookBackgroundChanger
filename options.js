@@ -21,23 +21,24 @@ function display_history() {
 	}
 }
 
-function initializeImageEffectDefaults() {
+function initializeImageEffects() {
 	var effects = ["blur", "grayscale", "sepia"];
+	var currentBackground = JSON.parse(localStorage['base64']);
 	for (i=0; i<effects.length; i++) {
-		currentBackground = JSON.parse(localStorage['base64']);
-		if (!currentBackground[effects[i]]) 
-		currentBackground[effects[i]] = 0;
+		if (!currentBackground[effects[i]]) {
+			currentBackground[effects[i]] = 0;
+		}
+		$("#"+effects[i]+'_effect').slider({value: currentBackground[effects[i]]});
 	}
 	localStorage['base64'] = JSON.stringify(currentBackground);
 }
 
 function display_current_picture() {
 	if (localStorage['base64']) {
-		initializeImageEffectDefaults();
+		initializeImageEffects();
 		$("#noBackground").hide();
 		$(".img_preview_req").show();
 		var currentBackground = JSON.parse(localStorage['base64']);
-		console.log(currentBackground);
 		$("#current-background img").attr("src", "data:image/png;base64, " + currentBackground.src).css({
 			"opacity": "1",
 			"height" : "auto",
@@ -129,15 +130,12 @@ $('#reset_ver').click(function() {
 	});
 	/** End Premium Background Previews**/
 	$("button, #header_buttons a").button();
+	
 	document.getElementById("img_preview").addEventListener("dragover", function (evt) {
-		evt.preventDefault();
-	}, false);
-	document.getElementById("img_preview").addEventListener("dragleave", function (evt) {
 		evt.preventDefault();
 	}, false);
 
 	document.getElementById("img_preview").addEventListener("drop", function (evt) {
-	resetPicture();
 	var files = evt.dataTransfer.files;
 	if (files.length < 0) {
 		message("incorrectImgFormat");

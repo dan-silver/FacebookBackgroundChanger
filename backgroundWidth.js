@@ -6,9 +6,9 @@ $(function() {
 	createRangeSetting('transparency', 0.85, 'transparency_settings',0,1,0.05,transparencyCallback);
 	
 	//image effects
-	createImageEffect('blur', 0, 'blur_effect',0,4,.2, "Blur");
-	createImageEffect('grayscale', 0, 'grayscale_effect',0,1,0.05, "Grayscale");
-	createImageEffect('sepia', 0, 'sepia_effect',0,1,0.05, "Sepia");
+	createImageEffect('blur', 0, 0,4,.2, "Blur");
+	createImageEffect('grayscale', 0, 0,1,0.05, "Grayscale");
+	createImageEffect('sepia', 0, 0,1,0.05, "Sepia");
 	
 	//dialog 
 		$('#launchImageEffets').button().click(function(){$("#imageEffects").dialog("open");});
@@ -17,6 +17,7 @@ $(function() {
 			$( this ).dialog( "close" );
 		}
 	}});
+	initializeImageEffects();
 });
 
 function transparencyCallback() {
@@ -48,8 +49,8 @@ function createRangeSetting(setting, defaultValue, rangeDivID, minValue, maxValu
 	});
 }
 
-function createImageEffect(setting, defaultValue, rangeDivID, minValue, maxValue, increment,humanReadable) {
-	$( '#' + rangeDivID ).before('<span class="humanReadable">'+humanReadable+':</span>').slider({
+function createImageEffect(setting, defaultValue, minValue, maxValue, increment,humanReadable) {
+	$( '#' + setting + '_effect' ).before('<span class="humanReadable">'+humanReadable+':</span>').slider({
 			value:JSON.parse(localStorage['base64'])[setting],
 			min: minValue,
 			max: maxValue,
