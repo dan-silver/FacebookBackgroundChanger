@@ -22,7 +22,7 @@ console.log("checking for other users background");
 	if (!$("#chromeFacebookbackground").length) {
 		$("body").prepend('<div id="chromeFacebookbackground"></div>');
 	}
-	var otherUser = document.URL.split(".com/")[1];
+	var otherUser = document.URL.split(".com/")[1].split("?")[0];
 	if (!otherUser || (otherUser == Facebook_ID)) {
 		getLocalBackground();
 		return;
