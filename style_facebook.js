@@ -2,10 +2,8 @@ var vars=new Array();
 var sharedBackground = false;
 
 function getLocalBackground() {
-	console.log("getting local background");
 	previousLookup = '';
 	var currentBackground = JSON.parse(vars[2]);
-	console.log(currentBackground);
 $('#chromeFacebookbackground').css({
 	"background": 'url(data:image/png;base64,'+currentBackground.src+')',
 	"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
@@ -18,7 +16,6 @@ chrome.extension.sendMessage({FacebookID: Facebook_ID}); //save users Facebook u
 
 var previousLookup;
 function lookup_backgrounds() {
-console.log("checking for other users background");
 	if (!$("#chromeFacebookbackground").length) {
 		$("body").prepend('<div id="chromeFacebookbackground"></div>');
 	}
