@@ -112,8 +112,7 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	if (request.method == "get_vars") {
 		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'];
 		sendResponse({variables: vars_string});
-    }
-	if (request.FacebookID) {
+    } else if (request.FacebookID) {
 		localStorage['FacebookID'] = request.FacebookID;
 	} else if (request.shift_history_down) {
 		shift_history_down();

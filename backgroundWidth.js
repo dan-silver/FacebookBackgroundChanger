@@ -41,8 +41,13 @@ function createRadioSetting(setting, defaultValue, radioDiv) {
 }
 var currentlyEditingbackground;
 function createImageEffect(setting, defaultValue, minValue, maxValue, increment,humanReadable) {
+	if (!JSON.parse(localStorage['base64'])[setting]) {
+		var defaultValue = '0';
+	} else {
+		var defaultValue = JSON.parse(localStorage['base64'])[setting];
+	}
 	$( '#' + setting + '_effect' ).before('<span class="humanReadable">'+humanReadable+':</span>').slider({
-			value:JSON.parse(localStorage['base64'])[setting],
+			value:defaultValue,
 			min: minValue,
 			max: maxValue,
 			step: increment,
@@ -54,7 +59,6 @@ function createImageEffect(setting, defaultValue, minValue, maxValue, increment,
 				$("#current-background img").attr("src", "data:image/png;base64, " + currentlyEditingbackground.src).css({
 					"-webkit-filter": "hue-rotate("+currentlyEditingbackground.hue+"deg) grayscale("+currentlyEditingbackground.grayscale+") sepia("+currentlyEditingbackground.sepia+")"
 				}); 
-			//	display_current_picture();
 			},
 			stop: function() {
 				chrome.extension.sendMessage({server_save_background: "true"});
