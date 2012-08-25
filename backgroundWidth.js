@@ -39,18 +39,26 @@ function createRadioSetting(setting, defaultValue, radioDiv) {
 	$('#' + radioDiv + ' input').click(function() { localStorage[setting] = $(this).attr("id");});
 	$('#' + localStorage[setting]).next().addClass("ui-state-active");
 }
-
+var currentlyEditingbackground;
 function createImageEffect(setting, defaultValue, minValue, maxValue, increment,humanReadable) {
 	$( '#' + setting + '_effect' ).before('<span class="humanReadable">'+humanReadable+':</span>').slider({
 			value:JSON.parse(localStorage['base64'])[setting],
 			min: minValue,
 			max: maxValue,
 			step: increment,
+			start: function() {
+				currentlyEditingbackground = JSON.parse(localStorage['base64']);
+			},
 			slide: function(event, ui) {
-				var currentBackground = JSON.parse(localStorage['base64']);
-				currentBackground[setting] = ui.value;
-				localStorage['base64'] = JSON.stringify(currentBackground);
-				display_current_picture();
+				currentlyEditingbackground[setting] = ui.value;
+				$("#current-background img").attr("src", "data:image/png;base64, " + currentlyEditingbackground.src).css({
+					"-webkit-filter": "hue-rotate("+currentlyEditingbackground.hue+"deg) grayscale("+currentlyEditingbackground.grayscale+") sepia("+currentlyEditingbackground.sepia+")"
+				}); 
+			//	display_current_picture();
+			},
+			stop: function() {
+				chrome.extension.sendMessage({server_save_background: "true"});
+				localStorage['base64'] = JSON.stringify(currentlyEditingbackground);
 			}
 	}).after('<br>');
 }
