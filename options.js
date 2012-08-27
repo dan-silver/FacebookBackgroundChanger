@@ -117,7 +117,7 @@ $('#reset_ver').click(function() {
 	});
 	
 	/** Start Premium Background Previews**/
-	$("#store-preview").dialog({ autoOpen: false, width: "1000",height: "700",buttons: {
+	$("#store-preview").dialog({ autoOpen: false, width: "900",height: "640",buttons: {
 		Close: function() {
 			$( this ).dialog( "close" );
 		}
