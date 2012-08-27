@@ -20,16 +20,18 @@ if (!localStorage['updagraded']) {
 	localStorage['temp'] = '';
 	localStorage['updagraded'] = true;
 }
-if (!localStorage['transparency']) {
-	localStorage['transparency'] = 0.85;
+function setDefaults() {
+	if (!localStorage['transparency']) {
+		localStorage['transparency'] = 0.85;
+	}
+	if (!localStorage['widthMode']) {
+		localStorage['widthMode'] = 'automatic';
+	}
+	if (!localStorage['sharingMode']) {
+		localStorage['sharingMode'] = 'private';
+	}
 }
-if (!localStorage['widthMode']) {
-	localStorage['widthMode'] = 'automatic';
-}
-if (!localStorage['sharingMode']) {
-	localStorage['sharingMode'] = 'private';
-}
-
+setDefaults();
 var currentTab;
 var wantToUpdate = false;
 function checkForValidUrl(tabId, changeInfo, tab) {
@@ -61,7 +63,7 @@ function shift_history_down() {
 		for(i = 1; i < 3; i++) {
 			if (!localStorage['old'+i] && localStorage['old'+(i+1)]) {
 				localStorage['old'+i] = localStorage['old'+(i+1)];
-				delete localStorage['old'+(i+1)];
+				localStorage['old'+(i+1)] = '';
 			}
 		}
 	}
@@ -71,7 +73,7 @@ function shift_history_up() {
 	for(i = 2; i > 0; i--) {
 		if (localStorage['old'+i]) {
 			localStorage['old'+(i+1)] = localStorage['old'+i]; //old3 is old 2, old2 is old1
-			delete localStorage['old'+i];
+			localStorage['old'+i] = '';
 		}
 	}
 }
@@ -81,7 +83,7 @@ function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 		shift_history_up();
 		if (localStorage['base64']) {
 			localStorage['old1'] = localStorage['base64'];
-			delete localStorage['base64'];
+			localStorage['base64'] = '';
 		}
 		if (clearMain != 1) { //just move current background to old1
 			if (isBackgroundSrc) {
@@ -166,7 +168,7 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
-		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'];
+		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'] + '~~~' + localStorage['sharingMode'];
 		sendResponse({variables: vars_string});
     } else if (request.FacebookID) {
 		localStorage['FacebookID'] = request.FacebookID;

@@ -3,7 +3,7 @@ var sharedBackground = false;
 
 function getLocalBackground() {
 	previousLookup = '';
-	if (vars[2] == 'undefined') {
+	if (vars[2] == 'undefined') { //no local background
 		autoWidth();
 		return;
 	}
@@ -23,6 +23,10 @@ function lookup_backgrounds() {
 	if (!$("#chromeFacebookbackground").length) {
 		$("body").prepend('<div id="chromeFacebookbackground"></div>');
 	}
+	if (vars[3] == 'private') { //only look for other peoples backgrounds if you're in public mode
+		getLocalBackground();
+		return;
+	}	
 	var otherUser = document.URL.split(".com/")[1].split("?")[0];
 	if (!otherUser || (otherUser == Facebook_ID)) {
 		getLocalBackground();
