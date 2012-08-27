@@ -3,12 +3,16 @@ var sharedBackground = false;
 
 function getLocalBackground() {
 	previousLookup = '';
+	if (vars[2] == 'undefined') {
+		autoWidth();
+		return;
+	}
 	var currentBackground = JSON.parse(vars[2]);
-$('#chromeFacebookbackground').css({
-	"background": 'url(data:image/png;base64,'+currentBackground.src+')',
-	"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
-});
-autoWidth();
+	$('#chromeFacebookbackground').css({
+		"background": 'url(data:image/png;base64,'+currentBackground.src+')',
+		"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+	});
+	autoWidth();
 }
   
 var Facebook_ID = $(".firstItem a").attr("href").split(".com/")[1].split("?")[0];

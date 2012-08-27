@@ -184,7 +184,7 @@ function prepareStore() {
 		if (localStorage['purchased_background-'+i] == 1) {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install">Install</button>';
 		} else {
-			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase">Purchase</button>';
+			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase">$0.99</button>';
 		}	
 		if (backgrounds[i].preview == 1) {
 			tempString += '<button bid="'+i+'" class="open-preview">Preview</button>';

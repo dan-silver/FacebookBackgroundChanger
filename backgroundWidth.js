@@ -35,7 +35,7 @@ function createRadioSetting(setting, radioDiv) {
 }
 var currentlyEditingbackground;
 function createImageEffect(setting, defaultValue, minValue, maxValue, increment,humanReadable) {
-	if (!JSON.parse(localStorage['base64'])[setting]) {
+	if (!localStorage['base64'] || !JSON.parse(localStorage['base64'])[setting]) {
 		var defaultValue = '0';
 	} else {
 		var defaultValue = JSON.parse(localStorage['base64'])[setting];
