@@ -31,6 +31,7 @@ if (!localStorage['sharingMode']) {
 }
 
 var currentTab;
+var wantToUpdate = false;
 function checkForValidUrl(tabId, changeInfo, tab) {
 	if (tab.url.indexOf('facebook.com') > -1) {
 		chrome.pageAction.show(tabId);
@@ -96,12 +97,35 @@ function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 		chrome.extension.sendMessage({message: "too_big"});
 	}
 	shift_history_down();
-	server_save_background();
+	wantToUpdate = true;
+}
+
+setInterval(function() {
+	server_save_background_timeout();
+}, 1000*60); //60 seconds
+
+function server_save_background_timeout() {
+	if (wantToUpdate == true) {
+		wantToUpdate = false;
+		server_save_background();
+	}
+}
+
+function removeServerBackground() {
+	console.log("sending fid to remove background");
+	$.ajax({
+		type : 'POST',
+		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
+		dataType : 'json',
+			data: {
+				"FacebookID" : localStorage['FacebookID']
+			}
+	});
 }
 
 function server_save_background() {
 	if (localStorage['sharingMode'] == 'private') return;
-	console.log('Sending background to server');
+	console.log("updating background on server");
 	$.ajax({
 		type : 'POST',
 		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
@@ -151,7 +175,9 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	} else if (request.shift_history_up) {
 		shift_history_up();
 	} else if (request.server_save_background) {
-		server_save_background();
+		wantToUpdate = true;
+	} else if (request.removeServerBackground) {
+		removeServerBackground();
 	} else if (request.update_history) {
 		if (request.backgroundSrc) {
 			update_history(null, request.update_history);
