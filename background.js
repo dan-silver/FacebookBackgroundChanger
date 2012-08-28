@@ -33,7 +33,7 @@ function setDefaults() {
 }
 setDefaults();
 var currentTab;
-var wantToUpdate = false;
+localStorage.wantToUpdate = false;
 function checkForValidUrl(tabId, changeInfo, tab) {
 	if (tab.url.indexOf('facebook.com') > -1) {
 		chrome.pageAction.show(tabId);
@@ -99,16 +99,16 @@ function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 		chrome.extension.sendMessage({message: "too_big"});
 	}
 	shift_history_down();
-	wantToUpdate = true;
+	localStorage.wantToUpdate = true;
 }
 
 setInterval(function() {
 	server_save_background_timeout();
-}, 1000*60); //60 seconds
+}, 1000*60*15); //15 minutes
 
 function server_save_background_timeout() {
-	if (wantToUpdate == true) {
-		wantToUpdate = false;
+	if (localStorage.wantToUpdate == true) {
+		localStorage.wantToUpdate = false;
 		server_save_background();
 	}
 }
@@ -177,7 +177,7 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	} else if (request.shift_history_up) {
 		shift_history_up();
 	} else if (request.server_save_background) {
-		wantToUpdate = true;
+		localStorage.wantToUpdate = true;
 	} else if (request.removeServerBackground) {
 		removeServerBackground();
 	} else if (request.update_history) {
