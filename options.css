@@ -126,7 +126,8 @@ span, a,div,p,h1,h2,h3,h4,h5,img {
 
 
 /*Menu*/
-#menu { 
+#menu {
+	min-width: 667px;
 	background: #7096AB;
 	position: fixed;
 	top: 0px;
@@ -150,12 +151,11 @@ span, a,div,p,h1,h2,h3,h4,h5,img {
 	margin-right: 100px;
 }
 #menu ul li a {
-	line-height: 29px;
 	padding: 0px;
 	cursor: pointer;
 	font-size: 19px;
 }
-#menu span {
+#menu span#title {
 	font-size: 19px;
 }
 #menu img#logo {
