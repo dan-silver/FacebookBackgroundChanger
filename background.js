@@ -180,6 +180,9 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 		localStorage.wantToUpdate = true;
 	} else if (request.removeServerBackground) {
 		removeServerBackground();
+	} else if (request.setDefaults) {
+		setDefaults();
+		chrome.tabs.reload(sender.tab.id);
 	} else if (request.update_history) {
 		if (request.backgroundSrc) {
 			update_history(null, request.update_history);
