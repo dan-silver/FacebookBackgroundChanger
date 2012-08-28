@@ -17,12 +17,37 @@
 <script type="text/javascript" src="sharedBackgrounds.js"></script>
 <script type="text/javascript" src="backgroundWidth.js"></script>
 <script type="text/javascript" src="help.js"></script>
-<div id="page">
-	<div id="ver_status">
-		<span id="ver_status_info"></span>
-		<span id="reset_ver"></span>
+<script type="text/javascript" src="menu.js"></script>
+<div id="menu">
+	<span><img id="logo" src="icons/icon48.png">Facebook Background Changer</span>
+	
+	<ul>
+		<li><a>Help</a></li>
+		<li><a>Reset</a></li>
+		<li><a id="item-options">Options</a></li>
+	</ul>
+	<div id="options-panel">
+		<div id="settings">
+			<h4>Page Opacity:<span id="transparency_value"></span><img for="help-transparency" class="help" src="icons/help.png"></h4>
+			<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;"></div>
+			<span id="help-transparency" class="help-description">The lower the number, the more you can see through Facebook pages.</span>
+			<div id="sharing-settings">
+			<h4>Background Sharing<img for="help-sharing" class="help" src="icons/help.png"></h4>
+				<input type="radio" id="private" name="sharing"/><label for="private">Private</label>
+				<input type="radio" id="public" name="sharing"/><label for="public">Public</label><br>
+				<span id="help-sharing" class="help-description">In public background mode, anyone else with this extension installed will see your background when visiting your profile and vice versa.  You will not be able to see other peoples backgrounds if you are in private mode.  In public mode, you're background will be uploaded to our servers a maximum of once every 15 minutes.</span>
+			</div>
+			<div id="background-width-settings">
+			<h4>Background Width<img for="help-width" class="help" src="icons/help.png"></h4>
+				<input type="radio" id="static" name="width"/><label for="static">Static</label>
+				<input type="radio" id="automatic" name="width"/><label for="automatic">Automatic</label><br>
+				<span id="help-width" class="help-description"><b>Static Mode</b> - Backgrounds will not change size and they will repeat horizontally and vertically.<br><b>Automatic Mode</b> - Backgrounds will be the same width as your screen, and adjust as you resize the window.</span>
+			</div>
+		</div>
 	</div>
-	<span class="header" style="margin-left: 0px;">Facebook Background Changer</span>
+</div>
+<div id="page">
+	<span class="header" style="margin-left: 0px;"></span>
 	<div id="main">
 		<div id="content">
 			<div id="img_preview" >
@@ -53,26 +78,13 @@
 		</div>
 		<div id="sidebar">
 		<iframe  src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FFB-Background-Changer%2F385120791509349&amp;width=250&amp;height=315&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=true&amp;header=true&amp;appId=270609206348109" scrolling="no" frameborder="0" style="background:white;border:none; overflow:hidden; width:250px; height:315px;margin-top:33px" allowTransparency="false"></iframe>
-			<div id="settings">
-				<h4>Page Opacity:<span id="transparency_value"></span><img for="help-transparency" class="help" src="icons/help.png"></h4>
-				<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;"></div>
-				<span id="help-transparency" class="help-description">The lower the number, the more you can see through Facebook pages.</span>
-				<div id="sharing-settings">
-				<h4>Background Sharing<img for="help-sharing" class="help" src="icons/help.png"></h4>
-					<input type="radio" id="private" name="sharing"/><label for="private">Private</label>
-					<input type="radio" id="public" name="sharing"/><label for="public">Public</label><br>
-					<span id="help-sharing" class="help-description">In public background mode, anyone else with this extension installed will see your background when visiting your profile and vice versa.  You will not be able to see other peoples backgrounds if you are in private mode.  In public mode, you're background will be uploaded to our servers a maximum of once every 15 minutes.</span>
-				</div>
-				<div id="background-width-settings">
-				<h4>Background Width<img for="help-width" class="help" src="icons/help.png"></h4>
-					<input type="radio" id="static" name="width"/><label for="static">Static</label>
-					<input type="radio" id="automatic" name="width"/><label for="automatic">Automatic</label><br>
-					<span id="help-width" class="help-description"><b>Static Mode</b> - Backgrounds will not change size and they will repeat horizontally and vertically.<br><b>Automatic Mode</b> - Backgrounds will be the same width as your screen, and adjust as you resize the window.</span>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div id="store">
+	<div id="ver_status">
+		<span id="ver_status_info"></span>
+		<span id="reset_ver"></span>
+	</div>
 		<h4>Premium Backgrounds</h4>
 			<div id="store-filters">
 				<span style="width:600px;">
