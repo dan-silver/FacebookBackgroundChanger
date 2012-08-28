@@ -1,25 +1,3 @@
-if (!localStorage['updagraded']) {
-	localStorage['base64'] = JSON.stringify({
-		src: localStorage['base64']
-	});
-	if (localStorage['old1']) {
-		localStorage['old1'] = JSON.stringify({
-			src: localStorage['old1']
-		});
-	}
-	if (localStorage['old2']) {
-		localStorage['old2'] = JSON.stringify({
-			src: localStorage['old2']
-		});
-	}
-	if (localStorage['old3']) {
-		localStorage['old3'] = JSON.stringify({
-			src: localStorage['old3']
-		});
-	}
-	localStorage['temp'] = '';
-	localStorage['updagraded'] = true;
-}
 function setDefaults() {
 	if (!localStorage['transparency']) {
 		localStorage['transparency'] = 0.85;
@@ -138,25 +116,6 @@ function server_save_background() {
 			}
 	});
 }
-
-var imageClick;
-chrome.contextMenus.create({
-	"title": "Set as Facebook background",
-	"contexts": ["image"],
-	"onclick": function (info) {
-		$.ajax({
-			type : 'POST',
-			url : 'http://www.dansilver.info/fbBackgroundChanger/convert_to_base64.php',
-			dataType : 'json',
-			data: {
-				url : info.srcUrl
-			},
-			success : function(data){
-				update_history(null, data.base64);
-			}
-		});
-	}
-});
 
 chrome.tabs.onUpdated.addListener(function(tabId) {
 	chrome.tabs.get(tabId, function(tab) {
