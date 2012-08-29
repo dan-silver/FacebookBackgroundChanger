@@ -175,15 +175,17 @@ span, a,div,p,h1,h2,h3,h4,h5,img {
 	-webkit-transition: -webkit-transform 0.25s;
 	-webkit-transform: rotate(180deg);
 }
-@media screen and (max-width: 652px) { /*2 lined menu*/
+@media screen and (max-width: 678px) { /*2 lined menu*/
 	#options-panel {
-		top: 53px;
+		top: 66px;
+		left: 23px;
 	}
 	#menu ul {
+		width: 100%;
 		float: left;
 	}
 	#page {
-		margin-top: 59px;
+		margin-top: 67px;
 	}
 	#menu {
 		padding-left: 5px;
