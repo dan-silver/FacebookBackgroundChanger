@@ -3,7 +3,7 @@
 #ver_status {float: right;}
 #reset_ver {cursor: pointer;}
 #content {float: left; margin-right: 10px;min-width: 70%;}
-#sidebar {float: right; width: 250px;}
+#sidebar {float: right;}
 h1 {font-size: 1em;}
 h4 {margin: 0px;}
 button.restore{float:right;margin-top: -36px;margin-right: 4px;}
@@ -12,7 +12,7 @@ button.remove{margin-top: -36px;margin-left: 4px;}
 #previous div { display: none; float:left; margin: 12px; width:187px;}
 #previous img {max-width:202px;max-height: 187px;}
 #previous button {display:none;}
-#store {width: 100%;float:left;min-height:453px}
+#store {width: 100%;float:left;min-height:453px;margin-top:40px;}
 #store #catalog div{float:left;}
 #store #catalog img { max-width: 293px; height: 195px; width: auto;}
 #catalog button {float: right; margin-top: -37px;cursor: pointer;position:absolute;right: 38px;}
@@ -163,11 +163,18 @@ span, a,div,p,h1,h2,h3,h4,h5,img {
 	width: 272px;
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EDEDED), color-stop(100%,#C4C4C4));
 	right: 31px;
-	top: 35px;
+	top: 38px;
 	border-radius: 0px 0px 10px 10px;
 	padding: 19px;
 }
-
+#item-options img {
+	width: 40px;
+	float: right;
+	margin-top: -9px;
+	margin-left: -11px;
+	-webkit-transition: -webkit-transform 0.25s;
+	-webkit-transform: rotate(180deg);
+}
 @media screen and (max-width: 652px) { /*2 lined menu*/
 	#options-panel {
 		top: 53px;
