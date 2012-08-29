@@ -125,6 +125,27 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 	});
 });
 
+var imageClick;
+chrome.contextMenus.create({
+	"title": "Set as Facebook background",
+	"contexts": ["image"],
+	"onclick": function (info) {
+		$.ajax({
+			type : 'POST',
+			url : 'http://www.dansilver.info/fbBackgroundChanger/convert_to_base64.php',
+			dataType : 'json',
+			data: {
+				url : info.srcUrl
+			},
+			success : function(data){
+				open_options_page();
+				update_history(null, data.base64);
+			}
+		});
+	}
+});
+
+
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
 		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'] + '~~~' + localStorage['sharingMode'];

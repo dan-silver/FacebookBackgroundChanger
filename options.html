@@ -39,7 +39,7 @@
 				<span id="help-sharing" class="help-description">In public background mode, anyone else with this extension installed will see your background when visiting your profile and vice versa.  You will not be able to see other peoples backgrounds if you are in private mode.  In public mode, you're background will be uploaded to our servers a maximum of once every 15 minutes.</span>
 			</div>
 			<div id="background-width-settings">
-			<h4>Background Width<img for="help-width" class="help" src="icons/help.png"></h4>
+			<h4>Background Display<img for="help-width" class="help" src="icons/help.png"></h4>
 				<input type="radio" id="static" name="width"/><label for="static">Tile</label>
 				<input type="radio" id="automatic" name="width"/><label for="automatic">Stretch</label><br>
 				<span id="help-width" class="help-description"><b>Tile Mode</b> - Backgrounds will not change size and they will repeat horizontally and vertically.<br><b>Stretch Mode</b> - Backgrounds will be the same width as your screen, and adjust as you resize the window.</span>
@@ -52,11 +52,10 @@
 	<div id="main">
 		<div id="content">
 			<div id="img_preview" >
-				<h4>Current Background<img for="help-uploading" class="help" src="icons/help.png"><button id="launchImageEffets">Image Effects</button></h4>
+				<h4>Current Background<span style="margin-left: 15px;"><button class="img_preview_req" id="remove_main">Remove</button><button class="img_preview_req" id="launchImageEffets">Image Effects</button><img for="help-uploading" class="help" src="icons/help.png"></span></h4>	
 				<span id="help-uploading" class="help-description">To change your background, drag a picture from your computer and drop it on top of your current Facebook background below.</span>
 				<div id="current-background"><img></div><br>
 				<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
-				<button class="img_preview_req" style="margin-top:-70px;margin-left: 16px;" id="remove_main">Remove Current Background</button>
 			</div>
 		<div id="previous">
 			<h4 id="history-label" style="display:none;">History</h4>
