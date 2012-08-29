@@ -11,7 +11,7 @@ $(function() {
 		hideOptionsPanel();
 	});
 	function hideOptionsPanel() {
-		$("#options-panel").slideUp();
+		$("#options-panel").slideUp(250);
 		$("#item-options img").css("-webkit-transform","rotate(180deg)");
 	}
 	$("#item-reset").click(function() {
