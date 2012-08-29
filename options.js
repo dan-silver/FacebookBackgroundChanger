@@ -129,11 +129,11 @@ $('#reset_ver').click(function() {
 	/** End Premium Background Previews**/
 	$("button, #header_buttons a").button();
 	
-	document.getElementById("img_preview").addEventListener("dragover", function (evt) {
+	document.addEventListener("dragover", function (evt) {
 		evt.preventDefault();
 	}, false);
 
-	document.getElementById("img_preview").addEventListener("drop", function (evt) {
+	document.addEventListener("drop", function (evt) {
 	var files = evt.dataTransfer.files;
 	if (files.length < 0) {
 		message("incorrectImgFormat");
