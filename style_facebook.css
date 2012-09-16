@@ -25,3 +25,7 @@
 #navSearch .uiSearchInput {
 	border-top: none;
 }
+
+#pageNav .navItem a.targetAfter:after {
+	display: none;
+}

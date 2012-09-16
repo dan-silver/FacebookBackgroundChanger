@@ -8,6 +8,9 @@ function setDefaults() {
 	if (!localStorage['sharingMode']) {
 		localStorage['sharingMode'] = 'private';
 	}
+	if (!localStorage['headerColor']) {
+		localStorage['headerColor'] = '#3B5998';
+	}
 }
 setDefaults();
 var currentTab;

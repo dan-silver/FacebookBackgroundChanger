@@ -179,15 +179,12 @@ $(document).keyup(function (e) {
 });
 
 //color picker support
-
-$("#headerColor").spectrum({
-    showButtons: false,
+$('#headerColor').spectrum({
 	color: localStorage['headerColor'],
-	change: function(color) {               
+	change: function(color) {
 		localStorage['headerColor'] = color.toHexString(); // #ff0000
 	}
 });
-
 });
 
 function message(status) {
