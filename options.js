@@ -178,6 +178,16 @@ $(document).keyup(function (e) {
 	}
 });
 
+//color picker support
+
+$("#headerColor").spectrum({
+    showButtons: false,
+	color: localStorage['headerColor'],
+	change: function(color) {               
+		localStorage['headerColor'] = color.toHexString(); // #ff0000
+	}
+});
+
 });
 
 function message(status) {

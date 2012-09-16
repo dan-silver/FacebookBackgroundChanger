@@ -1,27 +1,28 @@
 <html>
 <head>
 	<title>Facebook Backgrounds</title>
-	<link type="text/css" href="options.css" rel="Stylesheet" />	
-	<link type="text/css" href="Aristo/Aristo.css" rel="Stylesheet" />	
-<script type="text/javascript" src="googlejsapi.js"></script>
-<script type="text/javascript" src="jquery/jquery.js"></script>
-<script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
-<script type="text/javascript" src="jquery/noty/jquery.noty.js"></script>
-<script type="text/javascript" src="jquery/noty/themes/default.js"></script>
-<script type="text/javascript" src="jquery/noty/layouts/center.js"></script>
-<script type="text/javascript" src="defaults.js"></script>
-<script type="text/javascript" src="dashed_lines.js"></script>
-<script type="text/javascript" src="store.js"></script>
-<script type="text/javascript" src="options.js"></script>
-<script type="text/javascript" src="sharedBackgrounds.js"></script>
-<script type="text/javascript" src="backgroundWidth.js"></script>
-<script type="text/javascript" src="help.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+	<link type='text/css' href='options.css' rel='Stylesheet' />	
+	<link type='text/css' href='Aristo/Aristo.css' rel='Stylesheet' />	
+	<link type='text/css' href='jquery/spectrum/spectrum.css' rel='stylesheet'/>
+	<script type='text/javascript' src='googlejsapi.js'></script>
+	<script type='text/javascript' src='jquery/jquery.js'></script>
+	<script type='text/javascript' src='jquery/jquery-ui-1.8.22.custom.min.js'></script>
+	<script type='text/javascript' src='jquery/noty/jquery.noty.js'></script>
+	<script type='text/javascript' src='jquery/noty/themes/default.js'></script>
+	<script type='text/javascript' src='jquery/noty/layouts/center.js'></script>
+	<script type='text/javascript' src='defaults.js'></script>
+	<script type='text/javascript' src='dashed_lines.js'></script>
+	<script type='text/javascript' src='store.js'></script>
+	<script type='text/javascript' src='options.js'></script>
+	<script type='text/javascript' src='sharedBackgrounds.js'></script>
+	<script type='text/javascript' src='backgroundWidth.js'></script>
+	<script type='text/javascript' src='help.js'></script>
+	<script type='text/javascript' src='menu.js'></script>
+	<script src='jquery/spectrum/spectrum.js'></script>
 </head>
 <body>
 <div id="menu">
 	<span id="title"><img id="logo" src="icons/icon48.png">Facebook Background Changer</span>
-	
 	<ul>
 		<li><a href="http://dansilver.info/documentation/">Help</a></li>
 		<li><a id="item-reset">Reset</a></li>
@@ -50,6 +51,9 @@
 <div id="page">
 	<span class="header" style="margin-left: 0px;"></span>
 	<div id="main">
+		<div id="colorOptions">
+			<input type='color' id='headerColor' />
+		</div>
 		<div id="content">
 			<div id="img_preview" >
 				<h4>Current Background<span style="margin-left: 15px;"><button class="img_preview_req" id="launchImageEffets">Effects</button><button class="img_preview_req" id="remove_main">Remove</button><img for="help-uploading" class="help" src="icons/help.png"></span></h4>	
