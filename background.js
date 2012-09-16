@@ -148,7 +148,7 @@ chrome.contextMenus.create({
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
-		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'] + '~~~' + localStorage['sharingMode'];
+		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'] + '~~~' + localStorage['sharingMode']+ '~~~' + localStorage['headerColor'];
 		sendResponse({variables: vars_string});
     } else if (request.FacebookID) {
 		localStorage['FacebookID'] = request.FacebookID;

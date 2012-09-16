@@ -21,3 +21,7 @@
 	width: 100%;
 	position: fixed;
 }
+
+#navSearch .uiSearchInput {
+	border-top: none;
+}
