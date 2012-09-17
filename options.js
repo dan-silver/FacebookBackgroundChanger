@@ -181,6 +181,7 @@ $(document).keyup(function (e) {
 //color picker support
 $('#headerColor').spectrum({
 	color: localStorage['headerColor'],
+	showInitial: true,
 	change: function(color) {
 		localStorage['headerColor'] = color.toHexString(); // #ff0000
 	}

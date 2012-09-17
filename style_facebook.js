@@ -53,7 +53,7 @@ function lookup_backgrounds() {
 }
 setInterval(function() {
 	updateBackgroundSettings();
-}, 2000);
+}, 1500);
   
 window.onresize = function() {
 	autoWidth();
