@@ -61,9 +61,7 @@ window.onresize = function() {
 autoWidth();
 function autoWidth() {
 	if (vars[0] == "automatic") {
-		$('#chromeFacebookbackground').css({
-			'background-size': document.width
-		});
+		$('#chromeFacebookbackground').css('background-size',document.width);
 	}
 }
 function updateBackgroundSettings() {
@@ -77,19 +75,13 @@ function updateBackgroundSettings() {
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css('background-color','rgba(255,255,255,'+vars[1]+')');
 		$('.fbTimelineCapsule .timelineUnitContainer').css('background-color', 'rgba(255,255,255,'+vars[1]+')');
 		//Header color support
-		$('#jewelContainer').css({
-			'background-color': vars[4],
-		});
+		$('#jewelContainer').css('background-color', vars[4]);
 		$('#blueBar').css({
 			'background-color': vars[4],
 			'border-bottom': '1px solid ' + vars[4]
 		});	
-		$('#navSearch .uiTypeahead').css({
-			'border': 'none'
-		});
-		$('#navSearch .uiSearchInput').css({
-			'border-top': 'none'
-		});
+		$('#navSearch .uiTypeahead').css('border','none');
+		$('#navSearch .uiSearchInput').css('border-top','none');
 		$('#pageNav .tinyman .headerTinymanPhoto').css({
 			'border': 'none',
 			'border-top': 'none'
