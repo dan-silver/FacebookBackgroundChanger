@@ -128,7 +128,6 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 	});
 });
 
-var imageClick;
 chrome.contextMenus.create({
 	"title": "Set as Facebook background",
 	"contexts": ["image"],
@@ -147,7 +146,6 @@ chrome.contextMenus.create({
 		});
 	}
 });
-
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
