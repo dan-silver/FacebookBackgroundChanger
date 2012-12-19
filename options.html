@@ -77,24 +77,33 @@
 		<div class="row">
 			<div class="span6">
 				<h2>Facebook Background</h2>
-				<button id="uploadBtn" class="btn">Upload Background</button><br>
-				<input type="file" id="theFile" style="display:none;"/>
-				<img id="img_preview" >
-				<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
+				<div class="well">
+					<button id="uploadBtn" class="btn">Upload Background</button>
+					<button id="launchImageEffets" class="btn">Effects</button><br>
+					<input type="file" id="theFile" style="display:none;"/>
+					<img id="img_preview" >
+					<div title="Image Effects" id="imageEffects">
+						<div id="grayscale_effect"></div>
+						<div id="sepia_effect"></div>
+						<div id="hue_effect"></div>
+					</div>
+					<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
+				</div>
 			</div>
 			<div class="span6">
 				<h2>Other Facebook Options</h2>
-				<div id="colorOptions">
-					Facebook Bar Color: <input type='color' id='headerColor' />
-				</div>
-				<h4>Facebook Page Opacity: <span id="transparency_value"></span></h4>
-				<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;">
-					<input id="transparency_slider" type="range" min="0" max="1" step=".05" />
-				</div>
-				<h4>Background Display</h4>
-				<div id="background-width-settings" class="btn-group" data-toggle="buttons-radio">
-					<button id="static"     type="button" class="btn btn-primary">Tile</button>
-					<button  id="automatic" type="button" class="btn btn-primary">Stretch</button>
+				<div class="well">
+					<h4>Facebook Bar Color:</h4>
+					<input type='color' id='headerColor' />
+					<h4>Facebook Page Opacity: <span id="transparency_value"></span></h4>
+					<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;">
+						<input id="transparency_slider" type="range" min="0" max="1" step=".05" />
+					</div>
+					<h4>Background Display</h4>
+					<div id="background-width-settings" class="btn-group" data-toggle="buttons-radio">
+						<button id="static"     type="button" class="btn">Tile</button>
+						<button  id="automatic" type="button" class="btn">Stretch</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -104,5 +113,4 @@
 	</footer>
 
     </div> <!-- /container -->
-
 </body></html>

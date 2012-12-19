@@ -1,4 +1,10 @@
 #img_preview {
 	max-width: 300px;
 	max-height: 200px;
+	margin-top: 15px;
+}
+
+#imageEffects {
+	display: none;
+	margin-top: 15px;
 }
