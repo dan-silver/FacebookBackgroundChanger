@@ -182,12 +182,12 @@ function prepareStore() {
 	for(i = 1; i < (numberOfBackgrounds+1); i++){
 		tempString = '<div class="outer ' + backgrounds[i].tags + '"><div class="inner"><img id="img_'+i+'" src="premium_backgrounds/'+i+'_small.jpg"><br>';
 		if (localStorage['purchased_background-'+i] == 1) {
-			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install">Install</button>';
+			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install btn">Install</button>';
 		} else {
-			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase">$0.99</button>';
+			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase btn">$0.99</button>';
 		}	
 		if (backgrounds[i].preview == 1) {
-			tempString += '<button bid="'+i+'" class="open-preview">Preview</button>';
+			tempString += '<button bid="'+i+'" class="open-preview btn">Preview</button>';
 		}
 		tempString+= '<span class="info">Size: '+backgrounds[i].dimensions+'px</span></div></div>';
 		$("#catalog").prepend(tempString);

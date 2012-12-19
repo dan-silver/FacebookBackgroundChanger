@@ -1,10 +1,9 @@
 function initializeImageEffects() {
 	var effects = ["hue", "grayscale", "sepia"];
 	var currentBackground = JSON.parse(localStorage['base64']);
-	for (i=0; i<effects.length; i++) {
-		currentBackground[effects[i]] = 0;
-		$("#"+effects[i]+'_effect').slider({value: currentBackground[effects[i]]});
-	}
+	effects.forEach(function(effect) {
+		$("#"+effect+'_slider').attr("value", currentBackground[effect] || 0);
+	});
 	localStorage['base64'] = JSON.stringify(currentBackground);
 }
 
