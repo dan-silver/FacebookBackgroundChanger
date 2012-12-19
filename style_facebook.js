@@ -29,7 +29,6 @@ function autoWidth() {
 function updateBackgroundSettings() {
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
 		userData = response.variables.split('~~~');
-		console.log(userData);
 		lookup_backgrounds();
 		if (!$("#background_changer_link").length) {
 			$("#pageNav .firstItem").after('<li id="background_changer_link"  class="navItem"><a href="'+chrome.extension.getURL('options.html')+'" target="_blank" class="navLink">Customize</a></li>');

@@ -1,7 +1,6 @@
 $(function() {
 	//Background Width settings
 	createRadioSetting('widthMode','background-width-settings');
-
 	//image effects
 	createImageEffect('grayscale', 0, 0,1,0.05, "Grayscale");
 	createImageEffect('sepia', 0, 0,1,0.05, "Sepia");
@@ -15,16 +14,12 @@ $(function() {
 		}
 	}});
 	
+	$('#transparency_slider').attr("value", localStorage['transparency']);
 	$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
-	$( '#transparency_settings' ).slider({
-			value:localStorage['transparency'],
-			min: 0,
-			max: 1,
-			step: .05,
-			slide: function(event, ui) {
-				localStorage['transparency'] = ui.value;
-				$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
-			}
+	$('#transparency_slider').change(function() {
+		console.log(this.value);
+		localStorage['transparency'] = this.value;
+		$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
 	});
 });
 

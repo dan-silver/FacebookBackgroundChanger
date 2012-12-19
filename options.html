@@ -16,6 +16,8 @@
     <link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<script src='assets/js/jquery.js'></script>
 	
+	<link type='text/css' href='assets\css\options.css' rel='stylesheet'/>
+	
 	<link type='text/css' href='assets/js/spectrum/spectrum.css' rel='stylesheet'/>
 	<script src='assets/js/spectrum/spectrum.js'></script>
 
@@ -71,24 +73,37 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="span6">
-          <h2>Facebook Background</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">Upload Background</a></p>
-        </div>
-        <div class="span6">
-          <h2>Facebook Bar</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
-      </div>
-
+	<div class="container">
+		<div class="row">
+			<div class="span6">
+				<h2>Facebook Background</h2>
+				<button id="uploadBtn" class="btn">Upload Background</button>
+				<input type="file" id="theFile" style="display:none;"/>
+				<img id="img_preview" >
+				<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
+			</div>
+			<div class="span6">
+				<h2>Other Facebook Options</h2>
+				<div id="colorOptions">
+					Facebook Bar Color: <input type='color' id='headerColor' />
+				</div>
+				<h4>Facebook Page Opacity: <span id="transparency_value"></span><img for="help-transparency" class="help" src="icons/help.png"></h4>
+				<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;">
+					<input id="transparency_slider" type="range" min="0" max="1" step=".05" />
+				</div>
+				<span id="help-transparency" class="help-description">The lower the number, the more you can see through Facebook pages.</span>
+				<div id="background-width-settings">
+					<h4>Background Display<img for="help-width" class="help" src="icons/help.png"></h4>
+					<input type="radio" id="static" name="width"/><label for="static">Tile</label>
+					<input type="radio" id="automatic" name="width"/><label for="automatic">Stretch</label><br>
+					<span id="help-width" class="help-description"><b>Tile Mode</b> - Backgrounds will not change size and they will repeat horizontally and vertically.<br><b>Stretch Mode</b> - Backgrounds will be the same width as your screen, and adjust as you resize the window.</span>
+				</div>
+			</div>
+		</div>
       <hr>
-
-      <footer>
-        <p>Made by Dan Silver. NOT affiliated with Facebook.</p>
-      </footer>
+	<footer>
+		<p>Made by Dan Silver. NOT affiliated with Facebook.</p>
+	</footer>
 
     </div> <!-- /container -->
 
