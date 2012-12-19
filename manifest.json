@@ -11,7 +11,7 @@
  "options_page" : "options.html",
  "permissions" : [ "tabs", "http://*.google.com/*", "storage", "unlimitedStorage", "http://*.dansilver.info/*", "contextMenus" ],
  "background" : {
-  "scripts": ["jquery/jquery.js","background.js", "defaults.js"]
+  "scripts": ["assets/js/jquery.js","background.js", "defaults.js"]
  },
  "page_action" : {
   "default_icon": "icons/icon48.png",
@@ -20,7 +20,7 @@
  "content_scripts": [{
   "matches": [ "*://www.facebook.com/*" ],
   "css": ["style_facebook.css"],
-  "js": [ "jquery/jquery.js", "style_facebook.js" ]
+  "js": [ "assets/js/jquery.js", "style_facebook.js" ]
  }],
  "content_security_policy": "script-src 'self' https://www.google.com https://checkout.google.com; object-src 'self'"
 }
