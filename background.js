@@ -5,9 +5,6 @@ function setDefaults() {
 	if (!localStorage['widthMode']) {
 		localStorage['widthMode'] = 'automatic';
 	}
-	if (!localStorage['sharingMode']) {
-		localStorage['sharingMode'] = 'private';
-	}
 	if (!localStorage['headerColor']) {
 		localStorage['headerColor'] = '#3B5998';
 	}
@@ -83,43 +80,6 @@ function update_history(backgroundObject, isBackgroundSrc, clearMain) {
 	localStorage.wantToUpdate = true;
 }
 
-setInterval(function() {
-	server_save_background_timeout();
-}, 1000*60*15); //15 minutes
-
-function server_save_background_timeout() {
-	if (localStorage.wantToUpdate == true) {
-		localStorage.wantToUpdate = false;
-		server_save_background();
-	}
-}
-
-function removeServerBackground() {
-	console.log("sending fid to remove background");
-	$.ajax({
-		type : 'POST',
-		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
-		dataType : 'json',
-			data: {
-				"FacebookID" : localStorage['FacebookID']
-			}
-	});
-}
-
-function server_save_background() {
-	if (localStorage['sharingMode'] == 'private') return;
-	console.log("updating background on server");
-	$.ajax({
-		type : 'POST',
-		url : 'http://dansilver.info/fbBackgroundChanger/sharedBackgrounds/saveBackground.php',
-		dataType : 'json',
-			data: {
-				"FacebookID" : localStorage['FacebookID'],
-				"background" : localStorage['base64']
-			}
-	});
-}
-
 chrome.tabs.onUpdated.addListener(function(tabId) {
 	chrome.tabs.get(tabId, function(tab) {
 		if (tab.url.search("dansilver.info/oauth2callback/") > 0) {
@@ -151,16 +111,10 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	if (request.method == "get_vars") {
 		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'] + '~~~' + localStorage['sharingMode']+ '~~~' + localStorage['headerColor'];
 		sendResponse({variables: vars_string});
-    } else if (request.FacebookID) {
-		localStorage['FacebookID'] = request.FacebookID;
-	} else if (request.shift_history_down) {
+    } else if (request.shift_history_down) {
 		shift_history_down();
 	} else if (request.shift_history_up) {
 		shift_history_up();
-	} else if (request.server_save_background) {
-		localStorage.wantToUpdate = true;
-	} else if (request.removeServerBackground) {
-		removeServerBackground();
 	} else if (request.setDefaults) {
 		setDefaults();
 		chrome.tabs.reload(sender.tab.id);
