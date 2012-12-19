@@ -22,5 +22,5 @@
   "css": ["style_facebook.css"],
   "js": [ "jquery/jquery.js", "style_facebook.js" ]
  }],
- "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'"
+ "content_security_policy": "script-src 'self' https://www.google.com https://checkout.google.com; object-src 'self'"
 }
