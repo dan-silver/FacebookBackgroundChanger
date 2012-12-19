@@ -77,7 +77,7 @@
 		<div class="row">
 			<div class="span6">
 				<h2>Facebook Background</h2>
-				<button id="uploadBtn" class="btn">Upload Background</button>
+				<button id="uploadBtn" class="btn">Upload Background</button><br>
 				<input type="file" id="theFile" style="display:none;"/>
 				<img id="img_preview" >
 				<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
@@ -87,16 +87,14 @@
 				<div id="colorOptions">
 					Facebook Bar Color: <input type='color' id='headerColor' />
 				</div>
-				<h4>Facebook Page Opacity: <span id="transparency_value"></span><img for="help-transparency" class="help" src="icons/help.png"></h4>
+				<h4>Facebook Page Opacity: <span id="transparency_value"></span></h4>
 				<div id="transparency_settings" style="display: block;width: 249px;margin:10px 0px;">
 					<input id="transparency_slider" type="range" min="0" max="1" step=".05" />
 				</div>
-				<span id="help-transparency" class="help-description">The lower the number, the more you can see through Facebook pages.</span>
-				<div id="background-width-settings">
-					<h4>Background Display<img for="help-width" class="help" src="icons/help.png"></h4>
-					<input type="radio" id="static" name="width"/><label for="static">Tile</label>
-					<input type="radio" id="automatic" name="width"/><label for="automatic">Stretch</label><br>
-					<span id="help-width" class="help-description"><b>Tile Mode</b> - Backgrounds will not change size and they will repeat horizontally and vertically.<br><b>Stretch Mode</b> - Backgrounds will be the same width as your screen, and adjust as you resize the window.</span>
+				<h4>Background Display</h4>
+				<div id="background-width-settings" class="btn-group" data-toggle="buttons-radio">
+					<button id="static"     type="button" class="btn btn-primary">Tile</button>
+					<button  id="automatic" type="button" class="btn btn-primary">Stretch</button>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,4 @@
 $(function() {
-	//Background Width settings
-	createRadioSetting('widthMode','background-width-settings');
 	//image effects
 	createImageEffect('grayscale', 0, 0,1,0.05, "Grayscale");
 	createImageEffect('sepia', 0, 0,1,0.05, "Sepia");
@@ -15,19 +13,16 @@ $(function() {
 	}});
 	
 	$('#transparency_slider').attr("value", localStorage['transparency']);
-	$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
+	$("#transparency_value").html((localStorage['transparency']*100)+"%");
 	$('#transparency_slider').change(function() {
-		console.log(this.value);
 		localStorage['transparency'] = this.value;
 		$("#transparency_value").html((Math.round(localStorage['transparency']*100))+"%");
 	});
+
+	$('#background-width-settings button').click(function() { localStorage.widthMode = $(this).attr("id");});
+	$('#background-width-settings #' + localStorage.widthMode).addClass('active');
 });
 
-function createRadioSetting(setting, radioDiv) {
-	$( '#' + radioDiv ).buttonset();
-	$('#' + radioDiv + ' input').click(function() { localStorage[setting] = $(this).attr("id");});
-	$('#' + localStorage[setting]).next().addClass("ui-state-active");
-}
 var currentlyEditingbackground;
 function createImageEffect(setting, defaultValue, minValue, maxValue, increment,humanReadable) {
 	if (!localStorage['base64'] || !JSON.parse(localStorage['base64'])[setting]) {
