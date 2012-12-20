@@ -69,14 +69,10 @@ $(function() {
 		display_logged_in_status();
 	});
 	/** Start Premium Background Previews**/
-	$("#store-preview").dialog({ autoOpen: false, width: "900",height: "640",buttons: {
-		Close: function() {
-			$( this ).dialog( "close" );
-		}
-	}});
 	$(".open-preview").click(function() {
 		$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
 		$("#store-preview").dialog("open");
+		$("#store-preview").modal({show: true});
 	});
 	/** End Premium Background Previews**/
 	$("button, #header_buttons a").button();
