@@ -82,7 +82,8 @@ chrome.contextMenus.create({
 
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if (request.method == "get_vars") {
-		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + localStorage['base64'] + '~~~' + localStorage['headerColor'];
+		var background = localStorage.base64 || ' ';
+		vars_string = localStorage['widthMode'] +'~~~'+localStorage['transparency'] + '~~~' + background + '~~~' + localStorage['headerColor'];
 		sendResponse({variables: vars_string});
     } else if (request.setDefaults) {
 		setDefaults();

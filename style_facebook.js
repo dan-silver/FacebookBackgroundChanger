@@ -16,12 +16,16 @@ function updateBackgroundSettings() {
 	if ($('body').hasClass('UIPage_LoggedOut')) return;
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
 		userData = response.variables.split('~~~');
-		if (!$("#chromeFacebookbackground").length) {
-			$("body").prepend('<div id="chromeFacebookbackground"></div>');
+		if (userData[2] != ' ') { //background set
+			if (!$("#chromeFacebookbackground").length) {
+				$("body").prepend('<div id="chromeFacebookbackground"></div>');
+			}
+			var currentBackground = JSON.parse(userData[2]);
+			$('#chromeFacebookbackground').css("background", 'url(data:image/png;base64,'+currentBackground.src+')');
+			autoWidth();
+		} else {
+			$('#chromeFacebookbackground').remove();
 		}
-		var currentBackground = JSON.parse(userData[2]);
-		$('#chromeFacebookbackground').css("background", 'url(data:image/png;base64,'+currentBackground.src+')');
-		autoWidth();
 		if (!$("#background_changer_link").length) {
 			$("#pageNav .firstItem").after('<li id="background_changer_link"  class="navItem"><a href="'+chrome.extension.getURL('options.html')+'" target="_blank" class="navLink">Customize</a></li>');
 		}
