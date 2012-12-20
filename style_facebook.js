@@ -1,18 +1,4 @@
 var userData=[];
-
-function lookup_backgrounds() {
-	if (!$("#chromeFacebookbackground").length) {
-		$("body").prepend('<div id="chromeFacebookbackground"></div>');
-	}
-	if (userData[2]) { //user set a local background
-		var currentBackground = JSON.parse(userData[2]);
-		$('#chromeFacebookbackground').css({
-			"background": 'url(data:image/png;base64,'+currentBackground.src+')',
-			"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
-		});
-	}
-	autoWidth();
-}
 setInterval(function() {
 	updateBackgroundSettings();
 }, 4000);
@@ -27,9 +13,20 @@ function autoWidth() {
 	}
 }
 function updateBackgroundSettings() {
+	if ($('body').hasClass('UIPage_LoggedOut')) return;
 	chrome.extension.sendMessage({method: "get_vars"}, function(response) {
 		userData = response.variables.split('~~~');
-		lookup_backgrounds();
+		if (!$("#chromeFacebookbackground").length) {
+			$("body").prepend('<div id="chromeFacebookbackground"></div>');
+		}
+		if (userData[2]) { //user set a local background
+			var currentBackground = JSON.parse(userData[2]);
+			$('#chromeFacebookbackground').css({
+				"background": 'url(data:image/png;base64,'+currentBackground.src+')',
+				"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
+			});
+		}
+		autoWidth();
 		if (!$("#background_changer_link").length) {
 			$("#pageNav .firstItem").after('<li id="background_changer_link"  class="navItem"><a href="'+chrome.extension.getURL('options.html')+'" target="_blank" class="navLink">Customize</a></li>');
 		}
