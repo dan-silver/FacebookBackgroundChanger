@@ -32,18 +32,11 @@ function bind_purchase_buttons() {
 					parameters: {},
 					jwt: data.jwt,
 					success: function() {
-						noty({
-							text: 'Thank you for purchasing a background! You may now click on the "install" button on top of the background that you purchased to begin using it.  If you have this extension on a different computer, you can log in with the same Google account and the background will be available.',
-							layout: "center",
-							type: 'success',
-							  buttons: [{text: 'Ok', onClick: function($noty) {$noty.close();}}]
-						});	
-						$('button.[bid="'+temp_bid+'"]').after('<button bid="'+temp_bid+'" class="install" style="cursor: pointer;">Install</button>').remove();
-						$("button").button();
-						bind_install_buttons();
+						alert('Thank you for purchasing a background! You may now click on the "install" button on top of the background that you purchased to begin using it.  If you have this extension on a different computer, you can log in with the same Google account and the background will be available.');	
 						localStorage['purchased_background-'+temp_bid] = 1;
+						prepareStore();
 					},
-					failure: function() {}
+					failure: function(e) {console.log(e);}
 				});
 			}
 		});
@@ -156,7 +149,7 @@ function prepareStore() {
 	for(i = 1; i < (numberOfBackgrounds+1); i++){
 		tempString = '<div class="outer"><div class="inner"><img id="img_'+i+'" src="premium_backgrounds/'+i+'_small.jpg"><br>';
 		if (localStorage['purchased_background-'+i] == 1) {
-			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install btn">Install</button>';
+			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install btn btn-success">Install</button>';
 		} else {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase btn btn-info">Purchase</button>';
 		}	
