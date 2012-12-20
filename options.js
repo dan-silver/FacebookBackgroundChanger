@@ -1,30 +1,13 @@
-function initializeImageEffects() {
-	var effects = ["hue", "grayscale", "sepia"];
-	var currentBackground = JSON.parse(localStorage['base64']);
-	effects.forEach(function(effect) {
-		$("#"+effect+'_slider').attr("value", currentBackground[effect] || 0);
-	});
-	localStorage['base64'] = JSON.stringify(currentBackground);
-}
-
 function updatePreview() {
 	if (localStorage['base64']) {
-		initializeImageEffects();
 		$("#noBackground").hide();
+		$("#removeBtn").show();
 		var currentBackground = JSON.parse(localStorage['base64']);
-		$("#img_preview").attr("src", "data:image/png;base64, " + currentBackground.src).css({
-			"opacity": "1",
-			"height" : "auto",
-			"min-height": "0px",
-			"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
-		}); 
+		$("#img_preview").attr("src", "data:image/png;base64, " + currentBackground.src).css("display", "block"); 
 	} else {
-		$("#noBackground").fadeIn();
-		$("#img_preview").attr("src", "").css({
-			"opacity": "0",
-			"height" : "0px",
-			"min-height": "300px"
-		});
+		$("#noBackground").show();
+		$("#removeBtn").hide();
+		$("#img_preview").attr("src", "").hide();
 	}
 }
 
@@ -94,6 +77,11 @@ $(function() {
 		change: function(color) {
 			localStorage['headerColor'] = color.toHexString(); // #ff0000
 		}
+	});
+	
+	$('#removeBtn').click(function() {
+		localStorage.removeItem('base64');
+		updatePreview();
 	});
 });
 

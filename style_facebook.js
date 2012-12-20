@@ -19,13 +19,8 @@ function updateBackgroundSettings() {
 		if (!$("#chromeFacebookbackground").length) {
 			$("body").prepend('<div id="chromeFacebookbackground"></div>');
 		}
-		if (userData[2]) { //user set a local background
-			var currentBackground = JSON.parse(userData[2]);
-			$('#chromeFacebookbackground').css({
-				"background": 'url(data:image/png;base64,'+currentBackground.src+')',
-				"-webkit-filter": "hue-rotate("+currentBackground.hue+"deg) grayscale("+currentBackground.grayscale+") sepia("+currentBackground.sepia+")"
-			});
-		}
+		var currentBackground = JSON.parse(userData[2]);
+		$('#chromeFacebookbackground').css("background", 'url(data:image/png;base64,'+currentBackground.src+')');
 		autoWidth();
 		if (!$("#background_changer_link").length) {
 			$("#pageNav .firstItem").after('<li id="background_changer_link"  class="navItem"><a href="'+chrome.extension.getURL('options.html')+'" target="_blank" class="navLink">Customize</a></li>');
@@ -34,10 +29,10 @@ function updateBackgroundSettings() {
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css('background-color','rgba(255,255,255,'+userData[1]+')');
 		$('.fbTimelineCapsule .timelineUnitContainer').css('background-color', 'rgba(255,255,255,'+userData[1]+')');
 		//Header color support
-		$('#jewelContainer').css('background-color', userData[4]);
+		$('#jewelContainer').css('background-color', userData[3]);
 		$('#blueBar').css({
-			'background-color': userData[4],
-			'border-bottom': '1px solid ' + userData[4]
+			'background-color': userData[3],
+			'border-bottom': '1px solid ' + userData[3]
 		});	
 		$('#navSearch .uiTypeahead').css('border','none');
 		$('#navSearch .uiSearchInput').css('border-top','none');
