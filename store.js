@@ -34,7 +34,7 @@ function bind_purchase_buttons() {
 					success: function() {
 						alert('Thank you for purchasing a background! You may now click on the "install" button on top of the background that you purchased to begin using it.  If you have this extension on a different computer, you can log in with the same Google account and the background will be available.');	
 						localStorage['purchased_background-'+temp_bid] = 1;
-						prepareStore();
+						lookupPurchasedBackgrounds();
 					},
 					failure: function(e) {console.log(e);}
 				});
@@ -42,8 +42,8 @@ function bind_purchase_buttons() {
 		});
 	});
 }	
-	
-function lookup_purchased_backgrounds() {
+
+function lookupPurchasedBackgrounds() {
 	if (!localStorage['gid']) return; //	not logged in to Google
 	$.ajax({
 		type : 'POST',
@@ -55,13 +55,10 @@ function lookup_purchased_backgrounds() {
 		success : function(data){
 			if (!data) return;
 			var bids = data.split(",");
-			$("#store button").each(function() {
-				if (bids.indexOf($(this).attr("bid")) > -1) {
-					$(this).removeClass("purchase").addClass("install").find("span").text("Install");
-					localStorage['purchased_background-'+$(this).attr("bid")] = 1;
-				}
+			bids.forEach(function(bid) {
+				localStorage['purchased_background-'+bid] = 1;
 			});
-			bind_install_buttons();
+			prepareStore();
 		}
 	});
 }
@@ -161,8 +158,17 @@ function prepareStore() {
 	}
 	bind_install_buttons();
 	bind_purchase_buttons();
+	bindPreviewButtons();
 }
-
+function bindPreviewButtons() {
+	$(function() {
+		$(".open-preview").click(function() {
+			$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
+			$("#store-preview").dialog("open");
+			$("#store-preview").modal({show: true});
+		});
+	});
+}
 function bind_install_buttons() {
 	$('button.install').unbind('click');
 	$("button.install").click(function() {

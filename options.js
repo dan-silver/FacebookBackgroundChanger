@@ -45,8 +45,7 @@ function display_logged_in_status() {
 chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
 	if(request.new_auth_info) {
 		display_logged_in_status();
-		lookup_purchased_backgrounds();
-		bind_purchase_buttons();
+		lookupPurchasedBackgrounds();
 	} else if (request.display_pictures) {
 		updatePreview();	
 	} else if (request.message) {
@@ -67,16 +66,7 @@ $(function() {
 		localStorage['gid'] = '';
 		localStorage['name'] = '';
 		display_logged_in_status();
-	});
-	/** Start Premium Background Previews**/
-	$(".open-preview").click(function() {
-		$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
-		$("#store-preview").dialog("open");
-		$("#store-preview").modal({show: true});
-	});
-	/** End Premium Background Previews**/
-	$("button, #header_buttons a").button();
-	
+	});	
 	$("#uploadBtn").click(function() {
 		$('#theFile').click();		
 	});
