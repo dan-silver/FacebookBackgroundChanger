@@ -42,14 +42,12 @@
 #catalog span.info {
 	position: absolute;
 	display: block;
-	width: 120px;
-	left: 61px;
+	left: 44px;
 	bottom: -50px;
 	color: white;
-	padding:0px 5px 0px 5px;
+	padding: 3px;
 	background-color: rgba(125, 0, 0, 0.85);
-	line-height: 35px;
-	border-radius: 10px 10px 0 0;
+	line-height: 20px;
 	-webkit-transition: bottom .5s;
 	margin-left: -20px;
 	font-size: 14px;

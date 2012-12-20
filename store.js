@@ -163,7 +163,7 @@ function prepareStore() {
 		if (backgrounds[i].preview == 1) {
 			tempString += '<button bid="'+i+'" class="open-preview btn">Preview</button>';
 		}
-		tempString+= '<span class="info">Size: '+backgrounds[i].dimensions+'px</span></div></div>';
+		tempString+= '<span class="info">'+backgrounds[i].dimensions+'px</span></div></div>';
 		$("#catalog").prepend(tempString);
 	}
 	bind_install_buttons();
