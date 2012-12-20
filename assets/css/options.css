@@ -1,3 +1,7 @@
+#userName {
+	color: white;
+	margin:20px 10px 0 0;
+}
 #img_preview {
 	max-width: 300px;
 	max-height: 200px;
@@ -53,4 +57,17 @@
 
 #catalog div:hover span.info {
 	bottom: 0px;
+}
+
+
+#carousel {
+	width: 800px;
+	margin: 0px auto;
+	margin-bottom: 15px;
+}
+.carousel-control {
+	top: 50%;
+}
+.carousel-caption button {
+	float: right;
 }

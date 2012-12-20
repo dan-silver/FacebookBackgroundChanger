@@ -9,18 +9,16 @@ $(document).ready(function(){
 });
 function bind_purchase_buttons() {
 	$("button.purchase").click(function() {
+		console.log("click");
 		if (!localStorage['gid']) {
-			noty({
-				text: 'Please log in to your Google account before purchasing a background. Click \"Log In\" in the top right corner of this page.',
-				layout: "center",
-				type: 'warning',
-				timeout: 3000,
-			});
+			chrome.extension.sendMessage({resetAuthentication: "true"});
 			return;
 		}
+		console.log("click2");
 		if ($(this).find("span").text() == "Install") { //The button changed from a purchase button to an install button, don't prompt google wallet
 			return;
 		}
+		console.log("click3");
 		var temp_bid = $(this).attr("bid");
 		$.ajax({
 			type : 'POST',
@@ -192,7 +190,6 @@ function prepareStore() {
 		tempString+= '<span class="info">Size: '+backgrounds[i].dimensions+'px</span></div></div>';
 		$("#catalog").prepend(tempString);
 	}
-	$("button").button();
 	bind_install_buttons();
 	bind_purchase_buttons();
 }

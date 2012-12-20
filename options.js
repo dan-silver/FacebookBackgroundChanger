@@ -30,11 +30,15 @@ function updatePreview() {
 
 function display_logged_in_status() {
 	if (localStorage['name']) {
-		$("#ver_status_info").html('<i>' + localStorage['name'] + '</i>');
+		$("#userName").html('Signed in as ' + localStorage['name']);
 		$("#reset_ver").text("(Logout)");
+		$("#logInBtn").hide();
+		$("#logOutBtn").show();
+		
 	} else {
-		$("#reset_ver").text("Log In with your Google Account");
-		$("#ver_status_info").html("");
+		$("#logInBtn").show();
+		$("#logOutBtn").hide();
+		$("#userName").html("");
 	}
 }
 
@@ -52,48 +56,46 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 
 $(document).ready(function(){
 	display_logged_in_status();
-	$('#reset_ver').click(function() {
+	$('#logInBtn').click(function() {
 		for(i = 1; i < (numberOfBackgrounds+1); i++){
 			localStorage['purchased_background-'+i] = '';
 		}
 		prepareStore();
+		chrome.extension.sendMessage({resetAuthentication: "true"});
+	});
+	$('#logOutBtn').click(function() {
 		localStorage['gid'] = '';
 		localStorage['name'] = '';
-		if ($(this).text() == "(Logout)") {
-			$("#reset_ver").text("Log In with your Google Account");
-			$("#ver_status_info").html("");
-		} else {
-			chrome.extension.sendMessage({resetAuthentication: "true"});
+		display_logged_in_status();
+	});
+	/** Start Premium Background Previews**/
+	$("#store-preview").dialog({ autoOpen: false, width: "900",height: "640",buttons: {
+		Close: function() {
+			$( this ).dialog( "close" );
 		}
-	});	
-		/** Start Premium Background Previews**/
-		$("#store-preview").dialog({ autoOpen: false, width: "900",height: "640",buttons: {
-			Close: function() {
-				$( this ).dialog( "close" );
-			}
-		}});
-		$(".open-preview").click(function() {
-			$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
-			$("#store-preview").dialog("open");
-		});
-		/** End Premium Background Previews**/
-		$("button, #header_buttons a").button();
-		
-		$("#uploadBtn").click(function() {
-			$('#theFile').click();		
-		});
-		$('#theFile').change(function(evt) {
-			var file = evt.target.files[0];
-			if (!file.type.match('image.*')) {
-				return;
-			}
-			var reader = new FileReader();
-			reader.onload = function (evt) {
-				chrome.extension.sendMessage({update_history: evt.target.result.split(',')[1],backgroundSrc:1});
-				updatePreview();
-			};
-			reader.readAsDataURL(file);
-		});
+	}});
+	$(".open-preview").click(function() {
+		$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
+		$("#store-preview").dialog("open");
+	});
+	/** End Premium Background Previews**/
+	$("button, #header_buttons a").button();
+	
+	$("#uploadBtn").click(function() {
+		$('#theFile').click();		
+	});
+	$('#theFile').change(function(evt) {
+		var file = evt.target.files[0];
+		if (!file.type.match('image.*')) {
+			return;
+		}
+		var reader = new FileReader();
+		reader.onload = function (evt) {
+			chrome.extension.sendMessage({update_history: evt.target.result.split(',')[1],backgroundSrc:1});
+			updatePreview();
+		};
+		reader.readAsDataURL(file);
+	});
 	//initialize 
 	updatePreview();
 	$("html").disableSelection();

@@ -1,19 +1,4 @@
 $(function() {
-	$("#item-options").click(function() {
-		if ($("#options-panel").css("display") == "none") {
-			$("#options-panel").slideDown();
-			$("#item-options img").css("-webkit-transform","rotate(0deg)");
-		} else {
-			hideOptionsPanel();
-		}
-	});
-	$("#page,#content").click(function(){
-		hideOptionsPanel();
-	});
-	function hideOptionsPanel() {
-		$("#options-panel").slideUp(250);
-		$("#item-options img").css("-webkit-transform","rotate(180deg)");
-	}
 	$("#item-reset").click(function() {
 		noty({
 				layout: "center",
