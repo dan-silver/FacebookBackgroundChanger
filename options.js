@@ -54,7 +54,7 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	}
 });
 
-$(document).ready(function(){
+$(function() {
 	display_logged_in_status();
 	$('#logInBtn').click(function() {
 		for(i = 1; i < (numberOfBackgrounds+1); i++){

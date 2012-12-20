@@ -3,13 +3,15 @@ var currentSort,i;
 google.load('payments', '1.0', {
     'packages': ['production_config']
 });
-$(document).ready(function(){
+$(function() {
 	prepareStore();
 	prepare_store_filters();
+	$('#carousel').carousel({
+		interval: 2000
+	});
 });
 function bind_purchase_buttons() {
 	$("button.purchase").click(function() {
-		console.log("click");
 		if (!localStorage['gid']) {
 			chrome.extension.sendMessage({resetAuthentication: "true"});
 			return;
