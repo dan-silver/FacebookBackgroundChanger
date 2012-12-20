@@ -6,20 +6,18 @@ google.load('payments', '1.0', {
 $(function() {
 	prepareStore();
 	$('#carousel').carousel({
-		interval: 2000
+		interval: 3000
 	});
 });
 function bind_purchase_buttons() {
-	$("button.purchase").click(function() {
+	$("button.purchase, #carousel button").click(function() {
 		if (!localStorage['gid']) {
 			chrome.extension.sendMessage({resetAuthentication: "true"});
 			return;
 		}
-		console.log("click2");
 		if ($(this).find("span").text() == "Install") { //The button changed from a purchase button to an install button, don't prompt google wallet
 			return;
 		}
-		console.log("click3");
 		var temp_bid = $(this).attr("bid");
 		$.ajax({
 			type : 'POST',
@@ -160,7 +158,7 @@ function prepareStore() {
 		if (localStorage['purchased_background-'+i] == 1) {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install btn">Install</button>';
 		} else {
-			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase btn">$0.99</button>';
+			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase btn btn-info">Purchase</button>';
 		}	
 		if (backgrounds[i].preview == 1) {
 			tempString += '<button bid="'+i+'" class="open-preview btn">Preview</button>';

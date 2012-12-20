@@ -71,3 +71,14 @@
 .carousel-caption button {
 	float: right;
 }
+.carousel-inner > .item > img {
+	width: 100%;
+}
+
+#background-width-settings-title {
+	border-bottom: 1px dashed gray;
+	display: inline-block;
+}
+#background-width-settings {
+	display: block;
+}
