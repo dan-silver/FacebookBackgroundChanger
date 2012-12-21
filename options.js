@@ -1,4 +1,5 @@
 function updatePreview() {
+	backgroundTooBig(false);
 	if (localStorage['base64']) {
 		$("#noBackground").hide();
 		$("#removeBtn").show();
@@ -31,8 +32,8 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 		lookupPurchasedBackgrounds();
 	} else if (request.display_pictures) {
 		updatePreview();	
-	} else if (request.message) {
-		message(request.message);
+	} else if (request.status == "imgTooBig") {
+		backgroundTooBig(true);
 	}
 });
 
@@ -65,13 +66,8 @@ $(function() {
 		};
 		reader.readAsDataURL(file);
 	});
-	//initialize 
 	updatePreview();
-	$("html").disableSelection();
-	//end initialize
-
-	//color picker support
-	$('#headerColor').spectrum({
+	$('#headerColor').spectrum({ //color picker support
 		color: localStorage['headerColor'],
 		showInitial: true,
 		change: function(color) {
@@ -85,23 +81,10 @@ $(function() {
 	});
 });
 
-function message(status) {
-	switch (status) {
-		case 'saved':
-			noty({
-				text: 'Check Facebook! Your background has been saved.',
-				layout: "center",
-				type: 'success',
-				timeout: 3000
-			});	
-		break;
-		case 'too_big':
-			noty({
-				text: 'This image is too big, try using a smaller image and keeping the dimensions under 1600x1400px.<br>If this problem continues, try removing previous backgrounds in the history.',
-				layout: "center",
-				type: 'warning',
-				timeout: 5000,
-			});
-		break;
+function backgroundTooBig(status) {
+	if (status == true) {
+		$('#background-too-big').show();
+	} else {
+		$('#background-too-big').hide();
 	}
 }

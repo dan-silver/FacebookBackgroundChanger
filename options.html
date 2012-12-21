@@ -22,11 +22,6 @@
 	<script src='assets/js/spectrum/spectrum.js'></script>
 
 	<script src='googlejsapi.js'></script>
-	<script src='assets/js/jquery-ui-1.8.22.custom.min.js'></script>
-
-	<script src='assets/js/noty/jquery.noty.js'></script>
-	<script src='assets/js/noty/themes/default.js'></script>
-	<script src='assets/js/noty/layouts/center.js'></script>
 
 	<script src='defaults.js'></script>
 	<script src='store.js'></script>
@@ -67,10 +62,14 @@
 				<h2>Facebook Background</h2>
 				<div class="well">
 					<p>All backgrounds are private.</p>
+					<div class="alert alert-error" style="display:none;" id="background-too-big">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						The background you tried adding is too big.  Either try shrinking it down or use a different background.
+					</div>
 					<button id="uploadBtn" class="btn btn-info">Upload Background</button> <button id="removeBtn" class="btn btn-danger">Remove Background</button><br>
 					<input type="file" id="theFile" style="display:none;"/>
 					<img id="img_preview" >
-					<span id="noBackground">Hm....Looks like you don't have a background yet. Why not drop one here from your computer?</span>
+					<span id="noBackground">You haven't uploaded a background yet. Click on "Upload Background" to start.</span>
 				</div>
 			</div>
 			<div class="span6">

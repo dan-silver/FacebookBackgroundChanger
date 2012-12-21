@@ -164,7 +164,6 @@ function bindPreviewButtons() {
 	$(function() {
 		$(".open-preview").click(function() {
 			$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
-			$("#store-preview").dialog("open");
 			$("#store-preview").modal({show: true});
 		});
 	});

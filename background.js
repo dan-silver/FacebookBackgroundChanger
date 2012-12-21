@@ -11,7 +11,6 @@ function setDefaults() {
 }
 setDefaults();
 var currentTab;
-localStorage.wantToUpdate = false;
 function checkForValidUrl(tabId, changeInfo, tab) {
 	if (tab.url.indexOf('facebook.com') > -1) {
 		chrome.pageAction.show(tabId);
@@ -45,12 +44,10 @@ function update_history(backgroundObject, isBackgroundSrc) {
 		} else if (backgroundObject){
 			localStorage['base64'] = backgroundObject;
 		}
-		chrome.extension.sendMessage({display_pictures: "1",message: "saved"});
+		chrome.extension.sendMessage({display_pictures: "1"});
 	} catch (e) {
-		chrome.extension.sendMessage({message: "too_big"});
+		chrome.extension.sendMessage({status: "imgTooBig"});
 	}
-	shift_history_down();
-	localStorage.wantToUpdate = true;
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId) {
