@@ -44,7 +44,7 @@ function updateBackgroundSettings() {
 			'border': 'none',
 			'border-top': 'none'
 		});
-		$('#pageNav .navItem a, .fbJewel a.jewelButton, #pageLogo a,#navAccountLink').hover(function() {
+		$('#pageNav .navItem a.navLink, .fbJewel a.jewelButton, #pageLogo a,#navAccountLink').hover(function() {
 			$(this).css('background-color', 'transparent');
 		});
 		$('#pageNav .navItem a').addClass('targetAfter'); //adds class so css can target the psuedo element separator
