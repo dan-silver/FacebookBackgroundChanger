@@ -1,5 +1,4 @@
 var numberOfBackgrounds = 23;
-var currentSort,i;
 google.load('payments', '1.0', {
     'packages': ['production_config']
 });
@@ -143,7 +142,7 @@ function prepareStore() {
 	$("#catalog").html("");
 	var tempString='',storeContent = '';
 	
-	for(i = 1; i < (numberOfBackgrounds+1); i++){
+	for(var i = 1; i < (numberOfBackgrounds+1); i++){
 		tempString = '<div class="outer"><div class="inner"><img id="img_'+i+'" src="premium_backgrounds/'+i+'_small.jpg"><br>';
 		if (localStorage['purchased_background-'+i] == 1) {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="install btn btn-success">Install</button>';
@@ -161,11 +160,9 @@ function prepareStore() {
 	bindPreviewButtons();
 }
 function bindPreviewButtons() {
-	$(function() {
-		$(".open-preview").click(function() {
-			$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
-			$("#store-preview").modal({show: true});
-		});
+	$(".open-preview").click(function() {
+		$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
+		$("#store-preview").modal({show: true});
 	});
 }
 function bind_install_buttons() {
