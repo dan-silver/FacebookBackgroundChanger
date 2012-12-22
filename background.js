@@ -91,9 +91,7 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 		} else {
 			update_history(request.update_history, null);
 		}
-	} 
-
-	if(request.GoogleID) {
+	} else if (request.GoogleID) {
 		localStorage['gid']=request.GoogleID;
 		localStorage['name']=request.GoogleName;
 		chrome.extension.sendMessage({new_auth_info: 'true'});
@@ -104,5 +102,5 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 			currentTab = tab.id;
 			chrome.tabs.create({"url": "https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/userinfo.profile&response_type=token&redirect_uri=http://dansilver.info/oauth2callback&client_id=293292404055.apps.googleusercontent.com&hl=en&from_login=1&as=2e8b1573426b83ce&pli=1&authuser=0"});
 		});
-	} 
+	}
 });
