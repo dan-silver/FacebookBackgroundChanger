@@ -1,4 +1,4 @@
-var numberOfBackgrounds = 23;
+var numberOfBackgrounds = 26;
 google.load('payments', '1.0', {
     'packages': ['production_config']
 });
@@ -136,6 +136,15 @@ backgrounds[22] = {
 backgrounds[23] = {
 	"dimensions": "1600x1087",
 	"preview": 1
+};
+backgrounds[24] = {
+	"dimensions": "1024x768"
+};
+backgrounds[25] = {
+	"dimensions": "1900x1200"
+};
+backgrounds[26] = {
+	"dimensions": "1920x1200"
 };
 
 function prepareStore() {
