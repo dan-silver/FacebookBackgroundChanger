@@ -7,6 +7,36 @@ $(function() {
 	$('#carousel').carousel({
 		interval: 3000
 	});
+	
+	$('#monthly-subscription').click(function() {
+		if (!localStorage['gid']) {
+			chrome.extension.sendMessage({resetAuthentication: "true"});
+			return;
+		}
+		$.ajax({
+			type : 'POST',
+			url : 'http://dansilver.info/wallet/subscription_JWT.php/',
+			dataType : 'json',
+				data: {
+					"gid" : localStorage['gid']
+				},
+			success : function(data){
+				console.log(data.jwt);
+				goog.payments.inapp.buy({
+					jwt: data.jwt,
+					success: function() {
+						//enable all backgrounds
+						for (var i=1;i<=numberOfBackgrounds;i++ ) {
+							localStorage['purchased_background-'+i] = 1;
+						}
+						prepareStore();
+					},
+					failure: function(e) {console.log(e);}
+				});
+			}
+		});
+	});
+	
 });
 function bind_purchase_buttons() {
 	$("button.purchase, #carousel button").click(function() {
@@ -44,22 +74,41 @@ function bind_purchase_buttons() {
 
 function lookupPurchasedBackgrounds() {
 	if (!localStorage['gid']) return; //	not logged in to Google
+	//check subscription
 	$.ajax({
 		type : 'POST',
-		url : 'http://dansilver.info/wallet/lookup_purchased_backgrounds.php',
+		url : 'http://dansilver.info/wallet/check-subscription.php',
 		dataType : 'json',
 			data: {
 				"gid" : localStorage['gid'],
 			},
-		success : function(data){
-			if (!data) return;
-			var bids = data.split(",");
-			bids.forEach(function(bid) {
-				localStorage['purchased_background-'+bid] = 1;
-			});
-			prepareStore();
+		success : function(response){
+			if (response == 1) {
+				for (var i=1;i<=numberOfBackgrounds;i++ ) {
+					localStorage['purchased_background-'+i] = 1;
+				}
+				prepareStore();
+			} else {
+				//check for individual backgrounds
+				$.ajax({
+					type : 'POST',
+					url : 'http://dansilver.info/wallet/lookup_purchased_backgrounds.php',
+					dataType : 'json',
+						data: {
+							"gid" : localStorage['gid'],
+						},
+					success : function(data){
+						if (!data) return;
+						var bids = data.split(",");
+						bids.forEach(function(bid) {
+							localStorage['purchased_background-'+bid] = 1;
+						});
+						prepareStore();
+					}
+				});
+			}
 		}
-	});
+	});	
 }
 
 var backgrounds = [];
