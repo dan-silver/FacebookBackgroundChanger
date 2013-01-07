@@ -84,3 +84,10 @@
 #uploadBtn, #removeBtn {
     margin: 5px 5px 0 0;
 }
+#log-in-help {
+	color: white;
+	font-size: 13px;
+	display: inline-block;
+	margin: 20px 0 0 9px;
+	vertical-align: middle;
+}

@@ -16,11 +16,11 @@ function display_logged_in_status() {
 	if (localStorage['name']) {
 		$("#userName").html('Signed in as ' + localStorage['name']);
 		$("#reset_ver").text("(Logout)");
-		$("#logInBtn").hide();
+		$("#logInBtn, #log-in-help").hide();
 		$("#logOutBtn").show();
 		
 	} else {
-		$("#logInBtn").show();
+		$("#logInBtn, #log-in-help").show();
 		$("#logOutBtn").hide();
 		$("#userName").html("");
 	}

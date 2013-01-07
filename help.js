@@ -1,7 +1,6 @@
 $(function() {
-	$('#logInBtn').popover({
-		title: 'Why sign in with Google?',
-		content: 'Your Google account will be associated with any premium backgrounds that you purchase, so you can use them on any of your computers.',
+	$('#log-in-help').popover({
+		title: 'Your Google account will be associated with premium backgrounds that you purchase, so you can use them on any of your computers.',
 		placement: 'bottom',
 		trigger: 'hover'
 	});
