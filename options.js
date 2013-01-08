@@ -1,3 +1,4 @@
+localStorage['currentPurchase'] = '';
 function updatePreview() {
 	backgroundTooBig(false);
 	if (localStorage['base64']) {
@@ -30,6 +31,7 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 	if(request.new_auth_info) {
 		display_logged_in_status();
 		lookupPurchasedBackgrounds();
+		resumePurchase();
 	} else if (request.display_pictures) {
 		updatePreview();	
 	} else if (request.status == "imgTooBig") {
@@ -49,6 +51,7 @@ $(function() {
 	$('#logOutBtn').click(function() {
 		localStorage['gid'] = '';
 		localStorage['name'] = '';
+		localStorage['currentPurchase'] = '';
 		display_logged_in_status();
 	});	
 	$("#uploadBtn").click(function() {

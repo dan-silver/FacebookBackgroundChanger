@@ -10,67 +10,88 @@ $(function() {
 	
 	$('#monthly-subscription').click(function() {
 		if (!localStorage['gid']) {
+			localStorage['currentPurchase'] = 'monthlyPurchase';
 			chrome.extension.sendMessage({resetAuthentication: "true"});
 			return;
 		}
-		$.ajax({
-			type : 'POST',
-			url : 'http://dansilver.info/wallet/subscription_JWT.php/',
-			dataType : 'json',
-				data: {
-					"gid" : localStorage['gid']
-				},
-			success : function(data){
-				console.log(data.jwt);
-				goog.payments.inapp.buy({
-					jwt: data.jwt,
-					success: function() {
-						//enable all backgrounds
-						for (var i=1;i<=numberOfBackgrounds;i++ ) {
-							localStorage['purchased_background-'+i] = 1;
-						}
-						prepareStore();
-					},
-					failure: function(e) {console.log(e);}
-				});
-			}
-		});
+		purchaseSubscription();
 	});
 	
 });
+function purchaseSubscription() {
+	$.ajax({
+		type : 'POST',
+		url : 'http://dansilver.info/wallet/subscription_JWT.php/',
+		dataType : 'json',
+			data: {
+				"gid" : localStorage['gid']
+			},
+		success : function(data){
+			console.log(data.jwt);
+			goog.payments.inapp.buy({
+				jwt: data.jwt,
+				success: function() {
+					//enable all backgrounds
+					for (var i=1;i<=numberOfBackgrounds;i++ ) {
+						localStorage['purchased_background-'+i] = 1;
+					}
+					prepareStore();
+					localStorage['currentPurchase'] = '';
+				},
+				failure: function(e) {console.log(e);}
+			});
+		}
+	});
+}
+
+function resumePurchase() {
+	if (localStorage['currentPurchase']) {
+		if (localStorage['currentPurchase'] == 'monthlyPurchase') {
+			purchaseSubscription();
+		} else {
+			purchaseBackground(localStorage['currentPurchase']);
+		}
+	}
+}
+
 function bind_purchase_buttons() {
 	$("button.purchase, #carousel button").click(function() {
 		if (!localStorage['gid']) {
+			localStorage['currentPurchase'] = $(this).attr("bid");
 			chrome.extension.sendMessage({resetAuthentication: "true"});
 			return;
 		}
 		if ($(this).find("span").text() == "Install") { //The button changed from a purchase button to an install button, don't prompt google wallet
 			return;
 		}
-		var temp_bid = $(this).attr("bid");
-		$.ajax({
-			type : 'POST',
-			url : 'http://dansilver.info/wallet/jot-maker.php/',
-			dataType : 'json',
-				data: {
-					"gid" : localStorage['gid'],
-					"bid" : temp_bid
-				},
-			success : function(data){
-				goog.payments.inapp.buy({
-					parameters: {},
-					jwt: data.jwt,
-					success: function() {
-						alert('Thank you for purchasing a background! You may now click on the "install" button on top of the background that you purchased to begin using it.  If you have this extension on a different computer, you can log in with the same Google account and the background will be available.');	
-						localStorage['purchased_background-'+temp_bid] = 1;
-						lookupPurchasedBackgrounds();
-					},
-					failure: function(e) {console.log(e);}
-				});
-			}
-		});
+		purchaseBackground($(this).attr("bid"));
 	});
-}	
+}
+	
+function purchaseBackground(bid) {
+	$.ajax({
+		type : 'POST',
+		url : 'http://dansilver.info/wallet/jot-maker.php/',
+		dataType : 'json',
+			data: {
+				"gid" : localStorage['gid'],
+				"bid" : bid
+			},
+		success : function(data){
+			goog.payments.inapp.buy({
+				parameters: {},
+				jwt: data.jwt,
+				success: function() {
+					alert('Thank you for purchasing a background! You may now click on the "install" button on top of the background that you purchased to begin using it.  If you have this extension on a different computer, you can log in with the same Google account and the background will be available.');	
+					localStorage['purchased_background-'+bid] = 1;
+					localStorage['currentPurchase'] = '';
+					lookupPurchasedBackgrounds();
+				},
+				failure: function(e) {console.log(e);}
+			});
+		}
+	});
+}
 
 function lookupPurchasedBackgrounds() {
 	if (!localStorage['gid']) return; //	not logged in to Google
