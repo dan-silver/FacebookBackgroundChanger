@@ -1,4 +1,4 @@
-var numberOfBackgrounds = 27;
+var numberOfBackgrounds = 30;
 google.load('payments', '1.0', {
     'packages': ['production_config']
 });
@@ -16,7 +16,6 @@ $(function() {
 		}
 		purchaseSubscription();
 	});
-	
 });
 function purchaseSubscription() {
 	$.ajax({
@@ -219,6 +218,18 @@ backgrounds[26] = {
 backgrounds[27] = {
 	"dimensions": "1600x1066"
 };
+backgrounds[28] = {
+	"dimensions": "2020x1394",
+	"preview": 1
+};
+backgrounds[29] = {
+	"dimensions": "2528x1656",
+	"preview": 1
+};
+backgrounds[30] = {
+	"dimensions": "1800x1200",
+	"preview": 1
+};
 
 function prepareStore() {
 	$("#catalog").html("");
@@ -232,7 +243,7 @@ function prepareStore() {
 			tempString += '<button id="button-'+i+'" bid="'+i+'" class="purchase btn btn-info">Purchase</button>';
 		}	
 		if (backgrounds[i].preview == 1) {
-			tempString += '<button bid="'+i+'" class="open-preview btn">Preview</button>';
+			tempString += '<button class="btn open-preview" bid="'+i+'" data-toggle="lightbox" href="#store-preview">Preview</button>';
 		}
 		tempString+= '<span class="info">'+backgrounds[i].dimensions+'px</span></div></div>';
 		$("#catalog").prepend(tempString);
@@ -244,7 +255,6 @@ function prepareStore() {
 function bindPreviewButtons() {
 	$(".open-preview").click(function() {
 		$("#store-preview img").attr("src", "/premium_backgrounds/previews/"+$(this).attr("bid") + ".png");
-		$("#store-preview").modal({show: true});
 	});
 }
 function bind_install_buttons() {

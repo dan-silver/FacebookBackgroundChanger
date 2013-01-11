@@ -31,7 +31,12 @@ function updateBackgroundSettings() {
 		}
 		$('.fbTimelineTimePeriod').css('background', 'none');	
 		$('#leftCol, .UIStandardFrame_Container, .fbTimelineUFI, .timelineUnitContainer, div#contentCol.homeFixedLayout, .ego_column').css('background-color','rgba(255,255,255,'+userData[1]+')');
-		$('.fbTimelineCapsule .timelineUnitContainer').css('background-color', 'rgba(255,255,255,'+userData[1]+')');
+		$('.fbTimelineCapsule .timelineUnitContainer, #pageFooter').css('background-color', 'rgba(255,255,255,'+userData[1]+')');
+		//footer
+		$('#pageFooter').css({
+			'border-radius': '5px',
+			'height': '30px'
+		});
 		//Header color support
 		$('#jewelContainer').css('background-color', userData[3]);
 		$('#blueBar').css({

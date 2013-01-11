@@ -26,6 +26,10 @@
 	border-top: none;
 }
 
-#pageNav .navItem a.targetAfter:after {
+#pageNav .navItem a.targetAfter:after, #contentCurve {
 	display: none;
+}
+
+#footerContainer {
+	border-top: none !important;
 }
