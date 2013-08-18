@@ -70,14 +70,7 @@ $(function() {
 		reader.readAsDataURL(file);
 	});
 	updatePreview();
-	$('#headerColor').spectrum({ //color picker support
-		color: localStorage['headerColor'],
-		showInitial: true,
-		change: function(color) {
-			localStorage['headerColor'] = color.toHexString(); // #ff0000
-		}
-	});
-	
+
 	$('#removeBtn').click(function() {
 		localStorage.removeItem('base64');
 		updatePreview();

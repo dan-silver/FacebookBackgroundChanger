@@ -37,12 +37,6 @@ function updateBackgroundSettings() {
 			'border-radius': '5px',
 			'height': '30px'
 		});
-		//Header color support
-		$('#jewelContainer').css('background-color', userData[3]);
-		$('#blueBar').css({
-			'background-color': userData[3],
-			'border-bottom': '1px solid ' + userData[3]
-		});	
 		$('#navSearch .uiTypeahead').css('border','none');
 		$('#navSearch .uiSearchInput').css('border-top','none');
 		$('#pageNav .tinyman .headerTinymanPhoto').css({
